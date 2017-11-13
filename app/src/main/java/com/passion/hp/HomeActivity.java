@@ -1,10 +1,10 @@
-package com.chaos.ultrohupu;
+package com.passion.hp;
+
 
 import android.os.Bundle;
 import android.view.View;
 
-import com.chaos.base.AbstractBaseActivity;
-
+import com.passion.libbase.AbstractBaseActivity;
 
 public class HomeActivity extends AbstractBaseActivity {
 

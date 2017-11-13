@@ -1,7 +1,8 @@
-package com.chaos.ultrohupu.di;
+package com.passion.hp.di;
 
-import com.chaos.ultrohupu.HomeActivity;
-import com.chaos.ultrohupu.splash.ui.SplashActivity;
+
+import com.passion.hp.HomeActivity;
+import com.passion.hp.splash.ui.SplashActivity;
 
 import dagger.Subcomponent;
 

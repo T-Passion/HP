@@ -1,7 +1,8 @@
-package com.chaos.ultrohupu.di;
+package com.passion.hp.di;
 
-import com.chaos.base.di.imp.IInjector;
-import com.chaos.ultrohupu.splash.ui.SplashActivity;
+
+import com.passion.hp.splash.ui.SplashActivity;
+import com.passion.libbase.di.imp.IInjector;
 
 /**
  * Created by huangdou

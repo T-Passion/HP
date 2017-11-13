@@ -1,9 +1,10 @@
-package com.chaos.ultrohupu.di;
+package com.passion.hp.di;
 
-import com.chaos.base.di.BaseComponent;
-import com.chaos.base.di.BaseInjector;
-import com.chaos.base.di.imp.IInjector;
-import com.chaos.base.utils.LogUtils;
+
+import com.passion.libbase.di.BaseComponent;
+import com.passion.libbase.di.BaseInjector;
+import com.passion.libbase.di.imp.IInjector;
+import com.passion.libbase.utils.LogUtils;
 
 /**
  * Created by huangdou

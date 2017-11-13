@@ -1,7 +1,8 @@
-package com.chaos.ultrohupu.di;
+package com.passion.hp.di;
 
-import com.chaos.base.di.BaseComponent;
-import com.chaos.base.di.BaseModule;
+
+import com.passion.libbase.di.BaseComponent;
+import com.passion.libbase.di.BaseModule;
 
 import javax.inject.Singleton;
 
