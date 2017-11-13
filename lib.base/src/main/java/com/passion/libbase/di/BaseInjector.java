@@ -1,8 +1,9 @@
 package com.passion.libbase.di;
 
-import com.chaos.base.BaseApplication;
-import com.chaos.base.di.imp.IInjector;
-import com.chaos.base.utils.LogUtils;
+
+import com.passion.libbase.BaseApplication;
+import com.passion.libbase.di.imp.IInjector;
+import com.passion.libbase.utils.LogUtils;
 
 /**
  * Created by huangdou

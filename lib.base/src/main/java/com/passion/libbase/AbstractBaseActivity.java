@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chaos.base.utils.HPInjectUtils;
-import com.chaos.base.imp.OnNetReconnectListener;
-import com.chaos.base.mvp.IBaseView;
-import com.chaos.base.router.HPRouter;
-import com.chaos.widget.main.WidActionTitleBar;
-import com.chaos.widget.main.WidNetProgressView;
+import com.passion.libbase.imp.OnNetReconnectListener;
+import com.passion.libbase.mvp.IBaseView;
+import com.passion.libbase.router.HPRouter;
+import com.passion.libbase.utils.HPInjectUtils;
+import com.passion.widget.main.WidActionTitleBar;
+import com.passion.widget.main.WidNetProgressView;
 
 import java.util.List;
 

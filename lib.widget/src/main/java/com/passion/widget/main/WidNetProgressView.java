@@ -1,4 +1,4 @@
-package com.chaos.widget.main;
+package com.passion.widget.main;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,11 +7,12 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.chaos.widget.R;
-import com.chaos.widget.imp.ViewInterface;
-import com.chaos.widget.main.render.LoadingDrawable;
-import com.chaos.widget.main.render.LoadingRenderer;
-import com.chaos.widget.main.render.LoadingRendererFactory;
+import com.passion.libwidget.R;
+import com.passion.widget.imp.ViewInterface;
+import com.passion.widget.main.render.LoadingDrawable;
+import com.passion.widget.main.render.LoadingRenderer;
+import com.passion.widget.main.render.LoadingRendererFactory;
+
 
 /**
  * Created by huangdou

@@ -1,8 +1,5 @@
 package com.passion.libbase.mvp;
 
-import com.chaos.base.utils.JsonUtils;
-
-import javax.inject.Inject;
 
 /**
  * Created by chaos

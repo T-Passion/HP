@@ -1,4 +1,4 @@
-package com.chaos.widget.main.render;
+package com.passion.widget.main.render;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 
-import com.chaos.widget.utils.DensityUtil;
+import com.passion.widget.utils.DensityUtil;
 
 
 public abstract class LoadingRenderer {

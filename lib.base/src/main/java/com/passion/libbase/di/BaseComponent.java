@@ -1,6 +1,7 @@
 package com.passion.libbase.di;
 
-import com.chaos.base.BaseApplication;
+
+import com.passion.libbase.BaseApplication;
 
 import dagger.Subcomponent;
 

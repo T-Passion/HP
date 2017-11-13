@@ -2,9 +2,9 @@ package com.passion.libbase;
 
 import android.app.Application;
 
-import com.chaos.base.utils.HPInjectUtils;
-import com.chaos.base.router.HPRouter;
-import com.chaos.base.utils.LogUtils;
+import com.passion.libbase.router.HPRouter;
+import com.passion.libbase.utils.HPInjectUtils;
+import com.passion.libbase.utils.LogUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 

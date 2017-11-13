@@ -1,4 +1,4 @@
-package com.chaos.widget.main.render;
+package com.passion.widget.main.render;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -11,7 +11,7 @@ import android.graphics.RectF;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.animation.Interpolator;
 
-import com.chaos.widget.utils.DensityUtil;
+import com.passion.widget.utils.DensityUtil;
 
 
 public class MaterialLoadingRenderer extends LoadingRenderer {

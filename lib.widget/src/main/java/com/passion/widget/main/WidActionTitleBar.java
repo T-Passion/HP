@@ -1,4 +1,4 @@
-package com.chaos.widget.main;
+package com.passion.widget.main;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,9 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.chaos.widget.R;
-import com.chaos.widget.R2;
-import com.chaos.widget.imp.ViewInterface;
+import com.passion.libwidget.R;
+import com.passion.libwidget.R2;
+import com.passion.widget.imp.ViewInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

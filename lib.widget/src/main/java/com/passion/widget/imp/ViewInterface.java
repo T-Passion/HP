@@ -1,4 +1,4 @@
-package com.chaos.widget.imp;
+package com.passion.widget.imp;
 
 import android.util.AttributeSet;
 

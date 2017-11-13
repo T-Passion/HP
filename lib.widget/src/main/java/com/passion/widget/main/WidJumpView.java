@@ -1,4 +1,4 @@
-package com.chaos.widget.main;
+package com.passion.widget.main;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 
-import com.chaos.widget.R;
+import com.passion.libwidget.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

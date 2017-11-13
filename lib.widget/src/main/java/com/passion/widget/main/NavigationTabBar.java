@@ -1,4 +1,4 @@
-package com.chaos.widget.main;
+package com.passion.widget.main;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -40,8 +40,8 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Scroller;
 
-import com.chaos.widget.R;
-import com.chaos.widget.main.render.NavigationTabBarBehavior;
+import com.passion.libwidget.R;
+import com.passion.widget.main.render.NavigationTabBarBehavior;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

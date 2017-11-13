@@ -57,4 +57,9 @@ dependencies {
     compile rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["daggerCompiler"]
 
+
+    compile project(":lib.base")
+    compile project(":lib.reso")
+    compile project(":lib.widget")
+
 }

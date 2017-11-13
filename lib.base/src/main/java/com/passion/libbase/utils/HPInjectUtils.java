@@ -1,6 +1,7 @@
 package com.passion.libbase.utils;
 
-import com.chaos.base.di.imp.IInjector;
+
+import com.passion.libbase.di.imp.IInjector;
 
 /**
  * Created by huangdou

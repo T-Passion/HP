@@ -1,4 +1,4 @@
-package com.chaos.widget.main.render;
+package com.passion.widget.main.render;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;

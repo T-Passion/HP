@@ -1,4 +1,4 @@
-package com.chaos.widget.main;
+package com.passion.widget.main;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chaos.widget.R;
+import com.passion.libwidget.R;
 
 
 /**
