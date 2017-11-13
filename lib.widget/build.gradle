@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+    }
+}
+android {
+    compileSdkVersion rootProject.ext.dependencies["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.dependencies["buildToolsVersion"]
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.dependencies["minSdkVersion"]
+        targetSdkVersion rootProject.ext.dependencies["targetSdkVersion"]
+        versionCode rootProject.ext.dependencies["versionCode"]
+        versionName rootProject.ext.dependencies["versionName"]
+
+        testInstrumentationRunner rootProject.ext.dependencies["AndroidJUnitRunner"]
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile rootProject.ext.dependencies["testRunner"]
+    androidTestCompile rootProject.ext.dependencies["testRules"]
+    testCompile rootProject.ext.dependencies["junit"]
+    compile rootProject.ext.dependencies["supportAppcompatV7"]
+    compile rootProject.ext.dependencies["butterknifeVersion"]
+    annotationProcessor rootProject.ext.dependencies["butterknifeCompileVersion"]
+    compile rootProject.ext.dependencies["supportDesign"]
+    compile project(':lib.reso')
+}

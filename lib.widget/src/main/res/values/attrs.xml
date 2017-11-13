@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="WidActionTitleBar">
+        <attr name="leftText" format="string" />
+        <attr name="leftIcon" format="reference" />
+        <attr name="titleTxt" format="string" />
+        <attr name="titleIcon" format="reference" />
+        <attr name="rightText" format="string" />
+        <attr name="rightIcon" format="reference" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="NavigationTabBar">
+        <attr name="ntb_titled" format="boolean" />
+        <attr name="ntb_badged" format="boolean" />
+        <attr name="ntb_scaled" format="boolean" />
+        <attr name="ntb_tinted" format="boolean" />
+        <attr name="ntb_swiped" format="boolean" />
+        <attr name="ntb_badge_use_typeface" format="boolean" />
+
+        <attr name="ntb_title_size" format="dimension" />
+        <attr name="ntb_title_mode" format="enum">
+            <enum name="all" value="0" />
+            <enum name="active" value="1" />
+        </attr>
+
+        <attr name="ntb_badge_size" format="dimension" />
+        <attr name="ntb_badge_position" format="enum">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+        <attr name="ntb_badge_gravity" format="enum">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+        </attr>
+        <attr name="ntb_badge_bg_color" format="color" />
+        <attr name="ntb_badge_title_color" format="color" />
+
+        <attr name="ntb_typeface" format="string" />
+        <attr name="ntb_corners_radius" format="dimension" />
+        <attr name="ntb_icon_size_fraction" format="float" />
+        <attr name="ntb_animation_duration" format="integer" />
+
+        <attr name="ntb_inactive_color" format="color" />
+        <attr name="ntb_active_color" format="color" />
+        <attr name="ntb_bg_color" format="color" />
+
+        <attr name="ntb_preview_colors" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="WidNetProgressView">
+        <attr name="loading_renderer">
+            <!--circle rotate-->
+            <enum name="MaterialLoadingRenderer" value="0" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="WidJumpView">
+        <attr name="outLineColor" format="color" />
+        <attr name="outLineWidth" format="integer" />
+        <attr name="circleColor" format="color" />
+        <attr name="circleRadius" format="integer" />
+        <attr name="progressColor" format="color" />
+        <attr name="progressLineWidth" format="integer" />
+        <attr name="duration" format="integer" />
+        <attr name="text" format="reference" />
+
+
+    </declare-styleable>
+
+
+    <declare-styleable name="LimitEditView">
+        <attr name="sort" format="integer" />
+        <attr name="maxCount" format="integer" />
+        <attr name="ignoreCnOrEn" format="boolean" />
+        <attr name="hintText" format="string|reference" />
+        <attr name="hintTextColor" format="color|reference" />
+        <attr name="contentText" format="string|reference" />
+        <attr name="contentTextSize" format="dimension|reference" />
+        <attr name="contentTextColor" format="color|reference" />
+        <attr name="contentViewHeight" format="dimension|reference" />
+    </declare-styleable>
+
+</resources>

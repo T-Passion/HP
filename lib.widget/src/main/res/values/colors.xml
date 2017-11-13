@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="white_sub_title_common">#bcbcbc</color>
+    <color name="white_content_common">#909090</color>
+    <color name="white10transparent">#E6ffffff</color>
+    <color name="white12transparent">#d0ffffff</color>
+    <color name="white20transparent">#CCFFFFFF</color>
+    <color name="white30transparent">#B3FFFFFF</color>
+    <color name="white50transparent">#80FFFFFF</color>
+    <color name="white70transparent">#4DFFFFFF</color>
+    <color name="white80transparent">#33FFFFFF</color>
+    <color name="white85transparent">#26FFFFFF</color>
+    <color name="white90transparent">#19ffffff</color>
+    <color name="white92transparent">#14ffffff</color>
+    <color name="white95cap">#f3ffffff</color>
+    <color name="white70cap">#B3FFFFFF</color>
+    <color name="white50cap">#80FFFFFF</color>
+    <color name="white40cap">#66FFFFFF</color>
+    <color name="white30cap">#4CFFFFFF</color>
+    <color name="white25cap">#40FFFFFF</color>
+    <color name="white15cap">#26FFFFFF</color>
+    <color name="white12cap">#1fFFFFFF</color>
+    <color name="white5cap">#0CFFFFFF</color>
+    <color name="black90transparent">#19000000</color>
+    <color name="black70transparent">#4D000000</color>
+    <color name="black50transparent">#80000000</color>
+    <color name="black10transparent">#E6000000</color>
+    <color name="mask50transparent">#80333333</color>
+    <color name="app_primary">#e02200</color>
+    <color name="red_primary">#ec313d</color>
+    <color name="cloud_tip_bg">#CCe02200</color>
+    <color name="title_common">#333333</color>
+    <color name="content_common">#666666</color>
+    <color name="subcontent_common">#969696</color>
+    <color name="coupon_detail_text">#717171</color>
+    <color name="dim_foreground_dark">#bebebe</color>
+    <color name="followed_shop_line">#7f8CADFf</color>
+    <color name="cloud_cart_label">#006fce</color>
+    <color name="subcontent_common70cap">#4D969696</color>
+    <color name="item_tip_common">#c8c8c8</color>
+    <color name="tip_common">#ffcb1b</color>
+    <color name="card_tip_common">#FFCB1B</color>
+    <color name="gift_off_common">#F3A946</color>
+    <color name="background_common">#ececec</color>
+    <color name="shadow_line">#D7D7D7</color>
+    <color name="color_scheme_1_1">#33B5E5</color>
+    <color name="color_scheme_1_2">#99CC00</color>
+    <color name="color_scheme_1_3">#FFBB33</color>
+    <color name="color_scheme_1_4">#FF4444</color>
+    <color name="tab_text_pay_order">#f0f0f0</color>
+    <color name="two_acount">#F3683C</color>
+    <color name="tab_text_normal">#cfc6c4</color>
+    <color name="qr_index_header_bg">#ce1f00</color>
+    <color name="qr_corner_blue">#07bb8e</color>
+    <color name="txt_corner_green_light">#2CBA9A</color>
+    <color name="tab_indicator_bg">#444444</color>
+    <color name="bottom_bg">#F2F2F2</color>
+    <color name="capture_bottem_bg">#4D000000</color>
+    <color name="list_common_white_with_95_caps">#F2FFFFFF</color>
+    <color name="list_common_white_with_90_caps">#E6FFFFFF</color>
+    <color name="list_common_white_with_85_caps">#D9FFFFFF</color>
+    <color name="list_common_white_with_80_caps">#CCFFFFFF</color>
+    <color name="list_common_white_with_70_caps">#B2FFFFFF</color>
+    <color name="list_common_white_with_60_caps">#42FFFFFF</color>
+    <color name="list_common_white_with_10_caps">#1AFFFFFF</color>
+    <color name="black_with_15_caps">#26000000</color>
+    <color name="black_with_25_caps">#40000000</color>
+    <color name="black_with_30_caps">#4D000000</color>
+    <color name="black_with_40_caps">#66000000</color>
+    <color name="black_with_45_caps">#73000000</color>
+    <color name="black_with_50_caps">#80000000</color>
+    <color name="black_with_60_caps">#99000000</color>
+    <color name="black_with_70_caps">#B3000000</color>
+    <color name="black_with_80_caps">#CC000000</color>
+    <color name="default_aciton_bar_bg_color">#E6787366</color>
+    <color name="default_tab_bar_bg_color">#F25c3726</color>
+    <color name="darker_shadow_line">#BBBBBB</color>
+    <color name="color_menu_other">#006fce</color>
+    <color name="color_menu_other_press">#001fff</color>
+    <color name="color_menu_my">#e02200</color>
+    <color name="txt_corner_red_light">#e02200</color>
+    <!-- instance status bg -->
+    <color name="menu_marquee_bg">#4De02200</color>
+    <color name="instance_red_status_bg">#e02200</color>
+    <color name="instance_yellow_status_bg">#ffa21c</color>
+    <color name="instance_green_status_bg">#00c297</color>
+    <color name="instance_blue_status_bg">#c4d0ee</color>
+    <color name="color_group_tab">#999999</color>
+    <!-- drop down list header font color -->
+    <color name="drop_down_list_header_font_color">#000000</color>
+    <!-- drop down list header second font color -->
+    <color name="drop_down_list_header_second_font_color">#000000</color>
+    <!-- drop down list footer font color -->
+    <color name="drop_down_list_footer_font_color">#000000</color>
+
+    <color name="lineup_select_line">#E6E6E6</color>
+    <color name="addition_title_bg">#E6E6E6</color>
+    <color name="force_menu_note">#e02200</color>
+    <color name="grey_bg">#F1F1F1</color>
+    <color name="integral_grey_bg">#B5B5B5</color>
+    <color name="dialog_title_common">#979797</color>
+    <color name="dialog_title_light_black">#5a5a5a</color>
+    <color name="title_color">#333333</color>
+    <color name="shop_bottom_bg">#B2F2F2F2</color>
+    <color name="light_grey_line">#ebebeb</color>
+    <color name="level_name_bg">#961e00</color>
+    <color name="black">#000000</color>
+    <color name="gray_btn_bg">#aaaaaa</color>
+    <color name="grey_line">#929e9e9e</color>
+    <color name="light_green">#00b371</color>
+
+    <color name="light_grey_aaa">#aaaaaa</color>
+    <color name="light_grey_b4">#b4b4b4</color>
+    <color name="light_grey_b3">#b3b3b3</color>
+
+    <color name="uncompleted_color">#A3E0D9</color>
+    <color name="uncompleted_text_color">#F8F8F8</color>
+    <color name="content_color">#999999</color>
+    <color name="menu_color">#037AD4</color>
+
+    <color name="menu_divide_line_color">#979797</color>
+    <color name="menu_sub_desc">#D7D7D7</color>
+
+    <color name="color_of_unit">#151515</color>
+
+    <color name="red_color_transfer">#FD3143</color>
+
+
+    <color name="circle_button_gray_bg">#e5333333</color>
+    <color name="circle_button_grayness_bg">#ee737373</color>
+    <color name="circle_button_red_bg">#e5cf2222</color>
+    <color name="circle_button_blue_bg">#47ABFF</color>
+
+
+    <color name="qr_angle_color">#07bb8e</color>
+    <color name="qr_code_finder_mask">#77000000</color>
+    <color name="qr_scan_line_color">#07bb8e</color>
+    <color name="coupon_line">#C6A696</color>
+    <color name="btn_advertising">#785C4D</color>
+    <color name="transparent">#00000000</color>
+    <color name="coupon_type">#E02200</color>
+
+    <color name="fire_member_bg">#C07810</color>
+    <color name="green_btn">#74C11F</color>
+    <color name="solid_red">#EBD9D9</color>
+    <color name="stroke_red">#E5C2C2</color>
+    <color name="grey_grey_text">#AFAFAF</color>
+    <color name="red_sign_in">#EC2E2E</color>
+    <color name="input_bg_gray">#F0F0F0</color>
+    <color name="button_bg_gray">#B1B1B1</color>
+    <color name="color_progress_bar">#B7B7B7</color>
+
+    <color name="red_btn_presss">#9C1800</color>
+    <color name="little_blue_60caps">#99022049</color>
+    <color name="title_black">#030303</color>
+    <color name="line_40transparent">#66999999</color>
+    <color name="title_blue">#0076FF</color>
+    <color name="invoice_red_text">#cc0000</color>
+
+    <color name="last_visit_bg">#4D403A</color>
+    <color name="last_visit_bg_bottom">#352c28</color>
+
+    <color name="navigator_red">#ff4430</color>
+    <color name="navigator_bg">#202020</color>
+    <color name="address_navi_red">#EC313D</color>
+    <color name="bg_action_bar_search">#251F1B</color>
+    <color name="gps_location_blue">#007AFF</color>
+    <color name="gps_location_radius">#1A007AFF</color>
+
+    <color name="check_border_color">#4D4D4D</color>
+    <color name="binding_status_red">#ff3f49</color>
+    <color name="binding_status_green">#008f48</color>
+    <color name="binding_status_yellow">#ffb035</color>
+
+
+    <color name="huotong_bg_red">#EF665C</color>
+    <color name="huo_tong_square_red">#E12E3A</color>
+
+    <color name="tag_takeout_bg">#F39B13</color>
+    <color name="tag_queue_bg">#EC313D</color>
+    <color name="tag_book_bg">#DA52F6</color>
+    <color name="tag_enterprise_bg">#478EF4</color>
+
+    <color name="location_search_bg">#FF363636</color>
+
+    <color name="bg_main">#0f0f0f</color>
+    <color name="dark_btn_frame">#202020</color>
+</resources>

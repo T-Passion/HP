@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?><!--ui title view-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appTitleBar"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/app_title_bar_height"
+    android:background="@color/holo_red_dark">
+
+    <LinearLayout
+        android:id="@+id/titleBarLeftLay"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/app_title_bar_left_icon_height"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/titleBarLeftIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/app_title_bar_left_icon_height"
+            android:layout_marginLeft="@dimen/normal_page_margin"
+            android:src="@drawable/title_bar_left_icon_selector" />
+
+        <TextView
+            android:id="@+id/titleBarLeftText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="@dimen/normal_widget_padding"
+            android:textColor="@color/white"
+            tools:text="文字" />
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/titleBarNameFL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/titleBarNameIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_title_bar"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/titleBarNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/app_title_bar_txt_size"
+            android:visibility="gone"
+            tools:text="虎扑详情"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/titleBarRight"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/normal_page_margin"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/titleBarRightTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/normal_widget_margin"
+            android:background="@drawable/title_bar_right_txt_shape"
+            android:gravity="center"
+            android:padding="@dimen/app_title_bar_right_txt_padding"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="看楼主"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/titleBarRightIcon"
+            android:layout_width="@dimen/app_title_bar_right_icon_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/search_btn_board_day" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

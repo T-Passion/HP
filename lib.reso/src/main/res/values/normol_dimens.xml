@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="normal_page_padding">6dp</dimen>
+    <dimen name="normal_page_margin">6dp</dimen>
+    <dimen name="normal_widget_margin">6dp</dimen>
+    <dimen name="normal_widget_corner">2dp</dimen>
+    <dimen name="normal_widget_padding">4dp</dimen>
+
+</resources>
