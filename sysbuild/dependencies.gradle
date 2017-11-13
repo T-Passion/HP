@@ -8,8 +8,9 @@ def versionName = "5.6.32"
 def versionCode = 5644
 
 //依赖库配置版本
-def supportAppcompatV7 = "25.1.0"
+def supportDesign = "25.1.0"
 def constraintLayout = "1.0.2"
+def supportAppcompatV7 = "25.1.0"
 
 def butterKnifeVersion = "8.8.1"
 def butterKnifeCompileVersion = "8.8.1"
@@ -21,7 +22,6 @@ def aliRouterCompiler = "1.1.3"
 def dagger = "2.11"
 def daggerCompiler = "2.11"
 
-def supportDesign = "25.1.0"
 
 def jacksonCore = "2.7.3"
 def jacksonAnnotations = "2.7.3"
@@ -50,6 +50,7 @@ def jUnitVersion = "4.12"
 def assertJVersion = "1.7.1"
 def testRunnerVersion = "0.5"
 def testRulesVersion = "0.5"
+
 
 project.ext {
     dependencies = [

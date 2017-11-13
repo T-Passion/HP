@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply from: '../sysbuild/quality/quality.gradle'
 
 android {
     compileSdkVersion rootProject.ext.dependencies["compileSdkVersion"]
@@ -63,3 +63,4 @@ dependencies {
     compile project(":lib.widget")
 
 }
+
