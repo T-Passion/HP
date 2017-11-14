@@ -54,8 +54,8 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         setContentView(R.layout.activity_base_layout);
         findView();
         injector();
-        inflateUiBind();
-
+        mContentView = inflateUiBind();
+        ButterKnife.bind(this,mContentView);
         initThings(mContentLayout);
         loadInitDta();
     }
@@ -76,10 +76,11 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
     }
 
 
-    private void inflateUiBind() {
+    private ViewGroup inflateUiBind() {
         mContentLayoutId = getContentLayoutId();
-        mContentView = (ViewGroup) LayoutInflater.from(this).inflate(mContentLayoutId, mContentLayout, true);
-        mViewUnbind = ButterKnife.bind(this,mContentView);
+        ViewGroup vg = (ViewGroup) LayoutInflater.from(this).inflate(mContentLayoutId, mContentLayout, true);
+        return vg;
+
     }
 
     /**
