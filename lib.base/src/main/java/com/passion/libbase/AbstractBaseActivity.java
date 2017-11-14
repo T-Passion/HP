@@ -102,6 +102,13 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         return mContext;
     }
 
+    public View getRootView(){
+        return mRootContentView;
+    }
+
+    public View getContentLayout(){
+        return mContentLayout;
+    }
 
     /**
      * @param title 标题
@@ -168,20 +175,41 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         mActionTitleBar.setOnClickListener(rightListener);
     }
 
-
+    /**
+     * 是否展示空页面
+     * @param showEmpty true：展示，false：隐藏
+     */
     public void setEmptyUI(boolean showEmpty) {
         setEmptyLayout(showEmpty, -1, -1);
     }
 
-
+    /**
+     * 设置空页面
+     * @param showEmpty true：展示，false：隐藏
+     * @param emptyTxtId 文案
+     * @param emptyIcon 图标
+     */
     public void setEmptyLayout(boolean showEmpty, Integer emptyTxtId, Integer emptyIcon) {
         setEmptyLayout(showEmpty, getString(emptyTxtId), emptyIcon);
     }
 
+    /**
+     * 设置空页面
+     * @param showEmpty true：展示，false：隐藏
+     * @param emptyTxt 文案
+     * @param emptyIcon 图标
+     */
     public void setEmptyLayout(boolean showEmpty, String emptyTxt, Integer emptyIcon) {
         setEmptyLayout(showEmpty, emptyTxt, -1, emptyIcon);
     }
 
+    /**
+     * 设置空页面
+     * @param showEmpty true：展示，false：隐藏
+     * @param emptyTxt 文案
+     * @param emptyTxtColor 文案色值
+     * @param emptyIcon 图标
+     */
     public void setEmptyLayout(boolean showEmpty, String emptyTxt, @ColorInt Integer emptyTxtColor, Integer emptyIcon) {
         if (showEmpty) {
             mProgressLayout.setVisibility(View.GONE);
