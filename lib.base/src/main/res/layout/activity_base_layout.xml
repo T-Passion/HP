@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <!--ui title view-->
-    <com.chaos.widget.main.WidActionTitleBar
+    <com.passion.widget.main.WidActionTitleBar
         android:id="@+id/actionTitleBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_title_bar_height" />

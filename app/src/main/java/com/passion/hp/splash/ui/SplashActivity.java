@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.bumptech.glide.Glide;
 import com.passion.hp.R;
 import com.passion.hp.splash.contract.SplashContract;
 import com.passion.hp.splash.model.SplashModel;
@@ -54,6 +53,6 @@ public class SplashActivity extends AbstractBaseActivity implements com.passion.
 
     @Override
     public void updateContent(String imageUrl) {
-        Glide.with(this).load(imageUrl).into(mSplashAdImg);
+//        Glide.with(this).load(imageUrl).into(mSplashAdImg);
     }
 }

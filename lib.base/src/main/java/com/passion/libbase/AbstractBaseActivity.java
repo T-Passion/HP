@@ -35,6 +35,7 @@ import butterknife.Unbinder;
 public abstract class AbstractBaseActivity extends FragmentActivity implements OnNetReconnectListener, IBaseView {
     protected Context mContext;
 
+    @BindView(R2.id.rootContentView)
     LinearLayout mRootContentView;//根视图
     @BindView(R2.id.contentLayout)
     FrameLayout mContentLayout;//内容视图
@@ -58,21 +59,14 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_layout);
-        initRootView();
         initInjector();
         inflateContentUi();
-        mViewUnbind = ButterKnife.bind(this, mContentView);
-
+        mViewUnbind = ButterKnife.bind(this);
 
         initThings(mContentLayout);
         loadInitDta();
     }
 
-    private void initRootView() {
-        mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
-        mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
-        mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
-    }
 
     private void initInjector() {
         //路由
@@ -211,6 +205,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         }
 
     }
+
 
 
     @Override
