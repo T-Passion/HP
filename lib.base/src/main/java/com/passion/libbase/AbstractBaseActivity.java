@@ -23,7 +23,6 @@ import com.passion.widget.main.WidNetProgressView;
 
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -35,50 +34,52 @@ import butterknife.Unbinder;
 public abstract class AbstractBaseActivity extends FragmentActivity implements OnNetReconnectListener, IBaseView {
     protected Context mContext;
 
-    @BindView(R2.id.rootContentView)
     LinearLayout mRootContentView;//根视图
-    @BindView(R2.id.contentLayout)
     FrameLayout mContentLayout;//内容视图
-    @BindView(R2.id.actionTitleBar)
     WidActionTitleBar mActionTitleBar;//应用标题栏
-    @BindView(R2.id.emptyLayout)
     FrameLayout mEmptyLayout;//空数据内容显示
-    @BindView(R2.id.progressView)
     WidNetProgressView mProgressView;//刷新内容显示
-    @BindView(R2.id.progressLayout)
     FrameLayout mProgressLayout;//刷新内容显示
 
     private Unbinder mViewUnbind;
     //有数据内容部分
     protected ViewGroup mContentView;
     //当前页面布局id
-    protected int contentLayoutId;
+    protected int mContentLayoutId;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_layout);
-        initInjector();
-        inflateContentUi();
-        mViewUnbind = ButterKnife.bind(this);
+        findView();
+        injector();
+        inflateUiBind();
 
         initThings(mContentLayout);
         loadInitDta();
     }
+    private void findView(){
+        mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
+        mContentLayout = (FrameLayout) findViewById(R.id.contentLayout);
+        mActionTitleBar = (WidActionTitleBar) findViewById(R.id.actionTitleBar);
+        mEmptyLayout = (FrameLayout) findViewById(R.id.emptyLayout);
+        mProgressView = (WidNetProgressView) findViewById(R.id.progressView);
+        mProgressLayout = (FrameLayout) findViewById(R.id.progressLayout);
+    }
 
-
-    private void initInjector() {
+    private void injector() {
         //路由
         HPRouter.inject(this);
-        //
+        //注入
         HPInjectUtils.inject(this);
     }
 
 
-    private void inflateContentUi() {
-        contentLayoutId = getContentLayoutId();
-        mContentView = (ViewGroup) LayoutInflater.from(this).inflate(contentLayoutId, mContentLayout, true);
+    private void inflateUiBind() {
+        mContentLayoutId = getContentLayoutId();
+        mContentView = (ViewGroup) LayoutInflater.from(this).inflate(mContentLayoutId, mContentLayout, true);
+        mViewUnbind = ButterKnife.bind(this,mContentView);
     }
 
     /**

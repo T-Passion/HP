@@ -66,7 +66,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         initAttr(attrs);
     }
 
-    public void init() {
+    private void init() {
         mPaint = new Paint();
         mBounds = new Rect();
         mArcRectF = new RectF();

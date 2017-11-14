@@ -7,4 +7,10 @@
     <dimen name="normal_widget_corner">2dp</dimen>
     <dimen name="normal_widget_padding">4dp</dimen>
 
+    <dimen name="normal_txt_level_16">16sp</dimen>
+    <dimen name="normal_txt_level_14">14sp</dimen>
+    <dimen name="normal_txt_level_12">12sp</dimen>
+    <dimen name="normal_txt_level_10">10sp</dimen>
+    <dimen name="normal_txt_level_08">8sp</dimen>
+
 </resources>

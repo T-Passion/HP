@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
 import com.passion.hp.R;
 import com.passion.hp.splash.contract.SplashContract;
 import com.passion.hp.splash.model.SplashModel;
@@ -13,6 +14,7 @@ import com.passion.widget.main.WidJumpView;
 
 import butterknife.BindView;
 
+
 /**
  * Created by huangdou
  * on 2017/10/9.
@@ -20,7 +22,7 @@ import butterknife.BindView;
  */
 
 @Route(path = com.passion.hp.constant.RouterPath.SPLASH_ACTIVITY)
-public class SplashActivity extends AbstractBaseActivity implements com.passion.hp.splash.contract.SplashContract.View {
+public class SplashActivity extends AbstractBaseActivity implements SplashContract.View {
 
 
     @BindView(R.id.splashAdImg)
@@ -43,6 +45,7 @@ public class SplashActivity extends AbstractBaseActivity implements com.passion.
     @Override
     protected void initThings(View view) {
         mPresenter = new SplashPresenter(mModel, this);
+        mSplashJump.start();
     }
 
 
@@ -53,6 +56,6 @@ public class SplashActivity extends AbstractBaseActivity implements com.passion.
 
     @Override
     public void updateContent(String imageUrl) {
-//        Glide.with(this).load(imageUrl).into(mSplashAdImg);
+        Glide.with(this).load(imageUrl).into(mSplashAdImg);
     }
 }

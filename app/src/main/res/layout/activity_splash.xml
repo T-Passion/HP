@@ -5,12 +5,13 @@
 
     <com.passion.widget.main.WidJumpView
         android:id="@+id/splashJump"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="@dimen/normal_page_margin"
         android:text="@string/jump_over"
+        android:textSize="@dimen/normal_txt_level_10"
         android:gravity="center" />
 
     <LinearLayout
