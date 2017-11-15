@@ -1,4 +1,4 @@
-package com.passion.hp.splash;
+package com.passion.hp.module.splash;
 
 
 import java.util.ArrayList;

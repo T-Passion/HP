@@ -1,7 +1,7 @@
-package com.passion.hp.splash.presenter;
+package com.passion.hp.module.splash.presenter;
 
 
-import com.passion.hp.splash.contract.SplashContract;
+import com.passion.hp.module.splash.contract.SplashContract;
 import com.passion.libbase.mvp.BasePresenter;
 
 /**

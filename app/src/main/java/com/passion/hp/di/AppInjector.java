@@ -1,7 +1,7 @@
 package com.passion.hp.di;
 
 
-import com.passion.hp.splash.ui.SplashActivity;
+import com.passion.hp.module.splash.ui.SplashActivity;
 import com.passion.libbase.di.imp.IInjector;
 
 /**

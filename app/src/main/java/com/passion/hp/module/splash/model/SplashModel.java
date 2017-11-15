@@ -1,8 +1,8 @@
-package com.passion.hp.splash.model;
+package com.passion.hp.module.splash.model;
 
 
-import com.passion.hp.splash.Constant;
-import com.passion.hp.splash.contract.SplashContract;
+import com.passion.hp.module.splash.contract.SplashContract;
+import com.passion.hp.module.splash.Constant;
 import com.passion.libbase.mvp.BaseModel;
 
 import java.util.Random;

@@ -35,7 +35,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
     protected Context mContext;
 
     LinearLayout mRootContentView;//根视图
-    FrameLayout mContentLayout;//内容视图
+    LinearLayout mContentLayout;//内容视图
     View mContentView;//内容
     WidActionTitleBar mActionTitleBar;//应用标题栏
     FrameLayout mEmptyLayout;//空数据内容显示
@@ -52,15 +52,16 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_layout);
         findView();
+        injector();
         inflateUiBind();
-        mViewUnbind = ButterKnife.bind(this,mContentView);
+
         initThings(mContentView);
         loadInitDta();
     }
 
     private void findView() {
         mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
-        mContentLayout = (FrameLayout) findViewById(R.id.contentLayout);
+        mContentLayout = (LinearLayout) findViewById(R.id.contentLayout);
         mActionTitleBar = (WidActionTitleBar) findViewById(R.id.actionTitleBar);
         mEmptyLayout = (FrameLayout) findViewById(R.id.emptyLayout);
         mProgressView = (WidNetProgressView) findViewById(R.id.progressView);
@@ -78,6 +79,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
     private void inflateUiBind() {
         mContentLayoutId = getContentLayoutId();
         mContentView = getLayoutInflater().inflate(mContentLayoutId, mContentLayout, true);
+        mViewUnbind = ButterKnife.bind(this,mContentView);
     }
 
     /**
@@ -272,6 +274,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         super.onDestroy();
         if (mViewUnbind != null) {
             mViewUnbind.unbind();
+            mViewUnbind = null;
         }
     }
 }

@@ -1,7 +1,5 @@
-package com.passion.hp.splash.ui;
+package com.passion.hp.module.splash.ui;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -9,11 +7,12 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.passion.hp.R;
 import com.passion.hp.constant.RouterPath;
-import com.passion.hp.splash.contract.SplashContract;
-import com.passion.hp.splash.model.SplashModel;
-import com.passion.hp.splash.presenter.SplashPresenter;
+import com.passion.hp.module.splash.contract.SplashContract;
+import com.passion.hp.module.splash.presenter.SplashPresenter;
+import com.passion.hp.module.splash.model.SplashModel;
 import com.passion.libbase.AbstractBaseActivity;
 import com.passion.libbase.imp.LayoutId;
+import com.passion.libbase.router.HPRouter;
 import com.passion.widget.main.WidJumpView;
 
 import butterknife.BindView;
@@ -41,14 +40,14 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
     SplashContract.Presenter mPresenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     protected void initThings(View view) {
         mPresenter = new SplashPresenter(mModel, this);
-        mSplashJump.start();
+        mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
+            @Override
+            public void onAction() {
+                HPRouter.navigate(RouterPath.HOME_ACTIVITY);
+            }
+        });
     }
 
 

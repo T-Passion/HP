@@ -15,19 +15,21 @@
 
 
     <!--内容部分-->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/contentLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    </FrameLayout>
+    </LinearLayout>
     <!--progress部分-->
     <FrameLayout
         android:id="@+id/progressLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:visibility="gone">
 
         <com.passion.widget.main.WidNetProgressView
             android:id="@+id/progressView"
@@ -42,7 +44,8 @@
     <FrameLayout
         android:id="@+id/emptyLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <include layout="@layout/empty_layout" />
 

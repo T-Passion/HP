@@ -1,8 +1,8 @@
 package com.passion.hp.di;
 
 
-import com.passion.hp.HomeActivity;
-import com.passion.hp.splash.ui.SplashActivity;
+import com.passion.hp.module.home.HomeActivity;
+import com.passion.hp.module.splash.ui.SplashActivity;
 
 import dagger.Subcomponent;
 

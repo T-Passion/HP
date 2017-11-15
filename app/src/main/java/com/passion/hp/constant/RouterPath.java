@@ -7,6 +7,12 @@ package com.passion.hp.constant;
 
 public final class RouterPath {
 
-
+    /**
+     * Splash页面
+     */
     public static final String SPLASH_ACTIVITY = "/app/SplashActivity";
+    /**
+     * 首页
+     */
+    public static final String HOME_ACTIVITY = "/app/HomeActivity";
 }

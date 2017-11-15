@@ -1,4 +1,4 @@
-package com.passion.hp.splash.model.entity;
+package com.passion.hp.module.splash.model.entity;
 
 /**
  * Created by huangdou

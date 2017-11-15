@@ -1,4 +1,4 @@
-package com.passion.hp;
+package com.passion.hp.module.home;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.passion.hp.splash.contract;
+package com.passion.hp.module.splash.contract;
 
 
 import com.passion.libbase.mvp.IBaseModel;
