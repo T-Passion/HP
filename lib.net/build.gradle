@@ -1,17 +1,17 @@
 apply plugin: 'com.android.library'
 
-android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
 
+android {
+    compileSdkVersion rootProject.ext.dependencies["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.dependencies["buildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.dependencies["minSdkVersion"]
+        targetSdkVersion rootProject.ext.dependencies["targetSdkVersion"]
+        versionCode rootProject.ext.dependencies["versionCode"]
+        versionName rootProject.ext.dependencies["versionName"]
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["AndroidJUnitRunner"]
 
     }
     buildTypes {
@@ -20,13 +20,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile rootProject.ext.dependencies["testRunner"]
+    androidTestCompile rootProject.ext.dependencies["testRules"]
+    testCompile rootProject.ext.dependencies["junit"]
 
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+
 }
