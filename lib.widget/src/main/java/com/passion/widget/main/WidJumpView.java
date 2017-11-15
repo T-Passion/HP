@@ -178,7 +178,8 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
                     post(new Runnable() {
                         @Override
                         public void run() {
-                            mJumpAction.onAction();
+                            if(mJumpAction != null)
+                                mJumpAction.onAction();
                         }
                     });
                     mTimeCounter.cancel();
@@ -188,7 +189,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
     }
 
     /**
-     *
+     *监听
      */
     public interface OnJumpAction {
         void onAction();

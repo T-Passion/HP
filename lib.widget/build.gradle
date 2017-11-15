@@ -45,5 +45,7 @@ dependencies {
     compile rootProject.ext.dependencies["butterknifeVersion"]
     annotationProcessor rootProject.ext.dependencies["butterknifeCompileVersion"]
     compile rootProject.ext.dependencies["supportDesign"]
+
+
     compile project(':lib.reso')
 }

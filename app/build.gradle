@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply from: '../sysbuild/quality/quality.gradle'
+apply plugin: 'com.jakewharton.butterknife'
+
 
 android {
     compileSdkVersion rootProject.ext.dependencies["compileSdkVersion"]
@@ -56,6 +57,9 @@ dependencies {
     compile rootProject.ext.dependencies["glide"]//
     compile rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["daggerCompiler"]
+    compile rootProject.ext.dependencies["butterknifeVersion"]
+    annotationProcessor rootProject.ext.dependencies["butterknifeCompileVersion"]
+
 
 
     compile project(":lib.base")

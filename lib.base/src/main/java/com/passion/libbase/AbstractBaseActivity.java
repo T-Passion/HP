@@ -6,9 +6,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +15,9 @@ import android.widget.TextView;
 import com.passion.libbase.imp.OnNetReconnectListener;
 import com.passion.libbase.mvp.IBaseView;
 import com.passion.libbase.router.HPRouter;
+import com.passion.libbase.utils.AnnotationUtils;
 import com.passion.libbase.utils.HPInjectUtils;
+import com.passion.libbase.utils.LogUtils;
 import com.passion.widget.main.WidActionTitleBar;
 import com.passion.widget.main.WidNetProgressView;
 
@@ -36,14 +36,13 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
 
     LinearLayout mRootContentView;//根视图
     FrameLayout mContentLayout;//内容视图
+    View mContentView;//内容
     WidActionTitleBar mActionTitleBar;//应用标题栏
     FrameLayout mEmptyLayout;//空数据内容显示
     WidNetProgressView mProgressView;//刷新内容显示
     FrameLayout mProgressLayout;//刷新内容显示
 
     private Unbinder mViewUnbind;
-    //有数据内容部分
-    protected ViewGroup mContentView;
     //当前页面布局id
     protected int mContentLayoutId;
 
@@ -53,13 +52,13 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_layout);
         findView();
-        injector();
-        mContentView = inflateUiBind();
-        ButterKnife.bind(this,mContentView);
-        initThings(mContentLayout);
+        inflateUiBind();
+        mViewUnbind = ButterKnife.bind(this,mContentView);
+        initThings(mContentView);
         loadInitDta();
     }
-    private void findView(){
+
+    private void findView() {
         mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
         mContentLayout = (FrameLayout) findViewById(R.id.contentLayout);
         mActionTitleBar = (WidActionTitleBar) findViewById(R.id.actionTitleBar);
@@ -76,17 +75,23 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
     }
 
 
-    private ViewGroup inflateUiBind() {
+    private void inflateUiBind() {
         mContentLayoutId = getContentLayoutId();
-        ViewGroup vg = (ViewGroup) LayoutInflater.from(this).inflate(mContentLayoutId, mContentLayout, true);
-        return vg;
-
+        mContentView = getLayoutInflater().inflate(mContentLayoutId, mContentLayout, true);
     }
 
     /**
      * @return 获得当前页面的布局
      */
-    public abstract int getContentLayoutId();
+    private int getContentLayoutId() {
+        int layoutId = AnnotationUtils.getLayoutId(this);
+        if (layoutId != -1) {
+            return layoutId;
+        } else {
+            LogUtils.e("当前页面没有给定布局资源");
+            return -1;
+        }
+    }
 
     /**
      * 初始化当前页面的布局设置
@@ -104,11 +109,11 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         return mContext;
     }
 
-    public View getRootView(){
+    public View getRootView() {
         return mRootContentView;
     }
 
-    public View getContentLayout(){
+    public View getContentLayout() {
         return mContentLayout;
     }
 
@@ -179,6 +184,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
 
     /**
      * 是否展示空页面
+     *
      * @param showEmpty true：展示，false：隐藏
      */
     public void setEmptyUI(boolean showEmpty) {
@@ -187,9 +193,10 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
 
     /**
      * 设置空页面
-     * @param showEmpty true：展示，false：隐藏
+     *
+     * @param showEmpty  true：展示，false：隐藏
      * @param emptyTxtId 文案
-     * @param emptyIcon 图标
+     * @param emptyIcon  图标
      */
     public void setEmptyLayout(boolean showEmpty, Integer emptyTxtId, Integer emptyIcon) {
         setEmptyLayout(showEmpty, getString(emptyTxtId), emptyIcon);
@@ -197,8 +204,9 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
 
     /**
      * 设置空页面
+     *
      * @param showEmpty true：展示，false：隐藏
-     * @param emptyTxt 文案
+     * @param emptyTxt  文案
      * @param emptyIcon 图标
      */
     public void setEmptyLayout(boolean showEmpty, String emptyTxt, Integer emptyIcon) {
@@ -207,10 +215,11 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
 
     /**
      * 设置空页面
-     * @param showEmpty true：展示，false：隐藏
-     * @param emptyTxt 文案
+     *
+     * @param showEmpty     true：展示，false：隐藏
+     * @param emptyTxt      文案
      * @param emptyTxtColor 文案色值
-     * @param emptyIcon 图标
+     * @param emptyIcon     图标
      */
     public void setEmptyLayout(boolean showEmpty, String emptyTxt, @ColorInt Integer emptyTxtColor, Integer emptyIcon) {
         if (showEmpty) {
@@ -235,7 +244,6 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         }
 
     }
-
 
 
     @Override
