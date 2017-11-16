@@ -1,6 +1,7 @@
 package com.passion.libnet.core.factory;
 
-import android.net.Network;
+
+import com.passion.libnet.core.Network;
 
 /**
  * Created by chaos

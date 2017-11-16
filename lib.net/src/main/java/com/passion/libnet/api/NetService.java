@@ -1,10 +1,9 @@
 package com.passion.libnet.api;
 
-import android.net.Network;
 
-import com.passion.libnet.core.imp.Callback;
 import com.passion.libnet.core.FileCallback;
 import com.passion.libnet.core.NetResponse;
+import com.passion.libnet.core.Network;
 import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.ResponseModel;
 import com.passion.libnet.core.convert.Converter;
@@ -16,6 +15,7 @@ import com.passion.libnet.core.exception.ServerNetException;
 import com.passion.libnet.core.exception.TimeoutNetException;
 import com.passion.libnet.core.factory.DefaultNetFactory;
 import com.passion.libnet.core.factory.NetFactory;
+import com.passion.libnet.core.imp.Callback;
 import com.passion.libnet.core.request.RequestInterceptor;
 import com.passion.libnet.core.utils.DefaultNetCookieJar;
 import com.passion.libnet.core.utils.DefaultSignInterceptor;
@@ -70,7 +70,7 @@ public class NetService {
                 cookieJar = new DefaultNetCookieJar(new MemoryCookieCache());
             }
 
-            this.mNetFactory = new DefaultNetFactory(mNetworkConfig.debugMode, jsonConverter, networkDns, (NetCookieJar) cookieJar, mNetworkConfig.trustAllCerts, interceptors);
+            this.mNetFactory = new DefaultNetFactory(mNetworkConfig.debugMode, jsonConverter, null, (NetCookieJar) cookieJar, mNetworkConfig.trustAllCerts, interceptors);
             this.isDefaultFactory = true;
         }
     }
@@ -95,13 +95,13 @@ public class NetService {
         if (NetConfig == null) {
             throw new IllegalArgumentException("NetConfig == null");
         } else {
-            if (NetConfig.enableDns) {
-                HttpDnsConfig dnsConfig = (new Builder()).setDebugMode(NetConfig.debugMode).setMode(NetConfig.dnsMode).setDFireDnsDecryptKey(NetConfig.dnsKey).build();
-                HttpDns.init(dnsConfig);
-                if (NetConfig.dnsPreloadHosts != null && NetConfig.dnsPreloadHosts.length > 0) {
-                    HttpDns.preUpdateHosts(NetConfig.dnsPreloadHosts);
-                }
-            }
+//            if (NetConfig.enableDns) {
+//                HttpDnsConfig dnsConfig = (new Builder()).setDebugMode(NetConfig.debugMode).setMode(NetConfig.dnsMode).setDFireDnsDecryptKey(NetConfig.dnsKey).build();
+//                HttpDns.init(dnsConfig);
+//                if (NetConfig.dnsPreloadHosts != null && NetConfig.dnsPreloadHosts.length > 0) {
+//                    HttpDns.preUpdateHosts(NetConfig.dnsPreloadHosts);
+//                }
+//            }
 
             mNetworkConfig = NetConfig.newBuilder().setDnsKey("").setDnsPreloadHosts(new String[]{""}).build();
         }
@@ -144,22 +144,22 @@ public class NetService {
     }
 
     public <T> T get(String url, Map<String, String> params, Type type) throws NetException {
-        RequestModel requestModel = ((GetBuilder) RequestModel.get(url).addUrlParameters(params).responseType(type)).build();
+        RequestModel requestModel = ((RequestModel.GetBuilder) RequestModel.get(url).addUrlParameters(params).responseType(type)).build();
         return this.execute(requestModel);
     }
 
     public void post(String url, Map<String, Object> params, Callback callback) {
-        RequestModel requestModel = ((PostBuilder) RequestModel.post(url).addParameters(params)).build();
+        RequestModel requestModel = ((RequestModel.PostBuilder) RequestModel.post(url).addParameters(params)).build();
         this.getNetwork(url).execute(requestModel, callback);
     }
 
     public <T> T post(String url, Map<String, Object> params, Type type) throws NetException {
-        RequestModel requestModel = ((PostBuilder) ((PostBuilder) RequestModel.post(url).addParameters(params)).responseType(type)).build();
+        RequestModel requestModel = ((RequestModel.PostBuilder) ((RequestModel.PostBuilder) RequestModel.post(url).addParameters(params)).responseType(type)).build();
         return this.execute(requestModel);
     }
 
     public <T> T post(String url, String content, Type type) throws NetException {
-        PostBuilder builder = RequestModel.post(url);
+        RequestModel.PostBuilder builder = RequestModel.post(url);
         builder.postContent(content, "text/plain");
         builder.responseType(type);
         return this.execute(builder.build());
@@ -188,7 +188,7 @@ public class NetService {
             Network.Builder builder = null;
             if (mNetworkConfig != null && mNetworkConfig.enableDns && network.dns() == null) {
                 builder = network.newBuilder();
-                builder.dns(new DefaultNetworkDns());
+//                builder.dns(new DefaultNetworkDns());
             }
 
             if (mNetworkConfig != null && network.converter() == null) {
@@ -228,7 +228,7 @@ public class NetService {
                 } else if (!response.isSuccessful()) {
                     throw new IOException();
                 } else {
-                    return response.data();
+                    return (T) response.data();
                 }
             } catch (UnknownHostException | ConnectException var8) {
                 throw new ConnectNetException("网络出错，可能的原因是：您的网络不通！", var8);

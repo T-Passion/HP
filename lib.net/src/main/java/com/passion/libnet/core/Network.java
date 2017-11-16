@@ -3,8 +3,10 @@ package com.passion.libnet.core;
 import com.passion.libnet.core.convert.Converter;
 import com.passion.libnet.core.cookie.NetCookieJar;
 import com.passion.libnet.core.imp.Callback;
+import com.passion.libnet.core.imp.HttpCall;
 import com.passion.libnet.core.request.RequestInterceptor;
 import com.passion.libnet.core.request.RequestParser;
+import com.passion.libnet.core.utils.Platform;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.Dns;
-import okhttp3.internal.platform.Platform;
 
 /**
  * Created by chaos
@@ -79,7 +80,7 @@ public class Network {
     public <T> void get(String url, Map<String, String> queryParams, Callback<T> callback) {
         RequestModel requestModel = this.buildGetRequest(url, queryParams, callback.getResponseType());
         HttpCall<T> httpCall = new OKHttpCall(RequestParser.create(requestModel, this.requestInterceptors), this);
-        HttpCall<T> executeCall = new ExecutorCallbackHttpCall(Platform.getInstance().getCallbackExecutor(), httpCall);
+        HttpCall<T> executeCall = new HttpExecutorCallback(Platform.getInstance().getCallbackExecutor(), httpCall);
         executeCall.execute(callback);
     }
 
@@ -102,7 +103,7 @@ public class Network {
     public <T> void post(String url, Map<String, Object> formFields, Callback<T> callback) {
         RequestModel requestModel = this.buildPostRequest(url, formFields, callback.getResponseType(), (File) null, (String) null, (String) null);
         HttpCall<T> httpCall = new OKHttpCall(RequestParser.create(requestModel, this.requestInterceptors), this);
-        HttpCall<T> executeCall = new ExecutorCallbackHttpCall(Platform.getInstance().getCallbackExecutor(), httpCall);
+        HttpCall<T> executeCall = new HttpExecutorCallback(Platform.getInstance().getCallbackExecutor(), httpCall);
         executeCall.execute(callback);
     }
 
@@ -115,7 +116,7 @@ public class Network {
     public <T> void execute(RequestModel requestModel, Callback<T> callback) {
         RequestModel executeRequestModel = this.buildRequestWithCandidate(requestModel, callback.getResponseType());
         HttpCall<T> httpCall = new OKHttpCall(RequestParser.create(executeRequestModel, this.requestInterceptors), this);
-        HttpCall<T> executeCall = new ExecutorCallbackHttpCall(Platform.getInstance().getCallbackExecutor(), httpCall);
+        HttpCall<T> executeCall = new HttpExecutorCallback(Platform.getInstance().getCallbackExecutor(), httpCall);
         executeCall.execute(callback);
     }
 
@@ -134,18 +135,18 @@ public class Network {
     public void download(String url, File target, FileCallback callback) {
         RequestModel executeRequestModel = this.buildGetRequest(url, (Map) null, (Type) null);
         HttpCall<File> httpCall = new OKHttpCall(RequestParser.create(executeRequestModel, this.requestInterceptors), this);
-        HttpCall<File> executeCall = new ExecutorCallbackHttpCall(Platform.getInstance().getCallbackExecutor(), httpCall);
+        HttpCall<File> executeCall = new HttpExecutorCallback(Platform.getInstance().getCallbackExecutor(), httpCall);
         executeCall.download(target, callback);
     }
 
     private RequestModel buildGetRequest(String url, Map<String, String> queryParamsMap, Type type) {
-        GetBuilder requestBuilder = (GetBuilder) RequestModel.get(url).addUrlParameters(queryParamsMap).responseType(type);
-        this.buildRequestWithCandidate((com.dfire.mobile.network.RequestModel.Builder) requestBuilder);
+        RequestModel.GetBuilder requestBuilder = (RequestModel.GetBuilder) RequestModel.get(url).addUrlParameters(queryParamsMap).responseType(type);
+        this.buildRequestWithCandidate(requestBuilder);
         return requestBuilder.build();
     }
 
     private RequestModel buildPostRequest(String url, Map<String, Object> fieldsMap, Type type, File file, String fileKey, String fileName) {
-        PostBuilder requestBuilder = (PostBuilder) ((PostBuilder) RequestModel.post(url).addParameters(fieldsMap)).responseType(type);
+        RequestModel.PostBuilder requestBuilder = (RequestModel.PostBuilder) RequestModel.post(url).addParameters(fieldsMap).responseType(type);
         if (file != null) {
             if (fileKey == null) {
                 throw new NullPointerException("fileKey == null");
@@ -154,11 +155,11 @@ public class Network {
             requestBuilder.addFormDataPart(fileKey, file, fileName);
         }
 
-        this.buildRequestWithCandidate((com.dfire.mobile.network.RequestModel.Builder) requestBuilder);
+        this.buildRequestWithCandidate((RequestModel.Builder) requestBuilder);
         return requestBuilder.build();
     }
 
-    private void buildRequestWithCandidate(com.dfire.mobile.network.RequestModel.Builder requestBuilder) {
+    private void buildRequestWithCandidate(RequestModel.Builder requestBuilder) {
         requestBuilder.connectTimeout(this.connectTimeoutMillis);
         if (this.readTimeoutMillis > 0L) {
             requestBuilder.readTimeout(this.readTimeoutMillis);
@@ -230,13 +231,13 @@ public class Network {
 
     public void clearCookie() {
         if (this.cookieJar != null) {
-            this.cookieJar.clearCoolieFromCache();
+            this.cookieJar.clear();
         }
 
     }
 
     public static void cancel(Object tag) {
-        HttpCall httpCall = new OKHttpCall((RequestParser) null, (Network) null);
+        HttpCall httpCall = new OKHttpCall(null, null);
         httpCall.cancel(tag);
     }
 

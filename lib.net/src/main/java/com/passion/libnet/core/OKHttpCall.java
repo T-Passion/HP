@@ -8,11 +8,17 @@ import com.passion.libnet.core.exception.ConnectNetException;
 import com.passion.libnet.core.exception.NetException;
 import com.passion.libnet.core.exception.ServerNetException;
 import com.passion.libnet.core.exception.TimeoutNetException;
+import com.passion.libnet.core.factory.HttpSSLFactory;
 import com.passion.libnet.core.imp.Callback;
+import com.passion.libnet.core.imp.HttpCall;
 import com.passion.libnet.core.imp.RawResponse;
 import com.passion.libnet.core.interceptor.OKHttpGzipInterceptor;
+import com.passion.libnet.core.interceptor.OKHttpLogInterceptor;
+import com.passion.libnet.core.interceptor.OkHttpGzipRequestInterceptor;
 import com.passion.libnet.core.interceptor.OkHttpMockServerInterceptor;
+import com.passion.libnet.core.mock.HttpMock;
 import com.passion.libnet.core.request.RequestParser;
+import com.passion.libnet.core.utils.TrustAllHostnameVerifier;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -29,6 +35,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
 
 import okhttp3.Call;
 import okhttp3.Dns;
@@ -213,8 +221,8 @@ public class OKHttpCall<T> implements HttpCall<T> {
         OkHttpClient.Builder builder = client.newBuilder();
         boolean trustAllCerts = this.netWork.trustAllCerts();
         if (trustAllCerts) {
-            builder.sslSocketFactory(Https.createTrustAllSSLSocketFactory());
-            builder.hostnameVerifier(new TrustAllHostnameVerifier());
+            builder.sslSocketFactory(HttpSSLFactory.createTrustAllSSLSocketFactory());
+            builder.hostnameVerifier((HostnameVerifier) new TrustAllHostnameVerifier());
         }
 
         Dns dns = this.netWork.dns();

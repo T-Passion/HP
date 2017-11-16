@@ -1,5 +1,6 @@
 package com.passion.libnet.core.imp;
 
+import com.passion.libnet.core.FileCallback;
 import com.passion.libnet.core.ResponseModel;
 
 import java.io.File;

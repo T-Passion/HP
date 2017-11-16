@@ -33,7 +33,7 @@ public abstract class Callback<T> {
      */
     public abstract void onFailure(Throwable throwable);
 
-    protected Type getResponseType() {
+    public Type getResponseType() {
         return null;
     }
 

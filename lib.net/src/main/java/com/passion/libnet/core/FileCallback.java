@@ -14,7 +14,7 @@ public abstract class FileCallback extends Callback<File> {
     public FileCallback() {
     }
 
-    protected void onResponse(ResponseModel<File> responseModel) {
+    public void onResponse(ResponseModel<File> responseModel) {
     }
 
     public void onProgress(long currentSize, long totalSize, int progress) {

@@ -69,7 +69,7 @@ public class RequestParser {
         return create(requestModel, (List) null);
     }
 
-    static RequestParser create(RequestModel requestModel, List<RequestInterceptor> requestInterceptors) {
+    public static RequestParser create(RequestModel requestModel, List<RequestInterceptor> requestInterceptors) {
         RequestModel expected = requestModel;
         if (requestInterceptors != null) {
             Iterator var3 = requestInterceptors.iterator();
@@ -270,27 +270,27 @@ public class RequestParser {
         }
     }
 
-    long getConnectTimeoutMillis() {
+    public long getConnectTimeoutMillis() {
         return this.connectTimeoutMillis;
     }
 
-    long getReadTimeoutMillis() {
+    public long getReadTimeoutMillis() {
         return this.readTimeoutMillis;
     }
 
-    long getWriteTimeoutMillis() {
+    public long getWriteTimeoutMillis() {
         return this.writeTimeoutMillis;
     }
 
-    boolean isGzipEncoding() {
+    public boolean isGzipEncoding() {
         return this.gzipEncoding;
     }
 
-    Type getResponseType() {
+    public Type getResponseType() {
         return this.responseType;
     }
 
-    Converter getConverter() {
+    public Converter getConverter() {
         return this.converter;
     }
 }
