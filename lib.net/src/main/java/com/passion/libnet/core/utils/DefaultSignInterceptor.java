@@ -1,8 +1,7 @@
-package com.passion.libnet.api;
+package com.passion.libnet.core.utils;
 
 import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.request.RequestInterceptor;
-import com.passion.libnet.core.utils.SignGenerator;
 
 import java.util.HashMap;
 import java.util.HashSet;

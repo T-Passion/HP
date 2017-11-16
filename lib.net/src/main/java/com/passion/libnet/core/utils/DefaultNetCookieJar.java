@@ -1,4 +1,4 @@
-package com.passion.libnet.api;
+package com.passion.libnet.core.utils;
 
 import com.passion.libnet.core.cookie.CookieCache;
 import com.passion.libnet.core.cookie.CookiePolicy;

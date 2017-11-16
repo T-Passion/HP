@@ -1,4 +1,4 @@
-package com.passion.libnet.api.imp;
+package com.passion.libnet.core.imp;
 
 /**
  * Created by chaos

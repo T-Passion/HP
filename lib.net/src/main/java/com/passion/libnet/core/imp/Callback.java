@@ -1,4 +1,6 @@
-package com.passion.libnet.core;
+package com.passion.libnet.core.imp;
+
+import com.passion.libnet.core.ResponseModel;
 
 import java.lang.reflect.Type;
 
@@ -11,11 +13,11 @@ import java.lang.reflect.Type;
 public abstract class Callback<T> {
 
     /**
-     * 请求响应
+     * 响应
      *
-     * @param requestModel 请求model
+     * @param responseModel 响应model
      */
-    public abstract void onResponse(RequestModel<T> requestModel);
+    public abstract void onResponse(ResponseModel<T> responseModel);
 
     /**
      * 成功
@@ -29,7 +31,7 @@ public abstract class Callback<T> {
      *
      * @param throwable 异常信息
      */
-    public abstract void onFail(Throwable throwable);
+    public abstract void onFailure(Throwable throwable);
 
     protected Type getResponseType() {
         return null;
