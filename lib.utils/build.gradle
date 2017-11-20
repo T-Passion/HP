@@ -34,5 +34,8 @@ dependencies {
     testCompile rootProject.ext.dependencies["junit"]
 
 
-    compile 'org.jetbrains:annotations-java5:15.0'
+    compile rootProject.ext.dependencies["javaAnnotation5"]
+    compile rootProject.ext.dependencies["supportAnnotations"]
+    compile rootProject.ext.dependencies["logger"]
+    compile rootProject.ext.dependencies["supportAppcompatV7"]
 }

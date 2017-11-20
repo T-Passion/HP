@@ -11,6 +11,8 @@ def versionCode = 5644
 def supportDesign = "25.1.0"
 def constraintLayout = "1.0.2"
 def supportAppcompatV7 = "25.1.0"
+def supportAnnotations = "25.3.0"
+
 
 def butterKnifeVersion = "8.8.1"
 def butterKnifeCompileVersion = "8.8.1"
@@ -26,7 +28,10 @@ def daggerCompiler = "2.11"
 def jacksonCore = "2.7.3"
 def jacksonAnnotations = "2.7.3"
 def jacksonDatabind = "2.7.3"
+def gson = "2.8.0"
 
+
+def javaAnnotation5  = "15.0"
 def apacheCommonLang3 = "3.6"
 
 def logger = "1.3"
@@ -45,7 +50,6 @@ def glide = "3.8.0"
 
 def eventbus3 = "3.0.0"
 
-def gson = "2.8.0"
 
 
 //Testing tools
@@ -67,6 +71,7 @@ project.ext {
 
             "gradleVersion"            : "com.android.tools.build:gradle:${toolsGradleVersion}",
             "supportAppcompatV7"       : "com.android.support:appcompat-v7:${supportAppcompatV7}",
+            "supportAnnotations"       : "com.android.support:support-annotations:${supportAnnotations}",
             "butterknifeVersion"       : "com.jakewharton:butterknife:${butterKnifeVersion}",
             "butterknifeCompileVersion": "com.jakewharton:butterknife-compiler:${butterKnifeCompileVersion}",
             "butterkinfePlugin"        : "com.jakewharton:butterknife-gradle-plugin:${butterKnifePlugin}",
@@ -79,6 +84,7 @@ project.ext {
             "jacksonAnnotations"       : "com.fasterxml.jackson.core:jackson-annotations:${jacksonAnnotations}",
             "jacksonDatabind"          : "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabind}",
             "apacheCommonLang3"        : "org.apache.commons:commons-lang3:${apacheCommonLang3}",
+            "javaAnnotation5"        : "org.jetbrains:annotations-java5:${javaAnnotation5}",
             "logger"                   : "com.orhanobut:logger:${logger}",
             "leakcanary-debug"         : "com.squareup.leakcanary:leakcanary-android:${leakcanaryDebug}",
             "leakcanary-release"       : "com.squareup.leakcanary:leakcanary-android:${leakcanaryRelease}",

@@ -11,6 +11,8 @@ import com.passion.libnet.core.request.RequestInterceptor;
 import com.passion.libnet.core.utils.MD5Util;
 import com.passion.libutils.DeviceUtil;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -43,7 +45,7 @@ public class DefaultNetConfig {
                         signInterceptor) // 拦截器
                 .setSignAutomatic(false) // 不使用自动签名
                 .setDebugMode(debugMode) // debug 模式
-                .setAppSecret(AppEnv.getApiSecret()) // app_secret
+//                .setAppSecret(AppEnv.getApiSecret()) // app_secret
                 .setJsonConverter(new GsonConverter()) // 设置Gson的converter
                 .build();
         NetService.init(netConfig);//含拦截器的初始化
@@ -58,19 +60,19 @@ public class DefaultNetConfig {
                     callDeviceId = callDeviceId.substring(16, callDeviceId.length());
                 }
                 Map<String, String> apiParamMap = new HashMap<>();
-                apiParamMap.put("s_os", CommonConstant.ANDROID);                                // 系统.    android / ios /
+                apiParamMap.put("s_os", NetConstant.ANDROID);                                // 系统.    android / ios /
                 apiParamMap.put("s_osv", String.valueOf(Build.VERSION.SDK_INT));             // Android系统版本4.3.1
                 apiParamMap.put("s_apv", String.valueOf(versionCode));                          // 应用版本
                 apiParamMap.put("s_net", getNetType(context));                                      // 网络(有线:1 wifi:2 3G:3 4G:4 5G:5)
                 apiParamMap.put("s_sc", DeviceUtil.getScreenWidAndHeight(context));          //屏幕尺寸(800x600);
                 apiParamMap.put("s_br", String.format("%s-%s-%s", Build.MANUFACTURER, Build.BRAND, Build.MODEL));                                        // 手机品牌:  huawei
                 apiParamMap.put("s_did", MD5Util.encode(TextUtils.isEmpty(callDeviceId)
-                        ? CommonConstant.UNKNOWN : callDeviceId));                      // 设备ID（获取设备uuid再进行md5）
-                apiParamMap.put("format", CommonConstant.JSON);                                 // 返回格式,目前只支持json
-                apiParamMap.put("app_key", AppEnv.getApiKey());                             // api分配给每个应用的key
+                        ? NetConstant.UNKNOWN : callDeviceId));                      // 设备ID（获取设备uuid再进行md5）
+                apiParamMap.put("format", NetConstant.JSON);                                 // 返回格式,目前只支持json
+//                apiParamMap.put("app_key", AppEnv.getApiKey());                             // api分配给每个应用的key
                 apiParamMap.put("v", "1.0");                                                 // API协议版本，可选值：1.0
                 apiParamMap.put("timestamp", String.valueOf(System.currentTimeMillis()));    // 时间戳
-                apiParamMap.put("sign_method", CommonConstant.MD5);                             // 签名算法
+                apiParamMap.put("sign_method", NetConstant.MD5);                             // 签名算法
 
                 // 商户ID
                 String entityId = UserHelper.getEntityId();
@@ -94,7 +96,7 @@ public class DefaultNetConfig {
                         .addHeader("lang", StringUtils.appendStr(Locale.getDefault().getLanguage(), "_", Locale.getDefault().getCountry())); // 服务端语言（语言_国家）
                 String token = UserHelper.getToken();
                 if (!TextUtils.isEmpty(token)) {
-                    builder.addHeader(CommonConstant.PARA_TOKEN, token);
+                    builder.addHeader(NetConstant.PARA_TOKEN, token);
                 }
                 return builder.build();
             }
@@ -114,7 +116,7 @@ public class DefaultNetConfig {
         paramFilter(signParamsMap);
         String sign = SignUtil.sign(signParamsMap, AppEnv.getApiSecret());
         RequestModel.Builder builder = request.newBuilder();
-        builder.addParameter(CommonConstant.PARA_SIGN, sign);
+        builder.addParameter(NetConstant.PARA_SIGN, sign);
         return builder;
     }
 
