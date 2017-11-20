@@ -1,1 +1,1 @@
-include ':app', ':lib.base', ':lib.widget',  ':lib.reso', ':lib.net'
+include ':app', ':lib.base', ':lib.widget',  ':lib.reso', ':lib.net', ':lib.utils'

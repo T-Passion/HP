@@ -33,9 +33,6 @@ dependencies {
     androidTestCompile rootProject.ext.dependencies["testRules"]
     testCompile rootProject.ext.dependencies["junit"]
 
-    compile rootProject.ext.dependencies["gson"]
-    compile rootProject.ext.dependencies["okhttp3"]
 
     compile 'org.jetbrains:annotations-java5:15.0'
-    compile project(path: ':lib.utils')
 }

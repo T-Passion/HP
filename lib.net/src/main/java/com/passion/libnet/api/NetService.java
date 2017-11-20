@@ -2,6 +2,7 @@ package com.passion.libnet.api;
 
 
 import com.passion.libnet.core.FileCallback;
+import com.passion.libnet.core.NetConfig;
 import com.passion.libnet.core.NetResponse;
 import com.passion.libnet.core.Network;
 import com.passion.libnet.core.RequestModel;
@@ -37,7 +38,7 @@ import java.util.Map;
 
 public class NetService {
 
-    private static NetService instance;
+    private static NetService sInstance;
     private static NetConfig mNetworkConfig;
     private final boolean isDefaultFactory;
     private NetFactory mNetFactory;
@@ -48,10 +49,6 @@ public class NetService {
         } else if (mNetworkConfig.enableDefaultSign && mNetworkConfig.appSecret == null) {
             throw new IllegalStateException("使用默认签名方式[enableDefaultSign==true]，请设置NetworkConfig中的AppSecret或者设置[enableDefaultSign=false]。");
         } else {
-//            DefaultNetworkDns networkDns = null;
-//            if(mNetworkConfig.enableDns) {
-//                networkDns = new DefaultNetworkDns();
-//            }
 
             Converter jsonConverter = mNetworkConfig.jsonConverter;
             int defaultSize = mNetworkConfig.enableDefaultSign ? 1 : 0;
@@ -80,45 +77,26 @@ public class NetService {
         this.isDefaultFactory = false;
     }
 
-    /**
-     * @deprecated
-     */
-    @Deprecated
-    public static void init(String appSecret, boolean debugMode, RequestInterceptor... requestInterceptors) {
-        if (mNetworkConfig == null) {
-            mNetworkConfig = NetConfig.builder().setAppSecret(appSecret).setDebugMode(debugMode).setRequestInterceptors(requestInterceptors).build();
-        }
-
-    }
-
-    public static void init(NetConfig NetConfig) {
-        if (NetConfig == null) {
+    public static void init(NetConfig netConfig) {
+        if (netConfig == null) {
             throw new IllegalArgumentException("NetConfig == null");
         } else {
-//            if (NetConfig.enableDns) {
-//                HttpDnsConfig dnsConfig = (new Builder()).setDebugMode(NetConfig.debugMode).setMode(NetConfig.dnsMode).setDFireDnsDecryptKey(NetConfig.dnsKey).build();
-//                HttpDns.init(dnsConfig);
-//                if (NetConfig.dnsPreloadHosts != null && NetConfig.dnsPreloadHosts.length > 0) {
-//                    HttpDns.preUpdateHosts(NetConfig.dnsPreloadHosts);
-//                }
-//            }
-
-            mNetworkConfig = NetConfig.newBuilder().setDnsKey("").setDnsPreloadHosts(new String[]{""}).build();
+            mNetworkConfig = netConfig;
         }
     }
 
     public static NetService getDefault() {
-        if (instance == null) {
+        if (sInstance == null) {
             Class var0 = NetService.class;
             synchronized (NetService.class) {
-                if (instance == null) {
-                    instance = new NetService();
+                if (sInstance == null) {
+                    sInstance = new NetService();
                 }
             }
         }
-
-        return instance;
+        return sInstance;
     }
+
 
     public NetFactory getNetworkFactory() {
         return this.mNetFactory;
@@ -135,7 +113,7 @@ public class NetService {
     }
 
     public void get(String url, Callback callback) {
-        this.get(url, (Map) null, (Callback) callback);
+        this.get(url, null, callback);
     }
 
     public void get(String url, Map<String, String> params, Callback callback) {
@@ -144,17 +122,17 @@ public class NetService {
     }
 
     public <T> T get(String url, Map<String, String> params, Type type) throws NetException {
-        RequestModel requestModel = ((RequestModel.GetBuilder) RequestModel.get(url).addUrlParameters(params).responseType(type)).build();
+        RequestModel requestModel = RequestModel.get(url).addUrlParameters(params).responseType(type).build();
         return this.execute(requestModel);
     }
 
     public void post(String url, Map<String, Object> params, Callback callback) {
-        RequestModel requestModel = ((RequestModel.PostBuilder) RequestModel.post(url).addParameters(params)).build();
+        RequestModel requestModel = RequestModel.post(url).addParameters(params).build();
         this.getNetwork(url).execute(requestModel, callback);
     }
 
     public <T> T post(String url, Map<String, Object> params, Type type) throws NetException {
-        RequestModel requestModel = ((RequestModel.PostBuilder) ((RequestModel.PostBuilder) RequestModel.post(url).addParameters(params)).responseType(type)).build();
+        RequestModel requestModel = RequestModel.post(url).addParameters(params).responseType(type).build();
         return this.execute(requestModel);
     }
 
@@ -186,15 +164,9 @@ public class NetService {
             return network;
         } else {
             Network.Builder builder = null;
-            if (mNetworkConfig != null && mNetworkConfig.enableDns && network.dns() == null) {
-                builder = network.newBuilder();
-//                builder.dns(new DefaultNetworkDns());
-            }
 
             if (mNetworkConfig != null && network.converter() == null) {
-                if (builder == null) {
-                    builder = network.newBuilder();
-                }
+                builder = network.newBuilder();
 
                 if (mNetworkConfig.jsonConverter != null) {
                     builder.converter(mNetworkConfig.jsonConverter);
@@ -206,7 +178,7 @@ public class NetService {
     }
 
     private <T> T execute(RequestModel request) throws NetException {
-        return this.execute(request, (File) null);
+        return this.execute(request, null);
     }
 
     private <T> T execute(RequestModel request, File target) throws NetException {
