@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 
 import com.passion.libwidget.R;
@@ -83,6 +84,9 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         mProgressLineWidth = typedArray.getInt(R.styleable.WidJumpView_progressLineWidth, 4);
         mDuration = typedArray.getInt(R.styleable.WidJumpView_duration, 2000);
         mJumpText = typedArray.getString(R.styleable.WidJumpView_text);
+        if(TextUtils.isEmpty(mJumpText)){
+            mJumpText = getContext().getResources().getString(R.string.jump);
+        }
         typedArray.recycle();
     }
 
