@@ -40,7 +40,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
     SplashContract.Presenter mPresenter;
 
     @Override
-    protected void initThings(View view) {
+    protected void initVars(View view) {
         mPresenter = new SplashPresenter(mModel, this);
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override

@@ -1,7 +1,7 @@
 package com.passion.libbase.di;
 
 
-import com.passion.libbase.BaseApplication;
+import com.passion.libbase.HPApplication;
 
 import dagger.Subcomponent;
 
@@ -13,6 +13,6 @@ import dagger.Subcomponent;
 @Subcomponent(modules = BaseModule.class)
 public interface BaseComponent {
 
-    void inject(BaseApplication baseApplication);
+    void inject(HPApplication HPApplication);
 
 }

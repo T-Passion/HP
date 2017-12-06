@@ -17,7 +17,7 @@ public class HomeActivity extends AbstractBaseActivity {
 
 
     @Override
-    protected void initThings(View view) {
+    protected void initVars(View view) {
 
     }
 

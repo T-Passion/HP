@@ -87,7 +87,6 @@ public class NetService {
 
     public static NetService getDefault() {
         if (sInstance == null) {
-            Class var0 = NetService.class;
             synchronized (NetService.class) {
                 if (sInstance == null) {
                     sInstance = new NetService();

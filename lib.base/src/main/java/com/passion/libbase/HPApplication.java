@@ -15,7 +15,7 @@ import com.squareup.leakcanary.RefWatcher;
  * Description:
  */
 
-public class BaseApplication extends Application {
+public class HPApplication extends Application {
 
     private RefWatcher mRefWatcher;
 

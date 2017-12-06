@@ -7,7 +7,8 @@ package com.passion.libbase.mvp;
 
 public interface IBaseView {
 
-    void showNetLoading(boolean show);
-
+    void showNetLoading();
+    void showNetLoading(String message);
+    void closeLoading();
 
 }

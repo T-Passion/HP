@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,7 +17,6 @@ import com.passion.libbase.mvp.IBaseView;
 import com.passion.libbase.router.HPRouter;
 import com.passion.libbase.utils.AnnotationUtils;
 import com.passion.libbase.utils.HPInjectUtils;
-import com.passion.libbase.utils.LogUtils;
 import com.passion.widget.main.WidActionTitleBar;
 import com.passion.widget.main.WidNetProgressView;
 
@@ -31,7 +30,7 @@ import butterknife.Unbinder;
  * on 17-7-2.
  */
 
-public abstract class AbstractBaseActivity extends FragmentActivity implements OnNetReconnectListener, IBaseView {
+public  abstract class AbstractBaseActivity extends AppCompatActivity implements OnNetReconnectListener, IBaseView {
     protected Context mContext;
 
     LinearLayout mRootContentView;//根视图
@@ -55,7 +54,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         injector();
         inflateUiBind();
 
-        initThings(mContentView);
+        initVars(mContentView);
         loadInitDta();
     }
 
@@ -90,8 +89,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
         if (layoutId != -1) {
             return layoutId;
         } else {
-            LogUtils.e("当前页面没有给定布局资源");
-            return -1;
+            throw  new RuntimeException(getClass()+ "当前页面没有给定布局资源");
         }
     }
 
@@ -100,7 +98,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
      *
      * @param view 当前页面视图
      */
-    protected abstract void initThings(View view);
+    protected abstract void initVars(View view);
 
     /**
      * 加载初始数据
@@ -123,7 +121,7 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
      * @param title 标题
      */
     protected void setTitleBar(String title) {
-        mActionTitleBar.setTitleBar(title);
+        this.setTitleBar(title,null);
     }
 
     /**
@@ -132,6 +130,15 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
      */
     public void setTitleBar(String title, Integer titleIcon) {
         mActionTitleBar.setTitleBar(title, titleIcon);
+    }
+
+    /**
+     * @param titleId      标题资源id
+     * @param titleIcon    标题图片
+     * @param leftListener 监听器
+     */
+    public void setTitleBarLeft(int titleId, Integer titleIcon, View.OnClickListener leftListener) {
+        this.setTitleBarLeft(getString(titleId),titleIcon,leftListener);
     }
 
     /**
@@ -144,12 +151,12 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
     }
 
     /**
-     * @param titleId      标题资源id
-     * @param titleIcon    标题图片
-     * @param leftListener 监听器
+     * @param titleId       标题资源id
+     * @param titleIcon     标题图片
+     * @param rightListener 监听器
      */
-    public void setTitleBarLeft(int titleId, Integer titleIcon, View.OnClickListener leftListener) {
-        mActionTitleBar.setTitleBarLeft(titleId, titleIcon, leftListener);
+    public void setTitleBarRight(int titleId, Integer titleIcon, View.OnClickListener rightListener) {
+        this.setTitleBarRight(getString(titleId),titleIcon,rightListener);
     }
 
     /**
@@ -159,15 +166,6 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
      */
     public void setTitleBarRight(String title, Integer titleIcon, View.OnClickListener rightListener) {
         mActionTitleBar.setTitleBarRight(title, titleIcon, rightListener);
-    }
-
-    /**
-     * @param titleId       标题资源id
-     * @param titleIcon     标题图片
-     * @param rightListener 监听器
-     */
-    public void setTitleBarRight(int titleId, Integer titleIcon, View.OnClickListener rightListener) {
-        mActionTitleBar.setTitleBarRight(titleId, titleIcon, rightListener);
     }
 
     /**
@@ -228,13 +226,15 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
             mProgressLayout.setVisibility(View.GONE);
             mContentLayout.setVisibility(View.GONE);
             mEmptyLayout.setVisibility(View.VISIBLE);
-
+            //
             if (!TextUtils.isEmpty(emptyTxt)) {
                 ((TextView) mEmptyLayout.findViewById(R.id.emptyTxt)).setText(emptyTxt);
             } else {/*default*/}
+            //
             if (emptyTxtColor != null) {
                 ((TextView) mEmptyLayout.findViewById(R.id.emptyTxt)).setTextColor(emptyTxtColor);
             } else {/*default*/}
+            //
             if (emptyIcon != null) {
                 ((ImageView) mEmptyLayout.findViewById(R.id.emptyImg)).setImageResource(emptyIcon);
             } else {/*default*/}
@@ -245,18 +245,6 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
             mContentLayout.setVisibility(View.VISIBLE);
         }
 
-    }
-
-
-    @Override
-    public void showNetLoading(boolean show) {
-        if (show) {
-            mProgressLayout.setVisibility(View.VISIBLE);
-            mEmptyLayout.setVisibility(View.GONE);
-            mContentLayout.setVisibility(View.GONE);
-        } else {
-            mProgressLayout.setVisibility(View.GONE);
-        }
     }
 
     /**
@@ -276,5 +264,22 @@ public abstract class AbstractBaseActivity extends FragmentActivity implements O
             mViewUnbind.unbind();
             mViewUnbind = null;
         }
+    }
+
+    @Override
+    public void showNetLoading() {
+        this.showNetLoading(null);
+    }
+
+    @Override
+    public void showNetLoading(String message) {
+        mProgressLayout.setVisibility(View.VISIBLE);
+        mEmptyLayout.setVisibility(View.GONE);
+        mContentLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void closeLoading() {
+        mProgressLayout.setVisibility(View.GONE);
     }
 }
