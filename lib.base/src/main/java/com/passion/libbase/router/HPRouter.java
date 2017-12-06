@@ -15,7 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 public class HPRouter {
 
-    public static final int DEFUALT_RESULT_CODE_OK = 1000;
+    public static final int DEFAULT_RESULT_CODE_OK = 1000;
 
     /**
      * 初始化
@@ -42,32 +42,32 @@ public class HPRouter {
     }
 
     /**
-     * @param path
+     * @param path 路径
      */
     public static void navigate(String path) {
         ARouter.getInstance().build(path).navigation();
     }
 
     /**
-     * @param path
-     * @param bundle
+     * @param path 路径
+     * @param bundle 传参数
      */
     public static void navigate(String path, Bundle bundle) {
         ARouter.getInstance().build(path).with(bundle).navigation();
     }
 
     /**
-     * @param path
-     * @param bundle
-     * @param flag
+     * @param path 路径
+     * @param bundle 传参数
+     * @param flag 启动模式
      */
     public static void navigate(String path, Bundle bundle, int flag) {
         ARouter.getInstance().build(path).with(bundle).withFlags(flag).navigation();
     }
 
     /**
-     * @param context
-     * @param path
+     * @param context 上下文
+     * @param path 路径
      * @param requestCode
      */
     public static void navigateForResult(Activity context, String path, int requestCode) {
@@ -79,7 +79,7 @@ public class HPRouter {
      * @param bundle
      */
     public static void navigateResultBack(Activity cActivity, Bundle bundle) {
-        navigateResultBack(cActivity, bundle, DEFUALT_RESULT_CODE_OK);
+        navigateResultBack(cActivity, bundle, DEFAULT_RESULT_CODE_OK);
     }
 
     /**

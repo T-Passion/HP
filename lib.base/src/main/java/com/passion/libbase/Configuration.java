@@ -44,7 +44,7 @@ public final class Configuration {
     }
 
     Configuration withDagger2() {
-        HPInjectUtils.init(this, mAppContext.getPackageName());
+        HPInjectUtils.init();
         return this;
     }
 

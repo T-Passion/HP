@@ -19,11 +19,11 @@ import butterknife.BindView;
 
 
 /**
- * Created by huangdou
+ * Created by chaos
  * on 2017/10/9.
  * 启动页：启动三秒后，进入home
  */
-@LayoutId(R.layout.activity_splash)
+@LayoutId(R.layout.activity_splash_layout)
 @Route(path = RouterPath.SPLASH_ACTIVITY)
 public class SplashActivity extends AbstractBaseActivity implements SplashContract.View {
 
@@ -44,10 +44,10 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
         mPresenter = new SplashPresenter(mModel, this);
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override
-            public void onAction() {
+            public void onEnd() {
                 HPRouter.navigate(RouterPath.HOME_ACTIVITY);
             }
-        });
+        }).start();
     }
 
 

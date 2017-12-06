@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.passion.libwidget.R;
 
@@ -19,7 +20,7 @@ import java.util.TimerTask;
 /**
  * Created by huangdou
  * on 2017/10/12.
- *
+ * <p>
  * 控件实现了引导页的倒计时
  */
 
@@ -40,7 +41,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
     private int mDuration = 2000;//ms
     private int mInterval = 500;//ms
-    private int mDrawTimes = 4;//总的绘制次数
+    private int mDrawTimes = 8;//总的绘制次数
     private int mDrawedTimes;//已经绘制的次数
     private int mEachDrawAngle = 90;//默认每次绘制的度数
 
@@ -74,7 +75,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         mTimeCounter = new Timer();
     }
 
-    public void initAttr(AttributeSet attrs) {
+    private void initAttr(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WidJumpView);
         mOutLineColor = typedArray.getColor(R.styleable.WidJumpView_outLineColor, 0xFF888888);
         mOutLineWidth = typedArray.getInt(R.styleable.WidJumpView_outLineWidth, 4);
@@ -84,7 +85,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         mProgressLineWidth = typedArray.getInt(R.styleable.WidJumpView_progressLineWidth, 4);
         mDuration = typedArray.getInt(R.styleable.WidJumpView_duration, 2000);
         mJumpText = typedArray.getString(R.styleable.WidJumpView_text);
-        if(TextUtils.isEmpty(mJumpText)){
+        if (TextUtils.isEmpty(mJumpText)) {
             mJumpText = getContext().getResources().getString(R.string.jump);
         }
         typedArray.recycle();
@@ -153,14 +154,25 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         setDuration(time, 500);
     }
 
-    public void setJumpAction(OnJumpAction onJumpAction) {
+    public WidJumpView setJumpAction(OnJumpAction onJumpAction) {
         mJumpAction = onJumpAction;
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stop();
+                if (mJumpAction != null) {
+                    mJumpAction.onEnd();
+                }
+            }
+        });
+        return this;
     }
+
     /**
      * 倒计时时间应该被interval整除，每隔interval毫秒更新一次UI
      *
-     * @param time  一个周期
-     * @param interval  每次间隔，默认为500ms
+     * @param time     一个周期
+     * @param interval 每次间隔，默认为500ms
      */
     public void setDuration(int time, int interval) {
         mDuration = time;
@@ -182,8 +194,8 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
                     post(new Runnable() {
                         @Override
                         public void run() {
-                            if(mJumpAction != null)
-                                mJumpAction.onAction();
+                            if (mJumpAction != null)
+                                mJumpAction.onEnd();
                         }
                     });
                     mTimeCounter.cancel();
@@ -192,10 +204,15 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         }, 500, mInterval);
     }
 
+    public void stop() {
+        if (mTimeCounter != null)
+            mTimeCounter.cancel();
+    }
+
     /**
-     *监听
+     * 监听
      */
     public interface OnJumpAction {
-        void onAction();
+        void onEnd();
     }
 }

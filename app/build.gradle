@@ -13,6 +13,12 @@ android {
         versionName rootProject.ext.dependencies["versionName"]
 
         testInstrumentationRunner rootProject.ext.dependencies["AndroidJUnitRunner"]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
     }
     buildTypes {
 
@@ -64,7 +70,8 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["daggerCompiler"]
     compile rootProject.ext.dependencies["butterknifeVersion"]
     annotationProcessor rootProject.ext.dependencies["butterknifeCompileVersion"]
-
+    compile rootProject.ext.dependencies["aliRouter"]
+    annotationProcessor rootProject.ext.dependencies["aliRouterCompiler"]
 
 
     compile project(":lib.base")

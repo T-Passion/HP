@@ -10,20 +10,16 @@ import com.passion.libbase.di.imp.IInjector;
 
 public class HPInjectUtils {
 
-    private static final String HP_INJECTOR = "com.chaos.ultrohupu.di.HPInjector";
+    private static final String HP_INJECTOR = "com.passion.hp.di.HPInjector";
 
     private static Class<?> mInjector = null;
 
 
     /**
      * 在应用初始化的时候，调用
-     *
-     * @param target
-     * @param packageName
      */
-    public static void init(Object target, String packageName) {
+    public static void init() {
         init(HP_INJECTOR);
-        inject(target);
     }
 
     /**
@@ -36,7 +32,8 @@ public class HPInjectUtils {
             mInjector.getDeclaredMethod(IInjector.INIT_COMPONENT).setAccessible(true);
             mInjector.getMethod(IInjector.INIT_COMPONENT).invoke(null);
         } catch (Exception e) {
-            LogUtils.e(e);
+            e.printStackTrace();
+            LogUtils.e("dagger初始化失败");
         }
     }
 
@@ -46,7 +43,7 @@ public class HPInjectUtils {
     public static void inject(Object target) {
         try {
             mInjector.getDeclaredMethod(IInjector.INJECT, Object.class).setAccessible(true);
-            mInjector.getMethod(IInjector.INJECT, Object.class).invoke(null, target);
+            mInjector.getMethod(IInjector.INJECT, Object.class).invoke(target);
         } catch (Exception e) {
             e.printStackTrace();
         }

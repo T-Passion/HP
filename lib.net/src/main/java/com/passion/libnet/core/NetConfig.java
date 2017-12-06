@@ -16,6 +16,7 @@ public final class NetConfig {
     public final boolean enableDefaultSign;
     public final boolean trustAllCerts;
     public final int dnsMode;
+    public final String baseUrl;
     public final String appSecret;
     public final RequestInterceptor[] requestInterceptors;
     public final Converter jsonConverter;
@@ -27,6 +28,7 @@ public final class NetConfig {
         this.enableDefaultSign = builder.mEnableDefaultSign;
         this.trustAllCerts = builder.trustAllCerts;
         this.dnsMode = builder.dnsMode;
+        this.baseUrl = builder.baseUrl;
         this.appSecret = builder.mAppSecret;
         this.requestInterceptors = builder.mRequestInterceptors;
         this.jsonConverter = builder.mJsonConverter;
@@ -56,6 +58,7 @@ public final class NetConfig {
         private boolean mEnableCookie;
         private boolean mEnableDefaultSign = true;
         private int dnsMode;
+        private String baseUrl;
         private String mAppSecret;
         private RequestInterceptor[] mRequestInterceptors;
         private Converter mJsonConverter;
@@ -92,6 +95,11 @@ public final class NetConfig {
 
         public NetConfig.Builder setDnsMode(int dnsMode) {
             this.dnsMode = dnsMode;
+            return this;
+        }
+
+        public NetConfig.Builder setBaseUrl(String  baseUrl) {
+            this.baseUrl = baseUrl;
             return this;
         }
 
