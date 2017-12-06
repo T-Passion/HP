@@ -1,4 +1,4 @@
-package com.passion.hp.constant;
+package com.passion.libbase.constants;
 
 /**
  * Created by huangdou

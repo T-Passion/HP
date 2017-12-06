@@ -7,9 +7,10 @@ import com.passion.libbase.di.imp.IInjector;
 import com.passion.libbase.utils.LogUtils;
 
 /**
- * Created by huangdou
+ * Created by chaos
  * on 2017/10/13.
- * 该类需要被反射调用 混淆时避开该类
+ * 作为应用Dagger的入口
+ * 注意：该类需要被反射调用 混淆时避开该类
  */
 
 public class HPInjector implements IInjector {
@@ -22,10 +23,10 @@ public class HPInjector implements IInjector {
     @Override
     public void initComponent() {
         sHPComponent = DaggerHPComponent.builder().build();
-
+        //app module
         AppComponent appComponent = sHPComponent.plus(mAppInjector.getModule());
         mAppInjector.setComponent(appComponent);
-
+        //base module
         BaseComponent baseComponent = sHPComponent.plus(mBaseInjector.getModule());
         mBaseInjector.setComponent(baseComponent);
 

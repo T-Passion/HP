@@ -2,12 +2,6 @@ package com.passion.libbase;
 
 import android.app.Application;
 
-import com.passion.libbase.router.HPRouter;
-import com.passion.libbase.utils.HPInjectUtils;
-import com.passion.libbase.utils.LogUtils;
-import com.squareup.leakcanary.LeakCanary;
-import com.squareup.leakcanary.RefWatcher;
-
 /**
  * Created by chaos
  * On 17-7-2.
@@ -17,34 +11,23 @@ import com.squareup.leakcanary.RefWatcher;
 
 public class HPApplication extends Application {
 
-    private RefWatcher mRefWatcher;
+    private Configuration mConfiguration;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        //
-        initLeaker();
-        //
-        initRouter();
-        //
-        initDagger2();
-        //
-        initLog();
+
+        mConfiguration = new Configuration.Builder()
+                .app(this)
+                .buildType(BuildConfig.BUILD_TYPE)
+                .build();
+
+        mConfiguration.withLog()
+                .withLeaker()
+                .withDagger2()
+                .withRouter();
+
     }
 
-    private void initRouter() {
-        HPRouter.init(this);
-    }
 
-    private void initLeaker() {
-        mRefWatcher = LeakCanary.install(this);
-    }
-
-    private void initDagger2() {
-        HPInjectUtils.init(this, getPackageName());
-    }
-
-    private void initLog() {
-        LogUtils.init(getPackageName(), BuildConfig.DEBUG);
-    }
 }

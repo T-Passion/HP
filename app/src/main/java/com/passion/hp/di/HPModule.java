@@ -1,4 +1,4 @@
-package com.passion.libbase.di;
+package com.passion.hp.di;
 
 import com.passion.libbase.Configuration;
 import com.passion.libbase.HPApplication;
@@ -13,12 +13,12 @@ import dagger.Provides;
 
 /**
  * Created by chaos
- * on 2017/10/9.
- * 该类包含全局对象的依赖注入
+ * on 2017/12/6. 15:15
+ * 文件描述：需要在全局注入的对象
  */
+@Module
+public class HPModule {
 
-@Module()
-public class BaseModule {
 
     private HPApplication mAppContext;
 
@@ -42,8 +42,5 @@ public class BaseModule {
     public NetWorker provideNetWorker(){
         return new NetWorker();
     }
-
-
-
 
 }

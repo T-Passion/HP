@@ -1,23 +1,25 @@
-package com.passion.libnet.api;
+package com.passion.libbase.net;
 
 import android.content.Context;
 import android.os.Build;
 import android.text.TextUtils;
 
+import com.orhanobut.logger.Logger;
+import com.passion.libbase.AppEnv;
+import com.passion.libbase.constants.NetConstant;
 import com.passion.libnet.core.NetConfig;
 import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.convert.GsonConverter;
 import com.passion.libnet.core.request.RequestInterceptor;
 import com.passion.libnet.core.utils.MD5Util;
 import com.passion.libutils.DeviceUtil;
-
-import org.apache.commons.lang3.StringUtils;
+import com.passion.libutils.NetworkUtil;
+import com.passion.libutils.SignUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * Created by chaos
@@ -48,7 +50,7 @@ public class DefaultNetConfig {
 //                .setAppSecret(AppEnv.getApiSecret()) // app_secret
                 .setJsonConverter(new GsonConverter()) // 设置Gson的converter
                 .build();
-        NetService.init(netConfig);//含拦截器的初始化
+        NetWorker.init(netConfig);//含拦截器的初始化
     }
 
     private static RequestInterceptor getApiParamsInterceptor(final Context context, final int versionCode) {
@@ -74,27 +76,20 @@ public class DefaultNetConfig {
                 apiParamMap.put("timestamp", String.valueOf(System.currentTimeMillis()));    // 时间戳
                 apiParamMap.put("sign_method", NetConstant.MD5);                             // 签名算法
 
-                // 商户ID
-                String entityId = UserHelper.getEntityId();
-                if (!StringUtils.isEmpty(entityId)) {
-                    apiParamMap.put("s_eid", entityId);
-                }
-
                 // 定位
-                String latitude = LocationHelper.getLatitude();
-                if (!StringUtils.isEmpty(latitude)) {
-                    apiParamMap.put("s_lat", latitude); // 定位纬度
-                }
-                String longitude = LocationHelper.getLongitude();
-                if (!StringUtils.isEmpty(longitude)) {
-                    apiParamMap.put("s_lng", longitude); // 定位经度
-                }
+//                String latitude = LocationUtil.getLgetatitude();
+//                if (!StringUtils.isEmpty(latitude)) {
+//                    apiParamMap.put("s_lat", latitude); // 定位纬度
+//                }
+//                String longitude = LocationHelper.getLongitude();
+//                if (!StringUtils.isEmpty(longitude)) {
+//                    apiParamMap.put("s_lng", longitude); // 定位经度
+//                }
 
                 RequestModel.Builder builder = requestModel.newBuilder().addUrlParameters(apiParamMap) // 公共参数
                         .addHeader("content-type", "application/x-www-form-urlencoded") // content_type
-                        .addHeader("env", AppEnv.getGateWayEnv()) // env
-                        .addHeader("lang", StringUtils.appendStr(Locale.getDefault().getLanguage(), "_", Locale.getDefault().getCountry())); // 服务端语言（语言_国家）
-                String token = UserHelper.getToken();
+                        .addHeader("lang", String.valueOf(Locale.getDefault().getLanguage() + "_" + Locale.getDefault().getCountry())); // 服务端语言（语言_国家）
+                String token = "";//UserHelper.getToken();
                 if (!TextUtils.isEmpty(token)) {
                     builder.addHeader(NetConstant.PARA_TOKEN, token);
                 }
@@ -121,7 +116,7 @@ public class DefaultNetConfig {
     }
 
     private static String getNetType(Context context) {
-        switch (NetworkUtils.getNetworkType(context.getApplicationContext())) {
+        switch (NetworkUtil.getNetworkType(context.getApplicationContext())) {
             case NETWORK_WIFI:
                 return "2";
             case NETWORK_4G:
@@ -145,7 +140,7 @@ public class DefaultNetConfig {
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
             if (null == entry.getValue() || "null".equals(entry.getValue())) {
-                Logger.w("paramFilterRemove--" + entry.getKey());
+                Logger.i("paramFilterRemove--" + entry.getKey());
                 iterator.remove();
             }
         }

@@ -11,11 +11,11 @@ import dagger.Component;
 /**
  * Created by chaos
  * on 2017/10/16. 14:29
- * 文件描述：
+ * 文件描述：总和各个子Component
  */
 
 @Singleton
-@Component()
+@Component(modules = HPModule.class)
 public interface HPComponent {
 
     AppComponent plus(AppModule appModule);

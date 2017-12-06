@@ -1,7 +1,7 @@
 package com.passion.libnet.core.factory;
 
-import android.net.Network;
 
+import com.passion.libnet.core.Network;
 import com.passion.libnet.core.convert.Converter;
 import com.passion.libnet.core.cookie.NetCookieJar;
 import com.passion.libnet.core.request.RequestInterceptor;

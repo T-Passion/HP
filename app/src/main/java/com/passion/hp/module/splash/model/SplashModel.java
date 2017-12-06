@@ -2,7 +2,7 @@ package com.passion.hp.module.splash.model;
 
 
 import com.passion.hp.module.splash.contract.SplashContract;
-import com.passion.hp.module.splash.Constant;
+import com.passion.hp.module.splash.model.entity.SplashVo;
 import com.passion.libbase.mvp.BaseModel;
 
 import java.util.Random;
@@ -25,6 +25,6 @@ public class SplashModel extends BaseModel implements SplashContract.Model {
     @Override
     public String getSplashRandomRes() {
         Random random = new Random();
-        return Constant.SPLASH_IMG.SPLASH_LIST.get(random.nextInt(Constant.SPLASH_IMG.SPLASH_LIST.size()));
+        return SplashVo.SPLASH_IMG.SPLASH_LIST.get(random.nextInt(SplashVo.SPLASH_IMG.SPLASH_LIST.size()));
     }
 }

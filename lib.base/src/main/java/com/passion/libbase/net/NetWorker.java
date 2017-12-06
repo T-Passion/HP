@@ -1,4 +1,4 @@
-package com.passion.libnet.api;
+package com.passion.libbase.net;
 
 
 import com.passion.libnet.core.FileCallback;
@@ -36,14 +36,14 @@ import java.util.Map;
  * 文件描述：
  */
 
-public class NetService {
+public class NetWorker {
 
-    private static NetService sInstance;
+    private static NetWorker sInstance;
     private static NetConfig mNetworkConfig;
     private final boolean isDefaultFactory;
     private NetFactory mNetFactory;
 
-    public NetService() {
+    public NetWorker() {
         if (mNetworkConfig == null) {
             throw new IllegalStateException("NetService未初始化配置，请先调用NetService.init()进行初始化或者使用含参数的构造方法。");
         } else if (mNetworkConfig.enableDefaultSign && mNetworkConfig.appSecret == null) {
@@ -72,7 +72,7 @@ public class NetService {
         }
     }
 
-    public NetService(NetFactory NetFactory) {
+    public NetWorker(NetFactory NetFactory) {
         this.mNetFactory = NetFactory;
         this.isDefaultFactory = false;
     }
@@ -85,11 +85,11 @@ public class NetService {
         }
     }
 
-    public static NetService getDefault() {
+    public static NetWorker getDefault() {
         if (sInstance == null) {
-            synchronized (NetService.class) {
+            synchronized (NetWorker.class) {
                 if (sInstance == null) {
-                    sInstance = new NetService();
+                    sInstance = new NetWorker();
                 }
             }
         }

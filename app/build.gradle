@@ -49,6 +49,12 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile rootProject.ext.dependencies["junit"]
+    androidTestCompile ('com.android.support.test:runner:0.4.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile ('com.android.support.test:rules:0.4.1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 
     compile rootProject.ext.dependencies["supportAppcompatV7"]
     compile rootProject.ext.dependencies["constraintLayout"]

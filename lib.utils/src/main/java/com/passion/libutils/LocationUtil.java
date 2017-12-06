@@ -286,4 +286,5 @@ public class LocationUtil {
          */
         void onStatusChanged(String provider, int status, Bundle extras);//位置状态发生改变
     }
+
 }
