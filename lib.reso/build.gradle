@@ -4,7 +4,8 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion rootProject.ext.dependencies["compileSdkVersion"]
     buildToolsVersion rootProject.ext.dependencies["buildToolsVersion"]
-
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
     defaultConfig {
         minSdkVersion rootProject.ext.dependencies["minSdkVersion"]
         targetSdkVersion rootProject.ext.dependencies["targetSdkVersion"]

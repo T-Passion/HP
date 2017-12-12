@@ -123,6 +123,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
         //画外边框
         mPaint.reset();
+        mPaint.setAntiAlias(true);//防锯齿
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(mOutLineWidth);
         mPaint.setColor(mOutLineColor);
@@ -130,13 +131,15 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
         //画字
         mPaint.reset();
+        mPaint.setAntiAlias(true);//防锯齿
         mPaint.setColor(mTextColor);
-        mPaint.setAntiAlias(true);
         mPaint.setTextAlign(Paint.Align.CENTER);
         float textY = mCenterY - (mPaint.descent() + mPaint.ascent()) / 2;
         canvas.drawText(mJumpText, mCenterX, textY, mPaint);
 
         // 画进度条
+        mPaint.reset();
+        mPaint.setAntiAlias(true);//防锯齿
         mPaint.setStrokeWidth(mProgressLineWidth);
         mPaint.setColor(mProgressLineColor);
         mPaint.setStrokeCap(Paint.Cap.ROUND);

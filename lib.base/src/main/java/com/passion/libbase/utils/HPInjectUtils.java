@@ -43,7 +43,7 @@ public class HPInjectUtils {
     public static void inject(Object target) {
         try {
             mInjector.getDeclaredMethod(IInjector.INJECT, Object.class).setAccessible(true);
-            mInjector.getMethod(IInjector.INJECT, Object.class).invoke(target);
+            mInjector.getMethod(IInjector.INJECT, mInjector).invoke(target);
         } catch (Exception e) {
             e.printStackTrace();
         }

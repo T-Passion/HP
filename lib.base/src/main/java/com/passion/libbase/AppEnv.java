@@ -6,7 +6,7 @@ package com.passion.libbase;
  * 文件描述：全局性的变量
  */
 
-public class AppEnv {
+public final class AppEnv {
 
     private static HPApplication sAppContext;
     private static String sBuildType;
@@ -14,35 +14,37 @@ public class AppEnv {
     private static String NET_HOST = "";
     private static String NET_HOST_DEBUG = "";
     private static String NET_HOST_RELEASE = "";
-    private static String sApiSecret;
+    private static String sApiSecret = "dhMda9daJiw5qe1oa3sah9de2";
 
 
-    private AppEnv(){}
+    private AppEnv() {
+    }
 
-    public static void init(HPApplication app,String buildType){
+    public static void init(HPApplication app, String buildType) {
         sAppContext = app;
         sBuildType = buildType;
     }
 
-    public static HPApplication app(){
+    public static HPApplication app() {
         return sAppContext;
     }
 
-    public static String netHost(){
-        if(inDebug()){
+    public static String netHost() {
+        if (inDebug()) {
             NET_HOST = NET_HOST_DEBUG;
-        }else if(inRelease()){
+        } else if (inRelease()) {
             NET_HOST = NET_HOST_RELEASE;
-        }else {
+        } else {
             NET_HOST = NET_HOST_DEBUG;
         }
         return NET_HOST;
     }
 
-    private static boolean inDebug(){
+    private static boolean inDebug() {
         return (sBuildType != null && sBuildType.equals("debug"));
     }
-    private static boolean inRelease(){
+
+    private static boolean inRelease() {
         return (sBuildType != null && sBuildType.equals("release"));
     }
 
