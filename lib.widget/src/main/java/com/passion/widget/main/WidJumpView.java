@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.passion.libwidget.R;
+import com.passion.widget.utils.DensityUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -26,25 +27,23 @@ import java.util.TimerTask;
 
 public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
-    private int mOutLineColor = 0xFF888888;
-    private int mOutLineWidth = 4;//px
+    private static final int ROUND_ANGLE = 360;
+    private static final int DEFAULT_INTERVAL = 200;
+
+    private int mOutLineWidth = 8;//px
 
     private int mCircleColor = 0x99888888;
     private int mCircleRadius;
 
-    private int mTextColor = Color.WHITE;
-    private int mTextSize = 0;//sp
-
     private int mProgressLineColor = Color.RED;
-    private int mProgressLineWidth = 4;//px
     private int mProgress = 0;
 
 
     private int mDuration = 2000;//ms
-    private int mInterval = 200;//ms
-    private int mDrawTimes = mDuration / mInterval;//总的绘制次数
+    private int mInterval = DEFAULT_INTERVAL;//ms
+    private int mDrawTimes = 0;//总的绘制次数
     private int mDrawedTimes;//已经绘制的次数
-    private int mEachDrawAngle = 360 / mDrawTimes;//默认每次绘制的度数
+    private int mEachDrawAngle = 0;//默认每次绘制的度数
 
     private Paint mPaint;
     private Rect mBounds;
@@ -53,6 +52,8 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
     private Timer mTimeCounter;
     private OnJumpAction mJumpAction;
     private String mJumpText;
+    private int mTextSize;
+    private int mTextColor;
 
 
     public WidJumpView(Context context) {
@@ -78,18 +79,19 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
     private void initAttr(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WidJumpView);
-        mOutLineColor = typedArray.getColor(R.styleable.WidJumpView_outLineColor, 0xFF888888);
         mOutLineWidth = typedArray.getInt(R.styleable.WidJumpView_outLineWidth, 4);
-        mCircleColor = typedArray.getColor(R.styleable.WidJumpView_circleColor, 0x99888888);
+        mCircleColor = typedArray.getColor(R.styleable.WidJumpView_circleColor, Color.GRAY);
         mCircleRadius = typedArray.getInt(R.styleable.WidJumpView_circleRadius, 30);
         mProgressLineColor = typedArray.getColor(R.styleable.WidJumpView_progressColor, Color.RED);
-        mProgressLineWidth = typedArray.getInt(R.styleable.WidJumpView_progressLineWidth, 4);
         mDuration = typedArray.getInt(R.styleable.WidJumpView_duration, 2000);
-        mJumpText = typedArray.getString(R.styleable.WidJumpView_text);
-        mTextSize = typedArray.getDimensionPixelSize(R.styleable.WidJumpView_android_textSize, 14);
+        mJumpText = typedArray.getString(R.styleable.WidJumpView_jumpText);
+        mTextColor = typedArray.getColor(R.styleable.WidJumpView_jumpTextColor, Color.WHITE);
+        mTextSize = typedArray.getDimensionPixelSize(R.styleable.LimitEditView_contentTextSize, DensityUtil.dip2Px(getContext(), 12));
         if (TextUtils.isEmpty(mJumpText)) {
             mJumpText = getContext().getResources().getString(R.string.jump);
         }
+        mDrawTimes = mDuration / mInterval;
+        mEachDrawAngle = ROUND_ANGLE / mDrawTimes;
         typedArray.recycle();
     }
 
@@ -129,16 +131,16 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         mPaint.setStyle(Paint.Style.STROKE);//设置空心圆
         mPaint.setStrokeWidth(mOutLineWidth);//圆环宽度
         mPaint.setColor(mCircleColor);//圆环颜色
-        canvas.drawCircle(mCenterX, mCenterY, mCircleRadius - mOutLineWidth/2, mPaint);
+        canvas.drawCircle(mCenterX, mCenterY, mCircleRadius - mOutLineWidth / 2, mPaint);
 
         //画字
         mPaint.reset();
-        mPaint.setAntiAlias(true);//防锯齿
+        mPaint.setStrokeWidth(0);
         mPaint.setColor(mTextColor);
         mPaint.setTextSize(mTextSize);
-        mPaint.setTextAlign(Paint.Align.CENTER);
-        float textY = mCenterY - (mPaint.descent() + mPaint.ascent()) / 2;
-        canvas.drawText(mJumpText, mCenterX, textY, mPaint);
+        mPaint.setAntiAlias(true);
+        float textWidth = mPaint.measureText(mJumpText);
+        canvas.drawText(mJumpText, mCenterX - textWidth / 2, mCenterY + mTextSize / 2, mPaint);
 
         // 画进度条
         mPaint.reset();
@@ -152,12 +154,8 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
     }
 
-    public void setJumpText(String s) {
-        mJumpText = s;
-    }
-
     public void setDuration(int time) {
-        setDuration(time, 500);
+        setDuration(time, DEFAULT_INTERVAL);
     }
 
     public WidJumpView setJumpAction(OnJumpAction onJumpAction) {
@@ -178,13 +176,13 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
      * 倒计时时间应该被interval整除，每隔interval毫秒更新一次UI
      *
      * @param time     一个周期
-     * @param interval 每次间隔，默认为500ms
+     * @param interval 每次间隔，默认为200ms
      */
     public void setDuration(int time, int interval) {
         mDuration = time;
         mInterval = interval;
         mDrawTimes = time / interval;
-        mEachDrawAngle = 360 / mDrawTimes;
+        mEachDrawAngle = ROUND_ANGLE / mDrawTimes;
     }
 
     public void start() {
@@ -197,6 +195,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
                 mProgress += changePer;
                 mDuration -= mInterval;
                 if (mProgress == 100) {
+                    mTimeCounter.cancel();
                     post(new Runnable() {
                         @Override
                         public void run() {
@@ -204,7 +203,6 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
                                 mJumpAction.onEnd();
                         }
                     });
-                    mTimeCounter.cancel();
                 }
             }
         }, 500, mInterval);

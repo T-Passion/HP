@@ -67,8 +67,9 @@
         <attr name="progressColor" format="color" />
         <attr name="progressLineWidth" format="integer" />
         <attr name="duration" format="integer" />
-        <attr name="text" format="reference" />
-        <attr name="android:textSize" />
+        <attr name="jumpText" format="string|reference" />
+        <attr name="jumpTextSize" format="dimension|reference" />
+        <attr name="jumpTextColor" format="color|reference" />
 
 
     </declare-styleable>
