@@ -11,7 +11,7 @@ import com.passion.libbase.imp.LayoutId;
  * 文件描述：
  */
 
-public class AnnotationUtils {
+public class AnnotationUtil {
     /**
      * 获取注解Id
      *

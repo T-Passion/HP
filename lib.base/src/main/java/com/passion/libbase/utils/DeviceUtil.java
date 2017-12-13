@@ -57,7 +57,7 @@ import java.util.List;
 
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-public class DeviceUtils {
+public class DeviceUtil {
     // 手机网络类型
     public static final int NETTYPE_WIFI = 0x01;
     public static final int NETTYPE_CMWAP = 0x02;
@@ -78,7 +78,7 @@ public class DeviceUtils {
         PRE_HC = Build.VERSION.SDK_INT < 11;
     }
 
-    private DeviceUtils() {
+    private DeviceUtil() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 

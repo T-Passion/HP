@@ -3,7 +3,7 @@ package com.passion.libbase.di;
 
 import com.passion.libbase.HPApplication;
 import com.passion.libbase.di.imp.IInjector;
-import com.passion.libbase.utils.LogUtils;
+import com.passion.libbase.utils.LogUtil;
 
 /**
  * Created by huangdou
@@ -37,7 +37,7 @@ public class BaseInjector implements IInjector {
 
     @Override
     public boolean inject(Object target) {
-        LogUtils.i("start Base injector");
+        LogUtil.i("start Base injector");
         Class tClass = target.getClass();
         if (tClass == HPApplication.class) {
             sBaseComponent.inject((HPApplication) target);

@@ -15,9 +15,9 @@ import java.io.IOException;
  * 文件描述：
  */
 
-public class DrawableUtils {
+public class DrawableUtil {
 
-    private DrawableUtils() {
+    private DrawableUtil() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 

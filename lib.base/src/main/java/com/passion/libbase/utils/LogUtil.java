@@ -12,7 +12,7 @@ import com.orhanobut.logger.Logger;
  * But more pretty, simple and powerful
  */
 
-public final class LogUtils {
+public final class LogUtil {
     /**
      * It is used to change the tag
      *

@@ -16,8 +16,8 @@ public class AppModule {
 
 //    @Singleton
 //    @Provides
-//    JsonUtils provideJsonUtils(ObjectMapper objectMapper) {
-//        return new JsonUtils(objectMapper);
+//    JsonUtil provideJsonUtils(ObjectMapper objectMapper) {
+//        return new JsonUtil(objectMapper);
 //    }
 //
 //    @Singleton

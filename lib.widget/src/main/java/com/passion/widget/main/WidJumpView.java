@@ -33,6 +33,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
     private int mCircleRadius;
 
     private int mTextColor = Color.WHITE;
+    private int mTextSize = 0;//sp
 
     private int mProgressLineColor = Color.RED;
     private int mProgressLineWidth = 4;//px
@@ -40,10 +41,10 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
 
     private int mDuration = 2000;//ms
-    private int mInterval = 500;//ms
-    private int mDrawTimes = 8;//总的绘制次数
+    private int mInterval = 200;//ms
+    private int mDrawTimes = mDuration / mInterval;//总的绘制次数
     private int mDrawedTimes;//已经绘制的次数
-    private int mEachDrawAngle = 90;//默认每次绘制的度数
+    private int mEachDrawAngle = 360 / mDrawTimes;//默认每次绘制的度数
 
     private Paint mPaint;
     private Rect mBounds;
@@ -85,6 +86,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         mProgressLineWidth = typedArray.getInt(R.styleable.WidJumpView_progressLineWidth, 4);
         mDuration = typedArray.getInt(R.styleable.WidJumpView_duration, 2000);
         mJumpText = typedArray.getString(R.styleable.WidJumpView_text);
+        mTextSize = typedArray.getDimensionPixelSize(R.styleable.WidJumpView_android_textSize, 14);
         if (TextUtils.isEmpty(mJumpText)) {
             mJumpText = getContext().getResources().getString(R.string.jump);
         }
@@ -114,25 +116,26 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         int mCenterX = mBounds.centerX();
         int mCenterY = mBounds.centerY();
 
-        //画圆
+        //画内圆
         mPaint.reset();
         mPaint.setAntiAlias(true);//防锯齿
         mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(mCircleColor);
-        canvas.drawCircle(mCenterX, mCenterX, mCircleRadius, mPaint);
+        canvas.drawCircle(mCenterX, mCenterY, mCircleRadius - mOutLineWidth, mPaint);
 
         //画外边框
         mPaint.reset();
         mPaint.setAntiAlias(true);//防锯齿
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(mOutLineWidth);
-        mPaint.setColor(mOutLineColor);
-        canvas.drawCircle(mCenterX, mCenterY, mCircleRadius, mPaint);
+        mPaint.setStyle(Paint.Style.STROKE);//设置空心圆
+        mPaint.setStrokeWidth(mOutLineWidth);//圆环宽度
+        mPaint.setColor(mCircleColor);//圆环颜色
+        canvas.drawCircle(mCenterX, mCenterY, mCircleRadius - mOutLineWidth/2, mPaint);
 
         //画字
         mPaint.reset();
         mPaint.setAntiAlias(true);//防锯齿
         mPaint.setColor(mTextColor);
+        mPaint.setTextSize(mTextSize);
         mPaint.setTextAlign(Paint.Align.CENTER);
         float textY = mCenterY - (mPaint.descent() + mPaint.ascent()) / 2;
         canvas.drawText(mJumpText, mCenterX, textY, mPaint);
@@ -140,12 +143,12 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         // 画进度条
         mPaint.reset();
         mPaint.setAntiAlias(true);//防锯齿
-        mPaint.setStrokeWidth(mProgressLineWidth);
+        mPaint.setStrokeWidth(mOutLineWidth);
         mPaint.setColor(mProgressLineColor);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
-        mArcRectF.set(mBounds.left + mProgressLineWidth, mBounds.top + mProgressLineWidth,
-                mBounds.right - mProgressLineWidth, mBounds.bottom - mProgressLineWidth);
-        canvas.drawArc(mArcRectF, -90, (mDrawedTimes + 1) * mEachDrawAngle, false, mPaint);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mArcRectF.set(mCenterX - mCircleRadius, mCenterY - mCircleRadius, mCenterX + mCircleRadius, mCenterY + mCircleRadius);
+        canvas.drawArc(mArcRectF, 270, (mDrawedTimes + 1) * mEachDrawAngle, false, mPaint);
 
     }
 

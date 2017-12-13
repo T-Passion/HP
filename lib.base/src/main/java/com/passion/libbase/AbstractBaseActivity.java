@@ -15,8 +15,8 @@ import android.widget.TextView;
 import com.passion.libbase.imp.OnNetReconnectListener;
 import com.passion.libbase.mvp.IBaseView;
 import com.passion.libbase.router.HPRouter;
-import com.passion.libbase.utils.AnnotationUtils;
-import com.passion.libbase.utils.HPInjectUtils;
+import com.passion.libbase.utils.AnnotationUtil;
+import com.passion.libbase.utils.HPInjectUtil;
 import com.passion.widget.main.WidActionTitleBar;
 import com.passion.widget.main.WidNetProgressView;
 
@@ -71,7 +71,7 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
         //路由
         HPRouter.inject(this);
         //注入
-        HPInjectUtils.inject(this);
+        HPInjectUtil.inject(this);
     }
 
 
@@ -85,7 +85,7 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
      * @return 获得当前页面的布局
      */
     private int getContentLayoutId() {
-        int layoutId = AnnotationUtils.getLayoutId(this);
+        int layoutId = AnnotationUtil.getLayoutId(this);
         if (layoutId != -1) {
             return layoutId;
         } else {

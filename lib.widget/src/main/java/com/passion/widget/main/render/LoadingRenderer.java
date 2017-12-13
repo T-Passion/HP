@@ -99,8 +99,8 @@ public abstract class LoadingRenderer {
     }
 
     private void initParams(Context context) {
-        mWidth = DensityUtil.dip2px(context, DEFAULT_SIZE);
-        mHeight = DensityUtil.dip2px(context, DEFAULT_SIZE);
+        mWidth = DensityUtil.dip2Px(context, DEFAULT_SIZE);
+        mHeight = DensityUtil.dip2Px(context, DEFAULT_SIZE);
 
         mDuration = ANIMATION_DURATION;
     }

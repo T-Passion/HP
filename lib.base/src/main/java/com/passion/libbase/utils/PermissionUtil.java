@@ -16,11 +16,11 @@ import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
  * 文件描述：
  */
 
-public class PermissionUtils {
+public class PermissionUtil {
     public static final String TAG = "Permission";
 
 
-    private PermissionUtils() {
+    private PermissionUtil() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 
@@ -50,10 +50,10 @@ public class PermissionUtils {
                         @Override
                         public void onNext(Boolean granted) {
                             if (granted) {
-                                LogUtils.d("Request permissons success");
+                                LogUtil.d("Request permissons success");
                                 requestPermission.onRequestPermissionSuccess();
                             } else {
-                                LogUtils.d("Request permissons failure");
+                                LogUtil.d("Request permissons failure");
                                 requestPermission.onRequestPermissionFailure();
                             }
                         }

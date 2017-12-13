@@ -1,8 +1,8 @@
 package com.passion.libbase;
 
 import com.passion.libbase.router.HPRouter;
-import com.passion.libbase.utils.HPInjectUtils;
-import com.passion.libbase.utils.LogUtils;
+import com.passion.libbase.utils.HPInjectUtil;
+import com.passion.libbase.utils.LogUtil;
 import com.passion.libnet.core.NetConfig;
 import com.passion.libnet.core.convert.GsonConverter;
 import com.squareup.leakcanary.LeakCanary;
@@ -44,12 +44,12 @@ public final class Configuration {
     }
 
     Configuration withDagger2() {
-        HPInjectUtils.init();
+        HPInjectUtil.init();
         return this;
     }
 
     Configuration withLog() {
-        LogUtils.init(mAppContext.getPackageName(), BuildConfig.DEBUG);
+        LogUtil.init(mAppContext.getPackageName(), BuildConfig.DEBUG);
         return this;
     }
     Configuration withNet() {

@@ -12,7 +12,7 @@ import android.view.ViewTreeObserver;
  * 文件描述：
  */
 
-public class KeyboardStateListener {
+public class KeyboardStateUtil {
 
 
     private static final int SOFT_KEY_BOARD_MIN_HEIGHT = 500;
@@ -22,9 +22,9 @@ public class KeyboardStateListener {
     /**
      * 在Fragment中
      * @param f Fragment对象
-     * @return KeyboardStateListener
+     * @return KeyboardStateUtil
      */
-    public KeyboardStateListener registerFragment(Fragment f) {
+    public KeyboardStateUtil registerFragment(Fragment f) {
         registerView(f.getView());
         return this;
     }
@@ -32,9 +32,9 @@ public class KeyboardStateListener {
     /**
      * 在activity中
      * @param a activity对象
-     * @return KeyboardStateListener
+     * @return KeyboardStateUtil
      */
-    public KeyboardStateListener registerActivity(Activity a) {
+    public KeyboardStateUtil registerActivity(Activity a) {
         registerView(a.getWindow().getDecorView().findViewById(android.R.id.content));
         return this;
     }
@@ -72,9 +72,9 @@ public class KeyboardStateListener {
     /**
      *
      * @param listener  键盘可见性
-     * @return KeyboardStateListener
+     * @return KeyboardStateUtil
      */
-    public KeyboardStateListener setVisibilityListener(KeyboardVisibilityListener listener) {
+    public KeyboardStateUtil setVisibilityListener(KeyboardVisibilityListener listener) {
         mVisibilityListener = listener;
         return this;
     }

@@ -27,14 +27,14 @@ import java.util.Map;
  * on 2017/10/10.
  */
 
-public class JsonUtils {
+public class JsonUtil {
     public final static Short COMPILETYPE_MOCK_FIRST = (short) 1;
 
     public final static Short COMPILETYPE_API_FIRT = (short) 2;
 
     private ObjectMapper objectMapper = null;
 
-    public JsonUtils(ObjectMapper objectMapper) {
+    public JsonUtil(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
         this.objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
@@ -451,7 +451,7 @@ public class JsonUtils {
                 return false;
             }
         } catch (JSONException e) {
-            LogUtils.d("检测json是否有两层data抛出异常");
+            LogUtil.d("检测json是否有两层data抛出异常");
             return false;
         }
     }

@@ -4,7 +4,7 @@ package com.passion.hp.di;
 import com.passion.libbase.di.BaseComponent;
 import com.passion.libbase.di.BaseInjector;
 import com.passion.libbase.di.imp.IInjector;
-import com.passion.libbase.utils.LogUtils;
+import com.passion.libbase.utils.LogUtil;
 
 /**
  * Created by chaos
@@ -34,13 +34,13 @@ public class HPInjector implements IInjector {
 
     @Override
     public boolean inject(Object target) {
-        LogUtils.i("start App injector");
+        LogUtil.i("start App injector");
         if (mAppInjector.inject(target)) {
-            LogUtils.i("inject " + target.getClass() + " ok");
+            LogUtil.i("inject " + target.getClass() + " ok");
         } else if (mBaseInjector.inject(target)) {
-            LogUtils.i("inject " + target.getClass() + " ok");
+            LogUtil.i("inject " + target.getClass() + " ok");
         } else {
-            LogUtils.i("inject " + target.getClass() + " fail");
+            LogUtil.i("inject " + target.getClass() + " fail");
             return false;
         }
         return true;

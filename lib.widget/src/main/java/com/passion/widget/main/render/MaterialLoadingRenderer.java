@@ -81,8 +81,8 @@ public class MaterialLoadingRenderer extends LoadingRenderer {
     }
 
     private void init(Context context) {
-        mStrokeWidth = DensityUtil.dip2px(context, DEFAULT_STROKE_WIDTH);
-        mCenterRadius = DensityUtil.dip2px(context, DEFAULT_CENTER_RADIUS);
+        mStrokeWidth = DensityUtil.dip2Px(context, DEFAULT_STROKE_WIDTH);
+        mCenterRadius = DensityUtil.dip2Px(context, DEFAULT_CENTER_RADIUS);
 
         mColors = DEFAULT_COLORS;
 

@@ -14,9 +14,9 @@ import android.view.View;
  * 文件描述：
  */
 
-public class BlurUtils {
+public class BlurUtil {
 
-    private BlurUtils() {
+    private BlurUtil() {
         throw new IllegalStateException("you can't instantiate me!");
     }
 
@@ -267,7 +267,7 @@ public class BlurUtils {
         float radius = 15;
         float scaleFactor = 8;
         //放大到整个view的大小
-        bkg = DrawableUtils.getReSizeBitmap(bkg, view.getMeasuredWidth(), view.getMeasuredHeight());
+        bkg = DrawableUtil.getReSizeBitmap(bkg, view.getMeasuredWidth(), view.getMeasuredHeight());
 
         Bitmap overlay = Bitmap.createBitmap((int) (view.getMeasuredWidth() / scaleFactor)
                 , (int) (view.getMeasuredHeight() / scaleFactor), Bitmap.Config.ARGB_8888);
@@ -277,7 +277,7 @@ public class BlurUtils {
         Paint paint = new Paint();
         paint.setFlags(Paint.FILTER_BITMAP_FLAG);
         canvas.drawBitmap(bkg, 0, 0, paint);
-        overlay = BlurUtils.doBlur(overlay, (int) radius, true);
+        overlay = BlurUtil.doBlur(overlay, (int) radius, true);
         view.setBackgroundDrawable(new BitmapDrawable(context.getResources(), overlay));
         Log.w("test", "cost " + (System.currentTimeMillis() - startMs) + "ms");
     }
@@ -295,7 +295,7 @@ public class BlurUtils {
         float radius = 15;//越大模糊效果越大
         float scaleFactor = 8;
         //放大到整个view的大小
-        bkg = DrawableUtils.getReSizeBitmap(bkg, width, height);
+        bkg = DrawableUtil.getReSizeBitmap(bkg, width, height);
         Bitmap overlay = Bitmap.createBitmap((int) (width / scaleFactor)
                 , (int) (height / scaleFactor), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(overlay);
@@ -303,7 +303,7 @@ public class BlurUtils {
         Paint paint = new Paint();
         paint.setFlags(Paint.FILTER_BITMAP_FLAG);
         canvas.drawBitmap(bkg, 0, 0, paint);
-        overlay = BlurUtils.doBlur(overlay, (int) radius, true);
+        overlay = BlurUtil.doBlur(overlay, (int) radius, true);
         Log.w("test", "cost " + (System.currentTimeMillis() - startMs) + "ms");
         return overlay;
     }

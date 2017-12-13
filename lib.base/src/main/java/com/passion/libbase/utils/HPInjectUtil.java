@@ -8,7 +8,7 @@ import com.passion.libbase.di.imp.IInjector;
  * on 2017/10/13.
  */
 
-public class HPInjectUtils {
+public class HPInjectUtil {
 
     private static final String HP_INJECTOR = "com.passion.hp.di.HPInjector";
 
@@ -33,7 +33,7 @@ public class HPInjectUtils {
             mInjector.getMethod(IInjector.INIT_COMPONENT).invoke(null);
         } catch (Exception e) {
             e.printStackTrace();
-            LogUtils.e("dagger初始化失败");
+            LogUtil.e("dagger初始化失败");
         }
     }
 
