@@ -1,6 +1,8 @@
-package com.passion.hp.di;
+package com.passion.hp.di.global;
 
 
+import com.passion.hp.di.AppComponent;
+import com.passion.hp.di.AppModule;
 import com.passion.libbase.di.BaseComponent;
 import com.passion.libbase.di.BaseModule;
 

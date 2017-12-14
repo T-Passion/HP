@@ -1,4 +1,4 @@
-package com.passion.hp.di;
+package com.passion.hp.di.global;
 
 import com.passion.libbase.Configuration;
 import com.passion.libbase.HPApplication;

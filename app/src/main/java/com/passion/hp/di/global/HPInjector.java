@@ -1,6 +1,9 @@
-package com.passion.hp.di;
+package com.passion.hp.di.global;
 
 
+import com.passion.hp.di.AppComponent;
+import com.passion.hp.di.AppInjector;
+import com.passion.hp.di.DaggerHPComponent;
 import com.passion.libbase.di.BaseComponent;
 import com.passion.libbase.di.BaseInjector;
 import com.passion.libbase.di.imp.IInjector;
