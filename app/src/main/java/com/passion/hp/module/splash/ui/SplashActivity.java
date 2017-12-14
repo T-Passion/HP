@@ -16,6 +16,7 @@ import com.passion.libbase.router.HPRouter;
 import com.passion.widget.main.WidJumpView;
 
 import butterknife.BindView;
+import dagger.Provides;
 
 
 /**

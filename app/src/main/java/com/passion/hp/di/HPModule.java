@@ -16,6 +16,7 @@ import dagger.Provides;
  * on 2017/12/6. 15:15
  * 文件描述：需要在全局注入的对象
  */
+@Singleton
 @Module
 public class HPModule {
 

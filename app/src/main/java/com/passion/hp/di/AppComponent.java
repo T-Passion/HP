@@ -9,9 +9,7 @@ import dagger.Subcomponent;
  * Created by huangdou
  * on 2017/10/13.
  */
-@Subcomponent(modules = {
-        AppModule.class
-})
+@Subcomponent(modules = AppModule.class)
 public interface AppComponent {
 
     void inject(SplashActivity splashActivity);
