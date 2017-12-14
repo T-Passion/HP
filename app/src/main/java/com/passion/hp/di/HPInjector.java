@@ -22,7 +22,7 @@ public class HPInjector implements IInjector {
 
     @Override
     public void initComponent() {
-        sHPComponent = DaggerHPComponent.builder().build();
+        sHPComponent = DaggerHPComponent.builder().hPModule(new HPModule()).build();
         //app module
         AppComponent appComponent = sHPComponent.plus(mAppInjector.getModule());
         mAppInjector.setComponent(appComponent);

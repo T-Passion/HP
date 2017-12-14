@@ -41,7 +41,8 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
 
     @Override
     protected void initVars(View view) {
-        mPresenter = new SplashPresenter(mModel, this);
+        setTitleBarVisibility(false);
+        mPresenter = new SplashPresenter(this,mModel);
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override
             public void onEnd() {

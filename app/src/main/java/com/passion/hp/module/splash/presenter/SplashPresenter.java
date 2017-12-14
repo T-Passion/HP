@@ -17,8 +17,8 @@ public class SplashPresenter extends BasePresenter<SplashContract.Model, SplashC
         super(view);
     }
 
-    public SplashPresenter(SplashContract.Model model, SplashContract.View view) {
-        super(model, view);
+    public SplashPresenter( SplashContract.View view,SplashContract.Model model) {
+        super( view,model);
     }
 
     @Override

@@ -14,6 +14,7 @@ public class HPInjectUtil {
 
     private static Class<?> mInjector = null;
 
+    private static Object sReceiver;
 
     /**
      * 在应用初始化的时候，调用
@@ -28,9 +29,9 @@ public class HPInjectUtil {
     static void init(String clazzName) {
         try {
             mInjector = Class.forName(clazzName);
-            mInjector.newInstance();
+            sReceiver = mInjector.newInstance();
             mInjector.getDeclaredMethod(IInjector.INIT_COMPONENT).setAccessible(true);
-            mInjector.getMethod(IInjector.INIT_COMPONENT).invoke(null);
+            mInjector.getMethod(IInjector.INIT_COMPONENT).invoke(sReceiver);
         } catch (Exception e) {
             e.printStackTrace();
             LogUtil.e("dagger初始化失败");
@@ -43,7 +44,7 @@ public class HPInjectUtil {
     public static void inject(Object target) {
         try {
             mInjector.getDeclaredMethod(IInjector.INJECT, Object.class).setAccessible(true);
-            mInjector.getMethod(IInjector.INJECT, mInjector).invoke(target);
+            mInjector.getMethod(IInjector.INJECT, Object.class).invoke(sReceiver,target);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -20,7 +20,11 @@ import com.passion.libbase.utils.HPInjectUtil;
 import com.passion.widget.main.WidActionTitleBar;
 import com.passion.widget.main.WidNetProgressView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,7 +34,7 @@ import butterknife.Unbinder;
  * on 17-7-2.
  */
 
-public  abstract class AbstractBaseActivity extends AppCompatActivity implements OnNetReconnectListener, IBaseView {
+public abstract class AbstractBaseActivity extends AppCompatActivity implements OnNetReconnectListener, IBaseView {
     protected Context mContext;
 
     LinearLayout mRootContentView;//根视图
@@ -44,6 +48,9 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
     private Unbinder mViewUnbind;
     //当前页面布局id
     protected int mContentLayoutId;
+
+    @Inject
+    public EventBus mEventBus;
 
 
     @Override
@@ -68,17 +75,19 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
     }
 
     private void injector() {
-        //路由
-        HPRouter.inject(this);
         //注入
         HPInjectUtil.inject(this);
+        //路由
+        HPRouter.inject(this);
+
+
     }
 
 
     private void inflateUiBind() {
         mContentLayoutId = getContentLayoutId();
         mContentView = getLayoutInflater().inflate(mContentLayoutId, mContentLayout, true);
-        mViewUnbind = ButterKnife.bind(this,mContentView);
+        mViewUnbind = ButterKnife.bind(this, mContentView);
     }
 
     /**
@@ -89,7 +98,7 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
         if (layoutId != -1) {
             return layoutId;
         } else {
-            throw  new RuntimeException(getClass()+ "当前页面没有给定布局资源");
+            throw new RuntimeException(getClass() + "当前页面没有给定布局资源");
         }
     }
 
@@ -105,6 +114,10 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
      */
     protected abstract void loadInitDta();
 
+    public void registerBus() {
+        mEventBus.register(this);
+    }
+
     public Context getContext() {
         return mContext;
     }
@@ -117,11 +130,15 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
         return mContentLayout;
     }
 
+    public void setTitleBarVisibility(boolean visible) {
+        mActionTitleBar.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+
     /**
      * @param title 标题
      */
     protected void setTitleBar(String title) {
-        this.setTitleBar(title,null);
+        this.setTitleBar(title, null);
     }
 
     /**
@@ -138,7 +155,7 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
      * @param leftListener 监听器
      */
     public void setTitleBarLeft(int titleId, Integer titleIcon, View.OnClickListener leftListener) {
-        this.setTitleBarLeft(getString(titleId),titleIcon,leftListener);
+        this.setTitleBarLeft(getString(titleId), titleIcon, leftListener);
     }
 
     /**
@@ -156,7 +173,7 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
      * @param rightListener 监听器
      */
     public void setTitleBarRight(int titleId, Integer titleIcon, View.OnClickListener rightListener) {
-        this.setTitleBarRight(getString(titleId),titleIcon,rightListener);
+        this.setTitleBarRight(getString(titleId), titleIcon, rightListener);
     }
 
     /**
@@ -263,6 +280,9 @@ public  abstract class AbstractBaseActivity extends AppCompatActivity implements
         if (mViewUnbind != null) {
             mViewUnbind.unbind();
             mViewUnbind = null;
+        }
+        if (mEventBus != null && mEventBus.isRegistered(this)) {
+            mEventBus.unregister(this);
         }
     }
 

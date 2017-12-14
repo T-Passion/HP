@@ -14,22 +14,5 @@ import dagger.Module;
 public class AppModule {
 
 
-//    @Singleton
-//    @Provides
-//    JsonUtil provideJsonUtils(ObjectMapper objectMapper) {
-//        return new JsonUtil(objectMapper);
-//    }
-//
-//    @Singleton
-//    @Provides
-//    ObjectMapper provideObjectMapper() {
-//        return new ObjectMapper();
-//    }
-//    @Singleton
-//    @Provides
-//    SplashModel provideSplashModel() {
-//        return new SplashModel();
-//    }
-
 
 }

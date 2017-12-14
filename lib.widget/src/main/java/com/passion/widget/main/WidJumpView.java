@@ -83,7 +83,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         mCircleColor = typedArray.getColor(R.styleable.WidJumpView_circleColor, Color.GRAY);
         mCircleRadius = typedArray.getInt(R.styleable.WidJumpView_circleRadius, 30);
         mProgressLineColor = typedArray.getColor(R.styleable.WidJumpView_progressColor, Color.RED);
-        mDuration = typedArray.getInt(R.styleable.WidJumpView_duration, 2000);
+        mDuration = typedArray.getInt(R.styleable.WidJumpView_jumpDuration, 2000);
         mJumpText = typedArray.getString(R.styleable.WidJumpView_jumpText);
         mTextColor = typedArray.getColor(R.styleable.WidJumpView_jumpTextColor, Color.WHITE);
         mTextSize = typedArray.getDimensionPixelSize(R.styleable.LimitEditView_contentTextSize, DensityUtil.dip2Px(getContext(), 12));

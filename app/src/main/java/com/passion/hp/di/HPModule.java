@@ -20,12 +20,6 @@ import dagger.Provides;
 public class HPModule {
 
 
-    private HPApplication mAppContext;
-
-    private EventBus mEventBus;
-
-    private NetWorker mNetWorker;
-
     @Singleton
     @Provides
     public HPApplication provideAppContext(){

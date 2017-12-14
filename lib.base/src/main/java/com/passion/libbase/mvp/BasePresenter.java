@@ -26,7 +26,7 @@ public abstract class BasePresenter<M extends IBaseModel, V extends IBaseView> i
         onStart();
     }
 
-    public BasePresenter(M model, V view) {
+    public BasePresenter(V view,M model) {
         mModel = model;
         mView = view;
         onStart();
