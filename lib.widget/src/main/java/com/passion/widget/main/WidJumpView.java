@@ -28,11 +28,12 @@ import java.util.TimerTask;
 public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
     private static final int ROUND_ANGLE = 360;
-    private static final int DEFAULT_INTERVAL = 200;
+    private static final int DEFAULT_INTERVAL = 50;
+    private static final int BOUND_OFFSET = 4;
 
     private int mOutLineWidth = 8;//px
 
-    private int mCircleColor = 0x99888888;
+    private int mCircleColor;
     private int mCircleRadius;
 
     private int mProgressLineColor = Color.RED;
@@ -80,7 +81,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
     private void initAttr(AttributeSet attrs) {
         TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WidJumpView);
         mOutLineWidth = typedArray.getInt(R.styleable.WidJumpView_outLineWidth, 4);
-        mCircleColor = typedArray.getColor(R.styleable.WidJumpView_circleColor, Color.GRAY);
+        mCircleColor = typedArray.getColor(R.styleable.WidJumpView_circleColor, Color.TRANSPARENT);
         mCircleRadius = typedArray.getInt(R.styleable.WidJumpView_circleRadius, 30);
         mProgressLineColor = typedArray.getColor(R.styleable.WidJumpView_progressColor, Color.RED);
         mDuration = typedArray.getInt(R.styleable.WidJumpView_jumpDuration, 2000);
@@ -105,7 +106,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
         else
             w = h;
         //计算出圆半径
-        mCircleRadius = w / 2;
+        mCircleRadius = w / 2 - BOUND_OFFSET;
         setMeasuredDimension(w, h);
     }
 
@@ -154,6 +155,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
     }
 
+
     public void setDuration(int time) {
         setDuration(time, DEFAULT_INTERVAL);
     }
@@ -195,7 +197,7 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
                 mProgress += changePer;
                 mDuration -= mInterval;
                 if (mProgress == 100) {
-                    mTimeCounter.cancel();
+                    stop();
                     post(new Runnable() {
                         @Override
                         public void run() {

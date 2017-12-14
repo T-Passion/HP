@@ -13,4 +13,10 @@
     <dimen name="normal_txt_level_10">10sp</dimen>
     <dimen name="normal_txt_level_08">8sp</dimen>
 
+
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_6">6dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+
 </resources>

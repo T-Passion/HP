@@ -16,7 +16,7 @@ import com.passion.libbase.router.HPRouter;
 import com.passion.widget.main.WidJumpView;
 
 import butterknife.BindView;
-import dagger.Provides;
+import butterknife.OnClick;
 
 
 /**
@@ -42,14 +42,24 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
 
     @Override
     protected void initVars(View view) {
-        setTitleBarVisibility(false);
+        fullScreen(view);
         mPresenter = new SplashPresenter(this,mModel);
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override
             public void onEnd() {
                 HPRouter.navigate(RouterPath.HOME_ACTIVITY);
+                finish();
             }
         }).start();
+    }
+
+    private void fullScreen(View view){
+        setTitleBarVisibility(false);
+        view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+    @OnClick(R.id.splashAdImg)
+    public void onADClick(){
+        //TODO 广告位
     }
 
 
