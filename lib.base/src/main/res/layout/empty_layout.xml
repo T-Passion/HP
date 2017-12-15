@@ -11,7 +11,7 @@
         android:id="@+id/emptyImg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        tools:background="@drawable/ic_empty" />
+        tools:background="@drawable/icon_empty" />
 
 
     <TextView

@@ -5,5 +5,6 @@
     <dimen name="app_title_bar_txt_size">16sp</dimen>
     <dimen name="app_title_bar_right_icon_width">25dp</dimen>
     <dimen name="app_title_bar_right_txt_padding">2dp</dimen>
+    <dimen name="tab_bar_h">60dp</dimen>
 
 </resources>
