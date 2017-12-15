@@ -10,7 +10,7 @@ import com.passion.libbase.di.imp.IInjector;
 
 public class HPInjectUtil {
 
-    private static final String HP_INJECTOR = "com.passion.hp.di.HPInjector";
+    private static final String HP_INJECTOR = "com.passion.hp.di.global.HPInjector";
 
     private static Class<?> mInjector = null;
 
@@ -26,7 +26,7 @@ public class HPInjectUtil {
     /**
      * @param clazzName
      */
-    static void init(String clazzName) {
+    private static void init(String clazzName) {
         try {
             mInjector = Class.forName(clazzName);
             sReceiver = mInjector.newInstance();

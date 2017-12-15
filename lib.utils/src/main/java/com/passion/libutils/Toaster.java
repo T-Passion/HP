@@ -7,8 +7,6 @@ import android.widget.Toast;
 
 /**
  * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
  *     time  : 2016/9/29
  *     desc  : 吐司相关工具类
  * </pre>
@@ -40,7 +38,7 @@ public class Toaster {
      * @param context 上下文
      * @param text    文本
      */
-    public static void showShortToastSafe(final Context context, final CharSequence text) {
+    public static void showToastSafe(final Context context, final CharSequence text) {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -55,7 +53,7 @@ public class Toaster {
      * @param context 上下文
      * @param resId   资源Id
      */
-    public static void showShortToastSafe(final Context context, final int resId) {
+    public static void showToastSafe(final Context context, final int resId) {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -71,7 +69,7 @@ public class Toaster {
      * @param resId   资源Id
      * @param args    参数
      */
-    public static void showShortToastSafe(final Context context, final int resId, final Object... args) {
+    public static void showToastSafe(final Context context, final int resId, final Object... args) {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -87,7 +85,7 @@ public class Toaster {
      * @param format  格式
      * @param args    参数
      */
-    public static void showShortToastSafe(final Context context, final String format, final Object... args) {
+    public static void showToastSafe(final Context context, final String format, final Object... args) {
         sHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -164,7 +162,7 @@ public class Toaster {
      * @param context 上下文
      * @param text    文本
      */
-    public static void showShortToast(Context context, CharSequence text) {
+    public static void showToast(Context context, CharSequence text) {
         showToast(context, text, Toast.LENGTH_SHORT);
     }
 
@@ -181,7 +179,7 @@ public class Toaster {
 //                showToast(context, text, Toast.LENGTH_SHORT);
 //            }
 //        });
-        showShortToastSafe(context,text);
+        showToastSafe(context,text);
     }
 
     /**
@@ -190,7 +188,7 @@ public class Toaster {
      * @param context 上下文
      * @param resId   资源Id
      */
-    public static void showShortToast(Context context, int resId) {
+    public static void showToast(Context context, int resId) {
         showToast(context, resId, Toast.LENGTH_SHORT);
     }
 
@@ -201,7 +199,7 @@ public class Toaster {
      * @param resId   资源Id
      * @param args    参数
      */
-    public static void showShortToast(Context context, int resId, Object... args) {
+    public static void showToast(Context context, int resId, Object... args) {
         showToast(context, resId, Toast.LENGTH_SHORT, args);
     }
 
@@ -212,7 +210,7 @@ public class Toaster {
      * @param format  格式
      * @param args    参数
      */
-    public static void showShortToast(Context context, String format, Object... args) {
+    public static void showToast(Context context, String format, Object... args) {
         showToast(context, format, Toast.LENGTH_SHORT, args);
     }
 

@@ -3,16 +3,19 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/ActivityTransition</item>
     </style>
-
     <style name="FullScreenTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <!--// A -> B; A <- B  -->
+    <style name="ActivityTransition" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_right_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_right_exit_alpha</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_right_enter_alpha</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_right_exit</item>
+    </style>
 
 </resources>

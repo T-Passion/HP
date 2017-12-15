@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">lib.utils</string>
     <string name="material_dialog_sure">确定</string>
     <string name="material_dialog_cancel">取消</string>
     <string name="material_dialog_give_up">放弃</string>

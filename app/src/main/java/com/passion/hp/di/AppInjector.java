@@ -1,6 +1,7 @@
 package com.passion.hp.di;
 
 
+import com.passion.hp.module.home.HomeActivity;
 import com.passion.hp.module.splash.ui.SplashActivity;
 import com.passion.libbase.di.imp.IInjector;
 
@@ -39,7 +40,9 @@ public class AppInjector implements IInjector {
         Class tClass = target.getClass();
         if (tClass == SplashActivity.class) {
             sAppComponent.inject((SplashActivity) target);
-        } else {
+        }else if (tClass == HomeActivity.class) {
+            sAppComponent.inject((HomeActivity) target);
+        }else {
             return false;
         }
         return true;

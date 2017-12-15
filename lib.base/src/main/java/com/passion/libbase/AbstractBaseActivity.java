@@ -4,9 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,7 +20,9 @@ import com.passion.libbase.imp.OnNetReconnectListener;
 import com.passion.libbase.mvp.IBaseView;
 import com.passion.libbase.router.HPRouter;
 import com.passion.libbase.utils.AnnotationUtil;
+import com.passion.libbase.utils.DensityUtil;
 import com.passion.libbase.utils.HPInjectUtil;
+import com.passion.libutils.ActvStackUtil;
 import com.passion.widget.main.WidActionTitleBar;
 import com.passion.widget.main.WidNetProgressView;
 
@@ -45,6 +51,8 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     WidNetProgressView mProgressView;//刷新内容显示
     FrameLayout mProgressLayout;//刷新内容显示
 
+    private boolean mFullScreen;
+
     private Unbinder mViewUnbind;
     //当前页面布局id
     protected int mContentLayoutId;
@@ -56,22 +64,42 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(mFullScreen)  fullScreen();
+
         setContentView(R.layout.activity_base_layout);
         findView();
+        initActionBar();
         injector();
         inflateUiBind();
 
         initVars(mContentView);
         loadInitDta();
     }
+    private void fullScreen(){
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
 
     private void findView() {
         mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
         mContentLayout = (LinearLayout) findViewById(R.id.contentLayout);
-        mActionTitleBar = (WidActionTitleBar) findViewById(R.id.actionTitleBar);
         mEmptyLayout = (FrameLayout) findViewById(R.id.emptyLayout);
         mProgressView = (WidNetProgressView) findViewById(R.id.progressView);
         mProgressLayout = (FrameLayout) findViewById(R.id.progressLayout);
+    }
+
+    private void initActionBar(){
+        mActionTitleBar = new WidActionTitleBar(this);
+        FrameLayout.LayoutParams barParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int)DensityUtil.dp2Px(50));
+        mActionTitleBar.setLayoutParams(barParams);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setCustomView(mActionTitleBar);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        }
     }
 
     private void injector() {
@@ -79,6 +107,8 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
         HPInjectUtil.inject(this);
         //路由
         HPRouter.inject(this);
+        //activity栈 管理
+        ActvStackUtil.addActivity(this);
 
 
     }
@@ -113,6 +143,14 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
      * 加载初始数据
      */
     protected abstract void loadInitDta();
+
+    /**
+     * set before <p> super.onCreate(savedInstanceState); </p>
+     * @param fullScreen 是否全屏显示
+     */
+    public void setFullScreen(boolean fullScreen){
+        mFullScreen = fullScreen;
+    }
 
     public void registerBus() {
         mEventBus.register(this);
@@ -284,6 +322,7 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
         if (mEventBus != null && mEventBus.isRegistered(this)) {
             mEventBus.unregister(this);
         }
+        ActvStackUtil.remove(this);
     }
 
     @Override

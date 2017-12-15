@@ -36,7 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/normal_page_margin"
         android:gravity="center"
-        app:jumpTextSize="12sp"
+        app:jumpTextSize="10sp"
         app:jumpTextColor="@color/white"
         app:jumpText="@string/jump_over" />
 </RelativeLayout>

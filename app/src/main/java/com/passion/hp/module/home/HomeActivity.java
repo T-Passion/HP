@@ -1,7 +1,6 @@
 package com.passion.hp.module.home;
 
 
-import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -14,12 +13,6 @@ import com.passion.libbase.imp.LayoutId;
 @Route(path = RouterPath.HOME_ACTIVITY)
 public class HomeActivity extends AbstractBaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
 
 
     @Override

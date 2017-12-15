@@ -17,7 +17,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = HPModule.class)
+@Component(modules = {HPModule.class})
 public interface HPComponent {
 
     AppComponent plus(AppModule appModule);

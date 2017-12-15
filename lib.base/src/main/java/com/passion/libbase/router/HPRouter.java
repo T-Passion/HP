@@ -45,7 +45,7 @@ public class HPRouter {
      * @param path 路径
      */
     public static void navigate(String path) {
-        ARouter.getInstance().build(path).navigation();
+        navigate(path,null);
     }
 
     /**
@@ -53,7 +53,7 @@ public class HPRouter {
      * @param bundle 传参数
      */
     public static void navigate(String path, Bundle bundle) {
-        ARouter.getInstance().build(path).with(bundle).navigation();
+        navigate(path,bundle,-1);
     }
 
     /**
