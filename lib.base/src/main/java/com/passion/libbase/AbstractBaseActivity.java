@@ -27,6 +27,7 @@ import com.passion.widget.main.WidActionTitleBar;
 import com.passion.widget.main.WidNetProgressView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -152,6 +153,9 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
         mFullScreen = fullScreen;
     }
 
+    /**
+     * 注册事件
+     */
     public void registerBus() {
         mEventBus.register(this);
     }
@@ -311,6 +315,14 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
         //默认不处理
     }
 
+    /**
+     * 事件订阅的默认实现
+     * @param e 事件
+     */
+    @Subscribe
+    public void onEvent(Object e){
+
+    }
 
     @Override
     protected void onDestroy() {
