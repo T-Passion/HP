@@ -56,6 +56,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
             @Override
             public void onEnd() {
                 HPRouter.navigate(RouterPath.HOME_ACTIVITY);
+                finish();
             }
         }).start();
     }

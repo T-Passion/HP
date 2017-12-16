@@ -49,10 +49,6 @@ import java.util.List;
 import java.util.Random;
 
 
-/**
- * Created by huangdou
- * on 2017/10/9.
- */
 
 @SuppressWarnings({"unused", "DefaultFileTemplate"})
 public class NavigationTabBar extends View implements ViewPager.OnPageChangeListener {
@@ -77,7 +73,7 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
 
     protected final static int DEFAULT_INACTIVE_COLOR = Color.parseColor("#9f90af");
     protected final static int DEFAULT_ACTIVE_COLOR = Color.WHITE;
-    protected final static int DEFAULT_BG_COLOR = Color.parseColor("#605271");
+    protected final static int DEFAULT_BG_COLOR = Color.WHITE;
 
     protected final static float MIN_FRACTION = 0.0F;
     protected final static float MAX_FRACTION = 1.0F;

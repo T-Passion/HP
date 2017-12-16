@@ -11,6 +11,9 @@ import com.passion.libbase.constants.RouterPath;
 import com.passion.libbase.imp.LayoutId;
 import com.passion.widget.main.NavigationTabBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 
 @LayoutId(R.layout.activity_home_layout)
@@ -25,6 +28,7 @@ public class HomeActivity extends AbstractBaseActivity {
 
     @Override
     protected void initVars(View view) {
+        initTabBars();
 //        setTitleBar(null,getDrawable());
 
 
@@ -36,6 +40,38 @@ public class HomeActivity extends AbstractBaseActivity {
     }
 
     private void initTabBars(){
+        final List<NavigationTabBar.Model> models = new ArrayList<>();
+        final int whiteColor = getResources().getColor(R.color.white);
+        models.add(new NavigationTabBar.Model.Builder(
+                getResources().getDrawable(R.drawable.btn_news_up),whiteColor)
+                .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
+                .build()
+        );
+        models.add(new NavigationTabBar.Model.Builder(
+                getResources().getDrawable(R.drawable.btn_news_up),whiteColor)
+                .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
+                .build()
 
+        );
+        models.add(new NavigationTabBar.Model.Builder(
+                getResources().getDrawable(R.drawable.btn_news_up),whiteColor)
+                .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
+                .build()
+
+        );
+        models.add(new NavigationTabBar.Model.Builder(
+                getResources().getDrawable(R.drawable.btn_news_up),whiteColor)
+                .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
+                .build()
+
+        );
+        models.add(new NavigationTabBar.Model.Builder(
+                getResources().getDrawable(R.drawable.btn_news_up),whiteColor)
+                .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
+                .build()
+
+        );
+
+        mTabContainer.setModels(models);
     }
 }
