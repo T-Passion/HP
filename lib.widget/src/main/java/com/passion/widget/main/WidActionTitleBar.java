@@ -21,11 +21,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by huangdou
+ * Created by chaos
  * on 2017/9/29.
  */
 
-public class WidActionTitleBar extends View implements ViewInterface {
+public class WidActionTitleBar extends RelativeLayout implements ViewInterface {
 
     @BindView(R2.id.titleBarLeftText)
     TextView mTitleBarLeftText;
@@ -68,8 +68,9 @@ public class WidActionTitleBar extends View implements ViewInterface {
 
     @Override
     public void initView() {
-        mContainer = LayoutInflater.from(mContext).inflate(R.layout.action_title_bar_layout, null);
+        mContainer = LayoutInflater.from(mContext).inflate(R.layout.action_title_bar_layout, this);
         ButterKnife.bind(this, mContainer);
+
     }
 
     @Override

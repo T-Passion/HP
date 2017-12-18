@@ -1,14 +1,13 @@
 package com.passion.libbase;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -20,7 +19,6 @@ import com.passion.libbase.imp.OnNetReconnectListener;
 import com.passion.libbase.mvp.IBaseView;
 import com.passion.libbase.router.HPRouter;
 import com.passion.libbase.utils.AnnotationUtil;
-import com.passion.libbase.utils.DensityUtil;
 import com.passion.libbase.utils.HPInjectUtil;
 import com.passion.libutils.ActvStackUtil;
 import com.passion.widget.main.WidActionTitleBar;
@@ -42,7 +40,6 @@ import butterknife.Unbinder;
  */
 
 public abstract class AbstractBaseActivity extends AppCompatActivity implements OnNetReconnectListener, IBaseView {
-    protected Context mContext;
 
     LinearLayout mRootContentView;//根视图
     LinearLayout mContentLayout;//内容视图
@@ -51,8 +48,6 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     FrameLayout mEmptyLayout;//空数据内容显示
     WidNetProgressView mProgressView;//刷新内容显示
     FrameLayout mProgressLayout;//刷新内容显示
-
-    private boolean mFullScreen;
 
     private Unbinder mViewUnbind;
     //当前页面布局id
@@ -65,18 +60,16 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(mFullScreen)  fullScreen();
-
         setContentView(R.layout.activity_base_layout);
+        immerseTheme();
         findView();
-        initActionBar();
         injector();
         inflateUiBind();
 
         initVars(mContentView);
         loadInitDta();
     }
-    private void fullScreen(){
+    public void fullScreen(){
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
@@ -84,23 +77,11 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
 
     private void findView() {
         mRootContentView = (LinearLayout) findViewById(R.id.rootContentView);
+        mActionTitleBar = (WidActionTitleBar) findViewById(R.id.actionTitleBar);
         mContentLayout = (LinearLayout) findViewById(R.id.contentLayout);
         mEmptyLayout = (FrameLayout) findViewById(R.id.emptyLayout);
         mProgressView = (WidNetProgressView) findViewById(R.id.progressView);
         mProgressLayout = (FrameLayout) findViewById(R.id.progressLayout);
-    }
-
-    private void initActionBar(){
-        mActionTitleBar = new WidActionTitleBar(this);
-        FrameLayout.LayoutParams barParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int)DensityUtil.dp2Px(50));
-        mActionTitleBar.setLayoutParams(barParams);
-
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setCustomView(mActionTitleBar);
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        }
     }
 
     private void injector() {
@@ -146,22 +127,10 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     protected abstract void loadInitDta();
 
     /**
-     * set before <p> super.onCreate(savedInstanceState); </p>
-     * @param fullScreen 是否全屏显示
-     */
-    public void setFullScreen(boolean fullScreen){
-        mFullScreen = fullScreen;
-    }
-
-    /**
      * 注册事件
      */
     public void registerBus() {
         mEventBus.register(this);
-    }
-
-    public Context getContext() {
-        return mContext;
     }
 
     public View getRootView() {
@@ -323,6 +292,18 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     public void onEvent(Object e){
 
     }
+
+    private void immerseTheme(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
 
     @Override
     protected void onDestroy() {

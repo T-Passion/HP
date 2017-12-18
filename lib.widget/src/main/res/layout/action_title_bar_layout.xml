@@ -18,7 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/app_title_bar_left_icon_height"
             android:layout_marginLeft="@dimen/normal_page_margin"
-            android:src="@drawable/title_bar_left_icon_selector" />
+            android:src="@drawable/title_bar_left_icon_selector"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
         <TextView
             android:id="@+id/titleBarLeftText"
@@ -86,7 +88,9 @@
             android:id="@+id/titleBarRightIcon"
             android:layout_width="@dimen/app_title_bar_right_icon_width"
             android:layout_height="match_parent"
-            android:src="@drawable/search_btn_board_day" />
+            android:src="@drawable/search_btn_board_day"
+            android:visibility="gone"
+            tools:visibility="visible"/>
 
 
     </LinearLayout>

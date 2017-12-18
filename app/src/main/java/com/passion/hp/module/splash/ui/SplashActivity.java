@@ -45,12 +45,13 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        setFullScreen(true);
+        fullScreen();
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void initVars(View view) {
+        setTitleBarVisibility(false);
         mPresenter = new SplashPresenter(this,mModel);
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override

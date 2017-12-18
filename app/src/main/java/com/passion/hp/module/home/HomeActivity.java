@@ -29,7 +29,7 @@ public class HomeActivity extends AbstractBaseActivity implements NavigationTabB
     @Override
     protected void initVars(View view) {
         initTabBars();
-//        setTitleBar(null,getDrawable());
+        setTitleBar(null, R.drawable.icon_title_bar);
 
 
     }
@@ -39,40 +39,40 @@ public class HomeActivity extends AbstractBaseActivity implements NavigationTabB
 
     }
 
-    private void initTabBars(){
+    private void initTabBars() {
         final List<NavigationTabBar.Model> models = new ArrayList<>();
         final int whiteColor = getResources().getColor(R.color.white);
         models.add(new NavigationTabBar.Model.Builder(
-                getResources().getDrawable(R.drawable.btn_news_up),whiteColor)
+                getResources().getDrawable(R.drawable.btn_news_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
                 .build()
         );
         models.add(new NavigationTabBar.Model.Builder(
-                getResources().getDrawable(R.drawable.btn_nba_game_up),whiteColor)
+                getResources().getDrawable(R.drawable.btn_nba_game_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_nba_game_down))
                 .build()
 
         );
         models.add(new NavigationTabBar.Model.Builder(
-                getResources().getDrawable(R.drawable.btn_bbs_up),whiteColor)
+                getResources().getDrawable(R.drawable.btn_bbs_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_bbs_down))
                 .build()
 
         );
         models.add(new NavigationTabBar.Model.Builder(
-                getResources().getDrawable(R.drawable.btn_discovery_up),whiteColor)
+                getResources().getDrawable(R.drawable.btn_discovery_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_discovery_down))
                 .build()
 
         );
         models.add(new NavigationTabBar.Model.Builder(
-                getResources().getDrawable(R.drawable.btn_more_up),whiteColor)
+                getResources().getDrawable(R.drawable.btn_more_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_more_down))
                 .build()
 
         );
         mTabContainer.setModels(models);
-        mTabContainer.setModelIndex(0,true);
+        mTabContainer.setModelIndex(0, true);
         mTabContainer.setOnTabBarSelectedIndexListener(this);
     }
 
