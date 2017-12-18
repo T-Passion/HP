@@ -66,12 +66,12 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
     protected final static int DEFAULT_BADGE_ANIMATION_DURATION = 200;
     protected final static int DEFAULT_BADGE_REFRESH_ANIMATION_DURATION = 100;
     protected final static int DEFAULT_ANIMATION_DURATION = 300;
-    protected final static float DEFAULT_ICON_SIZE_FRACTION = 1F;
+    protected final static float DEFAULT_ICON_SIZE_FRACTION = 0.5F;
     protected final static float DEFAULT_TITLE_ICON_SIZE_FRACTION = 0.5F;
 
-    protected final static int DEFAULT_INACTIVE_COLOR = Color.parseColor("#9f90af");
-    protected final static int DEFAULT_ACTIVE_COLOR = Color.WHITE;
-    protected final static int DEFAULT_BG_COLOR =  Color.parseColor("#605271");
+    protected final static int DEFAULT_INACTIVE_COLOR = Color.GRAY;
+    protected final static int DEFAULT_ACTIVE_COLOR = Color.RED;
+    protected final static int DEFAULT_BG_COLOR =  Color.WHITE;
 
     protected final static float MIN_FRACTION = 0.0F;
     protected final static float MAX_FRACTION = 1.0F;
@@ -1202,7 +1202,8 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
                     (lastInterpolation * TITLE_ACTIVE_SCALE_BY) : titleScale;
 
             mIconPaint.setAlpha(MAX_ALPHA);
-            if (model.mSelectedIcon != null) mSelectedIconPaint.setAlpha(MAX_ALPHA);
+            if (model.mSelectedIcon != null)
+                mSelectedIconPaint.setAlpha(MAX_ALPHA);
 
             // Check if we handle models from touch on NTB or from ViewPager
             // There is a strange logic

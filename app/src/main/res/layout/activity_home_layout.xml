@@ -16,6 +16,9 @@
     <com.passion.widget.main.NavigationTabBar
         android:id="@+id/home_tab_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_bar_h"/>
+        android:layout_height="@dimen/tab_bar_h"
+        app:ntb_icon_size_fraction="1"
+        app:ntb_animation_duration="10"
+        app:ntb_scaled="false"/>
 
 </LinearLayout>

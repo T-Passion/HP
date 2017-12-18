@@ -72,6 +72,7 @@ public class HomeActivity extends AbstractBaseActivity implements NavigationTabB
 
         );
         mTabContainer.setModels(models);
+        mTabContainer.setModelIndex(0,true);
         mTabContainer.setOnTabBarSelectedIndexListener(this);
     }
 
