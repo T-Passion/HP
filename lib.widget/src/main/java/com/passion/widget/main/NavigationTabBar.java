@@ -49,8 +49,6 @@ import java.util.List;
 import java.util.Random;
 
 
-
-@SuppressWarnings({"unused", "DefaultFileTemplate"})
 public class NavigationTabBar extends View implements ViewPager.OnPageChangeListener {
 
     // NTB constants
@@ -68,12 +66,12 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
     protected final static int DEFAULT_BADGE_ANIMATION_DURATION = 200;
     protected final static int DEFAULT_BADGE_REFRESH_ANIMATION_DURATION = 100;
     protected final static int DEFAULT_ANIMATION_DURATION = 300;
-    protected final static float DEFAULT_ICON_SIZE_FRACTION = 0.5F;
+    protected final static float DEFAULT_ICON_SIZE_FRACTION = 1F;
     protected final static float DEFAULT_TITLE_ICON_SIZE_FRACTION = 0.5F;
 
     protected final static int DEFAULT_INACTIVE_COLOR = Color.parseColor("#9f90af");
     protected final static int DEFAULT_ACTIVE_COLOR = Color.WHITE;
-    protected final static int DEFAULT_BG_COLOR = Color.WHITE;
+    protected final static int DEFAULT_BG_COLOR =  Color.parseColor("#605271");
 
     protected final static float MIN_FRACTION = 0.0F;
     protected final static float MAX_FRACTION = 1.0F;
@@ -272,6 +270,8 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
 
     // Custom typeface
     protected Typeface mTypeface;
+    //是否允许切换动画
+    protected boolean mAllowAnim;
 
     public NavigationTabBar(final Context context) {
         this(context, null);
@@ -1832,7 +1832,8 @@ public class NavigationTabBar extends View implements ViewPager.OnPageChangeList
                 mColor = color;
 
                 if (icon != null) {
-                    if (icon instanceof BitmapDrawable) mIcon = ((BitmapDrawable) icon).getBitmap();
+                    if (icon instanceof BitmapDrawable)
+                        mIcon = ((BitmapDrawable) icon).getBitmap();
                     else {
                         mIcon = Bitmap.createBitmap(
                                 icon.getIntrinsicWidth(),
