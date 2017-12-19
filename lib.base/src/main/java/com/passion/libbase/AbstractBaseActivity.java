@@ -96,7 +96,7 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
 
 
     private void inflateUiBind() {
-        mContentLayoutId = getContentLayoutId();
+        mContentLayoutId = getLayoutId();
         mContentView = getLayoutInflater().inflate(mContentLayoutId, mContentLayout, true);
         mViewUnbind = ButterKnife.bind(this, mContentView);
     }
@@ -104,7 +104,7 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     /**
      * @return 获得当前页面的布局
      */
-    private int getContentLayoutId() {
+    private int getLayoutId() {
         int layoutId = AnnotationUtil.getLayoutId(this);
         if (layoutId != -1) {
             return layoutId;

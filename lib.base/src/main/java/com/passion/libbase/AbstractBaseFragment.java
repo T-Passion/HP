@@ -47,8 +47,16 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
     }
 
 
+    /**
+     * @return 获得当前页面的布局
+     */
     private int getLayoutId() {
-        return AnnotationUtil.getLayoutId(this);
+        int layoutId = AnnotationUtil.getLayoutId(this);
+        if (layoutId != -1) {
+            return layoutId;
+        } else {
+            throw new RuntimeException(getClass() + "当前页面没有给定布局资源");
+        }
     }
 
     /**
