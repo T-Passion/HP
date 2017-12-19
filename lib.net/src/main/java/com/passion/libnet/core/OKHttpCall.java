@@ -53,6 +53,7 @@ import okio.Buffer;
  */
 
 public class OKHttpCall<T> implements HttpCall<T> {
+
     private static final Call.Factory CALL_FACTORY = new OkHttpClient();
     private static final OKHttpGzipInterceptor OKHTTP_GZIP_INTERCEPTOR = new OKHttpGzipInterceptor();
     private Call rawCall;

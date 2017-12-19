@@ -13,13 +13,14 @@ import java.io.IOException;
  */
 
 public interface HttpCall<T>  {
+
     ResponseModel<T> execute() throws IOException;
 
-    void execute(Callback<T> var1);
+    void execute(Callback<T> callback);
 
-    ResponseModel download(File var1) throws IOException;
+    ResponseModel download(File file) throws IOException;
 
-    void download(File var1, FileCallback var2);
+    void download(File file, FileCallback fileCallback);
 
-    void cancel(Object var1);
+    void cancel(Object target);
 }

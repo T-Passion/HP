@@ -23,6 +23,8 @@ import java.util.regex.Pattern;
 public final class RequestModel<T> {
     public static final String MEDIA_TYPE_PLAIN = "text/plain";
     public static final String MEDIA_TYPE_JSON = "application/json";
+    public static final String REQUEST_POST = "post";
+    public static final String REQUEST_GET = "get";
     private static final Pattern PATTERN = Pattern.compile("//");
     public final String httpMethod;
     public final String url;
@@ -138,7 +140,11 @@ public final class RequestModel<T> {
     }
 
     public RequestModel.Builder newBuilder() {
-        return (RequestModel.Builder) ("GET".equals(this.httpMethod) ? new RequestModel.GetBuilder(this) : ("POST".equals(this.httpMethod) ? new RequestModel.PostBuilder(this) : new RequestModel.Builder(this)));
+        return REQUEST_GET.equals(this.httpMethod)
+                ? new GetBuilder(this)
+                : (REQUEST_POST.equals(this.httpMethod)
+                ? new PostBuilder(this)
+                : new Builder(this));
     }
 
     public static RequestModel.GetBuilder get(String url) {
@@ -151,11 +157,11 @@ public final class RequestModel<T> {
 
     public static final class PostBuilder extends RequestModel.Builder<RequestModel.PostBuilder> {
         public PostBuilder(String url) {
-            super("POST", url);
+            super(REQUEST_POST, url);
         }
 
         public PostBuilder(String baseUrl, String relativeUrl) {
-            super("POST", baseUrl, relativeUrl);
+            super(REQUEST_POST, baseUrl, relativeUrl);
         }
 
         public PostBuilder(RequestModel requestModel) {
@@ -189,11 +195,11 @@ public final class RequestModel<T> {
 
     public static final class GetBuilder extends RequestModel.Builder<RequestModel.GetBuilder> {
         public GetBuilder(String url) {
-            super("GET", url);
+            super(REQUEST_GET, url);
         }
 
         public GetBuilder(String baseUrl, String relativeUrl) {
-            super("GET", baseUrl, relativeUrl);
+            super(REQUEST_GET, baseUrl, relativeUrl);
         }
 
         public GetBuilder(RequestModel requestModel) {
@@ -402,9 +408,9 @@ public final class RequestModel<T> {
                         this.url = this.baseUrl + this.relativeUrl;
                         Matcher matcher = RequestModel.PATTERN.matcher(this.url);
                         if (matcher.find(8)) {
-                            StringBuilder stringBuffer = new StringBuilder(this.url);
-                            stringBuffer.replace(matcher.start(), matcher.end(), "/");
-                            this.url = stringBuffer.toString();
+                            StringBuilder stringBuilder = new StringBuilder(this.url);
+                            stringBuilder.replace(matcher.start(), matcher.end(), "/");
+                            this.url = stringBuilder.toString();
                         }
                     }
                 }
