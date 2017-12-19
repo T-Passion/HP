@@ -2,6 +2,7 @@ package com.passion.libbase.di;
 
 
 import com.passion.libbase.AbstractBaseActivity;
+import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.HPApplication;
 
 import dagger.Subcomponent;
@@ -17,5 +18,7 @@ public interface BaseComponent {
     void inject(HPApplication HPApplication);
 
     void inject(AbstractBaseActivity abstractBaseActivity);
+
+    void inject(AbstractBaseFragment abstractBaseFragment);
 
 }

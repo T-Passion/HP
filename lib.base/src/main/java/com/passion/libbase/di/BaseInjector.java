@@ -2,6 +2,7 @@ package com.passion.libbase.di;
 
 
 import com.passion.libbase.AbstractBaseActivity;
+import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.HPApplication;
 import com.passion.libbase.di.imp.IInjector;
 import com.passion.libbase.utils.LogUtil;
@@ -44,6 +45,8 @@ public class BaseInjector implements IInjector {
             sBaseComponent.inject((HPApplication) target);
         } else if(tClass == AbstractBaseActivity.class){
             sBaseComponent.inject((AbstractBaseActivity) target);
+        } else if(tClass == AbstractBaseFragment.class){
+            sBaseComponent.inject((AbstractBaseFragment) target);
         } else{
             return false;
         }
