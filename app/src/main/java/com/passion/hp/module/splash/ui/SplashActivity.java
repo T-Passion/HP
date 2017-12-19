@@ -56,7 +56,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override
             public void onEnd() {
-                HPRouter.navigate(RouterPath.HOME_ACTIVITY);
+                HPRouter.navigate(RouterPath.MAIN_ACTIVITY);
                 finish();
             }
         }).start();

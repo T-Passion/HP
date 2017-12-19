@@ -1,4 +1,4 @@
-package com.passion.hp.module.home;
+package com.passion.hp.module.main;
 
 
 import android.view.View;
@@ -17,9 +17,9 @@ import java.util.List;
 
 import butterknife.BindView;
 
-@LayoutId(R.layout.activity_home_layout)
-@Route(path = RouterPath.HOME_ACTIVITY)
-public class HomeActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener {
+@LayoutId(R.layout.activity_main_layout)
+@Route(path = RouterPath.MAIN_ACTIVITY)
+public class MainActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener {
 
 
     @BindView(R.id.home_content_container)
@@ -45,7 +45,7 @@ public class HomeActivity extends AbstractBaseActivity implements NavigationTabB
         setTitleBarRight(null, R.drawable.search_btn_board_day, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toaster.showToast(HomeActivity.this,"搜索");
+                Toaster.showToast(MainActivity.this,"搜索");
             }
         });
     }

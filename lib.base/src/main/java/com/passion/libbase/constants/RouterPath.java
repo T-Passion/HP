@@ -14,5 +14,5 @@ public final class RouterPath {
     /**
      * 首页
      */
-    public static final String HOME_ACTIVITY = "/app/HomeActivity";
+    public static final String MAIN_ACTIVITY = "/app/MainActivity";
 }
