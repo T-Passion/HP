@@ -165,18 +165,18 @@ public class WidActionTitleBar extends RelativeLayout implements ViewInterface {
     }
 
     /**
-     * @param title
-     * @param titleIcon
-     * @param rightListener
+     * @param title 标题
+     * @param rightIcon 右侧图标
+     * @param rightListener 右侧事件
      */
-    public void setTitleBarRight(String title, Integer titleIcon, OnClickListener rightListener) {
+    public void setTitleBarRight(String title, Integer rightIcon, OnClickListener rightListener) {
         mTitleBarRightTxt.setVisibility(TextUtils.isEmpty(title) ? GONE : VISIBLE);
         if (!TextUtils.isEmpty(title)) {
             mTitleBarRightTxt.setText(title);
         }
-        mTitleBarRightIcon.setVisibility(titleIcon == null ? GONE : VISIBLE);
-        if (titleIcon != null) {
-            mTitleBarRightIcon.setImageResource(titleIcon);
+        mTitleBarRightIcon.setVisibility(rightIcon == null ? GONE : VISIBLE);
+        if (rightIcon != null) {
+            mTitleBarRightIcon.setImageResource(rightIcon);
         }
         if (rightListener != null) {
             mTitleBarRightLay.setOnClickListener(rightListener);
@@ -193,6 +193,10 @@ public class WidActionTitleBar extends RelativeLayout implements ViewInterface {
 
     public void setTitleRightListener(OnClickListener rightListener) {
         mTitleBarRightLay.setOnClickListener(rightListener);
+    }
+
+    private void setActionBar(){
+
     }
 
 }

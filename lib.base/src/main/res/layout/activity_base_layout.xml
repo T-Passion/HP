@@ -5,13 +5,15 @@
     android:id="@+id/rootContentView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <!--ui title view-->
     <com.passion.widget.main.WidActionTitleBar
         android:id="@+id/actionTitleBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_title_bar_height" />
+        android:layout_height="@dimen/app_title_bar_height"
+        />
 
 
 

@@ -9,6 +9,7 @@ import com.passion.hp.R;
 import com.passion.libbase.AbstractBaseActivity;
 import com.passion.libbase.constants.RouterPath;
 import com.passion.libbase.imp.LayoutId;
+import com.passion.libutils.Toaster;
 import com.passion.widget.main.NavigationTabBar;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class HomeActivity extends AbstractBaseActivity implements NavigationTabB
     @Override
     protected void initVars(View view) {
         initTabBars();
-        setTitleBar(null, R.drawable.icon_title_bar);
+        initTitleBar();
 
 
     }
@@ -37,6 +38,16 @@ public class HomeActivity extends AbstractBaseActivity implements NavigationTabB
     @Override
     protected void loadInitDta() {
 
+    }
+
+    private void initTitleBar(){
+        setTitleBar(null, R.drawable.icon_title_bar);
+        setTitleBarRight(null, R.drawable.search_btn_board_day, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toaster.showToast(HomeActivity.this,"搜索");
+            }
+        });
     }
 
     private void initTabBars() {

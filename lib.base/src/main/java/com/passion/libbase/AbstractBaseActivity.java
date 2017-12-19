@@ -1,6 +1,5 @@
 package com.passion.libbase;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -161,15 +160,6 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     }
 
     /**
-     * @param titleId      标题资源id
-     * @param titleIcon    标题图片
-     * @param leftListener 监听器
-     */
-    public void setTitleBarLeft(int titleId, Integer titleIcon, View.OnClickListener leftListener) {
-        this.setTitleBarLeft(getString(titleId), titleIcon, leftListener);
-    }
-
-    /**
      * @param title        标题
      * @param titleIcon    标题图片
      * @param leftListener 监听器
@@ -179,36 +169,24 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     }
 
     /**
-     * @param titleId       标题资源id
-     * @param titleIcon     标题图片
+     * @param rightTxt         标题
+     * @param rightIcon     标题图片
      * @param rightListener 监听器
      */
-    public void setTitleBarRight(int titleId, Integer titleIcon, View.OnClickListener rightListener) {
-        this.setTitleBarRight(getString(titleId), titleIcon, rightListener);
+    public void setTitleBarRight(String rightTxt, Integer rightIcon, View.OnClickListener rightListener) {
+        mActionTitleBar.setTitleBarRight(rightTxt, rightIcon, rightListener);
     }
 
-    /**
-     * @param title         标题
-     * @param titleIcon     标题图片
-     * @param rightListener 监听器
-     */
-    public void setTitleBarRight(String title, Integer titleIcon, View.OnClickListener rightListener) {
-        mActionTitleBar.setTitleBarRight(title, titleIcon, rightListener);
+    private void setActionTitleBar(String leftTxt, Integer leftDrawableId, View.OnClickListener leftListener,
+                                   String title, Integer titleDrawableId,
+                                   String rightTxt, Integer rightDrawableId, View.OnClickListener rightListener){
+        this.setTitleBarLeft(leftTxt,leftDrawableId,leftListener);
+        this.setTitleBar(title,titleDrawableId);
+        this.setTitleBarRight(rightTxt,rightDrawableId,rightListener);
     }
 
-    /**
-     * @param leftListener 监听器
-     */
-    public void setTitleLeftListener(View.OnClickListener leftListener) {
-        mActionTitleBar.setOnClickListener(leftListener);
-    }
 
-    /**
-     * @param rightListener 监听器
-     */
-    public void setTitleRightListener(View.OnClickListener rightListener) {
-        mActionTitleBar.setOnClickListener(rightListener);
-    }
+
 
     /**
      * 是否展示空页面
@@ -299,8 +277,6 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
-            getWindow().setNavigationBarColor(Color.TRANSPARENT);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
 
