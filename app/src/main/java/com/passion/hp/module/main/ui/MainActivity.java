@@ -1,4 +1,4 @@
-package com.passion.hp.module.main;
+package com.passion.hp.module.main.ui;
 
 
 import android.view.View;
@@ -6,9 +6,13 @@ import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.passion.hp.R;
+import com.passion.hp.module.main.contract.MainContract;
+import com.passion.hp.module.main.model.MainModel;
+import com.passion.hp.module.main.presenter.MainPresenter;
 import com.passion.libbase.AbstractBaseActivity;
 import com.passion.libbase.constants.RouterPath;
 import com.passion.libbase.imp.LayoutId;
+import com.passion.libbase.utils.LogUtil;
 import com.passion.libutils.Toaster;
 import com.passion.widget.main.NavigationTabBar;
 
@@ -19,24 +23,31 @@ import butterknife.BindView;
 
 @LayoutId(R.layout.activity_main_layout)
 @Route(path = RouterPath.MAIN_ACTIVITY)
-public class MainActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener {
+public class MainActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener ,MainContract.View{
 
 
-    @BindView(R.id.home_content_container)
+    @BindView(R.id.main_content_container)
     FrameLayout mContentContainer;
-    @BindView(R.id.home_tab_container)
+    @BindView(R.id.main_tab_container)
     NavigationTabBar mTabContainer;
+
+    MainContract.Model mModel;
+    MainContract.Presenter mPresenter;
 
     @Override
     protected void initVars(View view) {
         initTabBars();
         initTitleBar();
 
+        mModel = new MainModel();
+        mPresenter = new MainPresenter(this,mModel);
 
     }
 
     @Override
     protected void loadInitDta() {
+        //请求接口获得
+        mModel.loadStatusInit();
 
     }
 
@@ -89,11 +100,11 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
 
     @Override
     public void onStartTabSelected(NavigationTabBar.Model model, int index) {
-
+        LogUtil.i("tab onStartTab :"+ index);
     }
 
     @Override
     public void onEndTabSelected(NavigationTabBar.Model model, int index) {
-
+        LogUtil.i("tab onEndTab :"+ index);
     }
 }
