@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import com.passion.libbase.mvp.IBaseView;
 import com.passion.libbase.utils.AnnotationUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -21,6 +25,8 @@ import butterknife.Unbinder;
 
 public abstract class AbstractBaseFragment extends Fragment implements IBaseView {
 
+    @Inject
+    public EventBus mEventBus;
 
     private Unbinder mUnBinder;
 
@@ -45,10 +51,21 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
         return AnnotationUtil.getLayoutId(this);
     }
 
+    /**
+     * <p>在onCreate()之后</p>
+     */
     public abstract void initVars();
-
+    /**
+     * <p>onCreateView(),完成butterKnife bind之后</p>
+     */
     public abstract void loadInitDta(View view);
 
+    /**
+     * 注册事件
+     */
+    public void registerBus() {
+        mEventBus.register(this);
+    }
 
     @Override
     public void onDestroyView() {
@@ -56,6 +73,9 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
         if (mUnBinder != null) {
             mUnBinder.unbind();
             mUnBinder = null;
+        }
+        if (mEventBus != null && mEventBus.isRegistered(this)) {
+            mEventBus.unregister(this);
         }
     }
 

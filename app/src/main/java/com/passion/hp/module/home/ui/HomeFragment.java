@@ -1,5 +1,7 @@
 package com.passion.hp.module.home.ui;
 
+import android.view.View;
+
 import com.passion.hp.module.home.contract.HomeContract;
 import com.passion.libbase.AbstractBaseFragment;
 
@@ -12,6 +14,13 @@ import com.passion.libbase.AbstractBaseFragment;
 public class HomeFragment extends AbstractBaseFragment implements HomeContract.View {
 
 
+    @Override
+    public void initVars() {
 
+    }
 
+    @Override
+    public void loadInitDta(View view) {
+
+    }
 }
