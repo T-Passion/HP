@@ -32,6 +32,14 @@ import butterknife.OnClick;
 public class SplashActivity extends AbstractBaseActivity implements SplashContract.View {
 
 
+
+
+
+
+
+
+
+
     @BindView(R.id.splashAdImg)
     ImageView mSplashAdImg;
     @BindView(R.id.splashLogo)
