@@ -8,7 +8,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
     }
 }
 android {
@@ -25,7 +24,7 @@ android {
         testInstrumentationRunner rootProject.ext.dependencies["AndroidJUnitRunner"]
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
     }
@@ -51,16 +50,16 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile(name:'QuSdk-RC',ext:'aar')
+
 
     testCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile rootProject.ext.dependencies["junit"]
-    androidTestCompile ('com.android.support.test:runner:0.4.1', {
+    androidTestCompile('com.android.support.test:runner:0.4.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile ('com.android.support.test:rules:0.4.1', {
+    androidTestCompile('com.android.support.test:rules:0.4.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile rootProject.ext.dependencies["multidex"]
