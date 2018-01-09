@@ -32,14 +32,6 @@ import butterknife.OnClick;
 public class SplashActivity extends AbstractBaseActivity implements SplashContract.View {
 
 
-
-
-
-
-
-
-
-
     @BindView(R.id.splashAdImg)
     ImageView mSplashAdImg;
     @BindView(R.id.splashLogo)
@@ -64,7 +56,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override
             public void onEnd() {
-                HPRouter.navigate(RouterPath.MAIN_ACTIVITY);
+                HPRouter.navigate(RouterPath.QU_PAI_ACTIVITY);
                 finish();
             }
         }).start();

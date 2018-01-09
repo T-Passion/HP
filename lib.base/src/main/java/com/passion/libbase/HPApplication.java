@@ -1,6 +1,8 @@
 package com.passion.libbase;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 /**
  * Created by chaos
@@ -12,6 +14,12 @@ import android.app.Application;
 public class HPApplication extends Application {
 
     private Configuration mConfiguration;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

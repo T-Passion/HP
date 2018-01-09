@@ -25,6 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.main.ui.MainActivity" />
+        <activity android:name=".module.qupai.QuPaiActivity" />
+        <activity android:name=".module.qupai.RecordActivity" />
 
 
         <!--友盟统计-->
