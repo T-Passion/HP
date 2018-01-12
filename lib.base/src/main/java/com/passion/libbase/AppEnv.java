@@ -8,13 +8,13 @@ package com.passion.libbase;
 
 public final class AppEnv {
 
-    private static HPApplication sAppContext;
+    private static final String sApiSecret = "dhMda9daJiw5qe1oa3sah9de2";
     private static String sBuildType;
+    private static HPApplication sAppContext;
 
     private static String NET_HOST = "https://games.mobileapi.hupu.com/1/7.1.13";
     private static String NET_HOST_DEBUG = "https://games.mobileapi.hupu.com/1/7.1.13";
     private static String NET_HOST_RELEASE = "https://games.mobileapi.hupu.com/1/7.1.13";
-    private static String sApiSecret = "dhMda9daJiw5qe1oa3sah9de2";
 
 
     private AppEnv() {

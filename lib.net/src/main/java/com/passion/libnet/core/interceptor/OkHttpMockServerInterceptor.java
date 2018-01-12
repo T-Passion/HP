@@ -26,6 +26,6 @@ public class OkHttpMockServerInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         Response response = this.dispatcher.dispatch(request);
-        return response != null?response:chain.proceed(request);
+        return response != null ? response : chain.proceed(request);
     }
 }

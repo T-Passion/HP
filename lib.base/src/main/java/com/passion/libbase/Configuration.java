@@ -1,10 +1,9 @@
 package com.passion.libbase;
 
+import com.passion.libbase.net.HPNetConfig;
 import com.passion.libbase.router.HPRouter;
 import com.passion.libbase.utils.HPInjectUtil;
 import com.passion.libbase.utils.LogUtil;
-import com.passion.libnet.core.NetConfig;
-import com.passion.libnet.core.convert.GsonConverter;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
@@ -19,14 +18,14 @@ public final class Configuration {
     private static HPApplication mAppContext;
     private String mBuildType;
 
-    Configuration(Builder builder){
+    Configuration(Builder builder) {
         this.mAppContext = builder.mApp;
         this.mBuildType = builder.mBuildType;
-        AppEnv.init(mAppContext,mBuildType);
+        AppEnv.init(mAppContext, mBuildType);
     }
 
-    public static HPApplication getAppContext(){
-        if(mAppContext == null){
+    public static HPApplication getAppContext() {
+        if (mAppContext == null) {
             throw new RuntimeException("请先在Application中进行初始化");
         }
         return mAppContext;
@@ -52,38 +51,30 @@ public final class Configuration {
         LogUtil.init(mAppContext.getPackageName(), BuildConfig.DEBUG);
         return this;
     }
+
     Configuration withNet() {
-        NetConfig netConfig = new NetConfig.Builder()
-                .setAppSecret("")
-                .setCookieEnable(true)
-                .setCookieJar(null)
-                .setDebugMode(true)
-                .setJsonConverter(new GsonConverter())
-                .trustAllCerts(true)
-                .build();
-
-
+        HPNetConfig.initNetWork(mAppContext);
         return this;
     }
 
-    public static class Builder{
+    public static class Builder {
         HPApplication mApp;
         String mBuildType;
 
         public Builder() {
         }
 
-        Builder app(HPApplication app){
+        Builder app(HPApplication app) {
             this.mApp = app;
             return this;
         }
 
-        Builder buildType(String buildType){
+        Builder buildType(String buildType) {
             this.mBuildType = buildType;
             return this;
         }
 
-        Configuration build(){
+        Configuration build() {
             return new Configuration(this);
         }
     }

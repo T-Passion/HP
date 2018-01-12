@@ -4,6 +4,7 @@ package com.passion.hp.module.splash.contract;
 import com.passion.libbase.mvp.IBaseModel;
 import com.passion.libbase.mvp.IBasePresenter;
 import com.passion.libbase.mvp.IBaseView;
+import com.passion.libnet.core.imp.NetCallback;
 
 /**
  * Created by huangdou
@@ -18,7 +19,7 @@ public interface SplashContract {
      */
     interface Model extends IBaseModel {
 
-        String getSplashRandomRes();
+        void getSplashRandomRes(NetCallback netCallback);
 
     }
 

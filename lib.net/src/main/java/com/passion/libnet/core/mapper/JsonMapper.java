@@ -8,11 +8,6 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.internal.Streams;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.passion.libnet.core.utils.ByteDefaultAdapter;
-import com.passion.libnet.core.utils.DoubleDefaultAdapter;
-import com.passion.libnet.core.utils.IntegerDefaultAdapter;
-import com.passion.libnet.core.utils.ListParameterizedType;
-import com.passion.libnet.core.utils.LongDefaultAdapter;
 import com.passion.libnet.core.utils.ShortDefaultAdapter;
 
 import java.io.IOException;

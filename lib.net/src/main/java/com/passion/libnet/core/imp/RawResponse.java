@@ -12,6 +12,8 @@ import java.util.Map;
  */
 
 public interface RawResponse {
+
+
     int code();
 
     String message();

@@ -1,8 +1,17 @@
 package com.passion.libnet.core;
 
+import android.content.Context;
+
 import com.passion.libnet.core.convert.Converter;
 import com.passion.libnet.core.cookie.NetCookieJar;
-import com.passion.libnet.core.request.RequestInterceptor;
+import com.passion.libnet.core.imp.ApiService;
+import com.passion.libnet.core.imp.INetWorker;
+import com.passion.libnet.core.imp.RequestInterceptor;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import okhttp3.Dns;
 
 /**
  * Created by chaos
@@ -11,61 +20,116 @@ import com.passion.libnet.core.request.RequestInterceptor;
  */
 
 public final class NetConfig {
-    public final boolean debugMode;
-    public final boolean enableCookie;
-    public final boolean enableDefaultSign;
-    public final boolean trustAllCerts;
-    public final int dnsMode;
-    public final String baseUrl;
-    public final String appSecret;
-    public final RequestInterceptor[] requestInterceptors;
-    public final Converter jsonConverter;
-    public final NetCookieJar cookieJar;
+    private final Context appContext;
+    private final boolean debugMode;
+    private final boolean enableCookie;
+    private final boolean enableDefaultSign;
+    private final boolean trustAllCerts;
+    private final int dnsMode;
+    private final Dns dns;
+    private final String hostUrl;
+    private final String appSecret;
+    private final RequestInterceptor[] requestInterceptors;
+    private final Converter jsonConverter;
+    private final NetCookieJar cookieJar;
+    public Map<String, INetWorker> networkMap = new LinkedHashMap<>();
+    private final ApiService apiService;
 
     private NetConfig(NetConfig.Builder builder) {
         this.debugMode = builder.mDebugMode;
+        this.appContext = builder.appContext;
         this.enableCookie = builder.mEnableCookie;
         this.enableDefaultSign = builder.mEnableDefaultSign;
         this.trustAllCerts = builder.trustAllCerts;
         this.dnsMode = builder.dnsMode;
-        this.baseUrl = builder.baseUrl;
+        this.dns = builder.dns;
+        this.hostUrl = builder.hostUrl;
         this.appSecret = builder.mAppSecret;
         this.requestInterceptors = builder.mRequestInterceptors;
         this.jsonConverter = builder.mJsonConverter;
         this.cookieJar = builder.cookieJar;
+        this.apiService = builder.apiService;
     }
 
-    NetConfig.Builder newBuilder() {
-        NetConfig.Builder builder = new NetConfig.Builder();
-        builder.mDebugMode = this.debugMode;
-        builder.mEnableCookie = this.enableCookie;
-        builder.mEnableDefaultSign = this.enableDefaultSign;
-        builder.trustAllCerts = this.trustAllCerts;
-        builder.dnsMode = this.dnsMode;
-        builder.mAppSecret = this.appSecret;
-        builder.mRequestInterceptors = this.requestInterceptors;
-        builder.mJsonConverter = this.jsonConverter;
-        builder.cookieJar = this.cookieJar;
-        return builder;
+    public Context getAppContext() {
+        return appContext;
     }
 
-    public static NetConfig.Builder builder() {
-        return new NetConfig.Builder();
+    public ApiService getApiService() {
+        return apiService;
+    }
+
+    public boolean isDebugMode() {
+        return debugMode;
+    }
+
+    public boolean isEnableCookie() {
+        return enableCookie;
+    }
+
+    public boolean isEnableDefaultSign() {
+        return enableDefaultSign;
+    }
+
+    public boolean isTrustAllCerts() {
+        return trustAllCerts;
+    }
+
+    public int getDnsMode() {
+        return dnsMode;
+    }
+
+    public Dns getDns() {
+        return dns;
+    }
+
+    public String getHostUrl() {
+        return hostUrl;
+    }
+
+    public String getAppSecret() {
+        return appSecret;
+    }
+
+    public RequestInterceptor[] getRequestInterceptors() {
+        return requestInterceptors;
+    }
+
+    public Converter getJsonConverter() {
+        return jsonConverter;
+    }
+
+    public NetCookieJar getCookieJar() {
+        return cookieJar;
+    }
+
+    public Map<String, INetWorker> getNetworkMap() {
+        return networkMap;
     }
 
     public static class Builder {
+        private Context appContext;
         private boolean mDebugMode;
         private boolean mEnableCookie;
         private boolean mEnableDefaultSign = true;
         private int dnsMode;
-        private String baseUrl;
+        private Dns dns;
+        private String hostUrl;
         private String mAppSecret;
         private RequestInterceptor[] mRequestInterceptors;
         private Converter mJsonConverter;
         private NetCookieJar cookieJar;
         private boolean trustAllCerts;
+        private Map<String, INetWorker> networkMap = new LinkedHashMap<>();
+        private ApiService apiService;
+
 
         public Builder() {
+        }
+
+        public NetConfig.Builder setAppContext(Context appContext) {
+            this.appContext = appContext;
+            return this;
         }
 
         public NetConfig.Builder setDebugMode(boolean debugMode) {
@@ -98,13 +162,18 @@ public final class NetConfig {
             return this;
         }
 
-        public NetConfig.Builder setBaseUrl(String  baseUrl) {
-            this.baseUrl = baseUrl;
+        public NetConfig.Builder setDns(Dns dns) {
+            this.dns = dns;
+            return this;
+        }
+
+        public NetConfig.Builder setHostUrl(String hostUrl) {
+            this.hostUrl = hostUrl;
             return this;
         }
 
 
-        public NetConfig.Builder setRequestInterceptors(RequestInterceptor... requestInterceptors) {
+        public NetConfig.Builder setRequestInterceptors(RequestInterceptor[] requestInterceptors) {
             this.mRequestInterceptors = requestInterceptors;
             return this;
         }
@@ -118,6 +187,20 @@ public final class NetConfig {
             this.cookieJar = cookieJar;
             return this;
         }
+
+        public NetConfig.Builder setApiService(ApiService apiService) {
+            this.apiService = apiService;
+            return this;
+        }
+
+        public NetConfig.Builder addNetWorker(String tag, INetWorker worker) {
+            if (networkMap.containsKey(tag)) {
+                return this;
+            }
+            networkMap.put(tag, worker);
+            return this;
+        }
+
 
         public NetConfig build() {
             return new NetConfig(this);

@@ -10,7 +10,7 @@ import okhttp3.Response;
  * on 2017/11/16. 17:24
  * 文件描述：
  */
-
+@Deprecated
 public interface Dispatcher {
 
     Response dispatch(Request var1) throws IOException;

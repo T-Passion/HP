@@ -28,7 +28,15 @@ public class OKHttpLogInterceptor implements Interceptor {
     private static final String TAG = "Network";
     private static final Charset UTF8 = Charset.forName("UTF-8");
 
-    public OKHttpLogInterceptor() {
+    private OKHttpLogInterceptor() {
+    }
+
+    private static final class Holder{
+        static final OKHttpLogInterceptor LOG_INTERCEPTOR = new OKHttpLogInterceptor();
+    }
+
+    public static OKHttpLogInterceptor get(){
+        return Holder.LOG_INTERCEPTOR;
     }
 
     public Response intercept(Interceptor.Chain chain) throws IOException {

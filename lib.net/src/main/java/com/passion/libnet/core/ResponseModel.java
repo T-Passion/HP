@@ -16,7 +16,7 @@ public class ResponseModel<T> {
     private final RawResponse rawResponse;
 
     private ResponseModel(T data, RawResponse rawResponse) {
-        if(rawResponse == null) {
+        if (rawResponse == null) {
             throw new NullPointerException("rawResponse == null");
         } else {
             this.data = data;
@@ -24,19 +24,19 @@ public class ResponseModel<T> {
         }
     }
 
-    static <T> ResponseModel success(T data, RawResponse rawResponse) {
+    public static <T> ResponseModel success(T data, RawResponse rawResponse) {
         return new ResponseModel(data, rawResponse);
     }
 
-    static <T> ResponseModel<T> success(RawResponse rawResponse) {
-        return new ResponseModel((Object)null, rawResponse);
+    public static ResponseModel success(RawResponse rawResponse) {
+        return new ResponseModel(null, rawResponse);
     }
 
-    static <T> ResponseModel<T> error(RawResponse rawResponse) {
-        if(rawResponse != null && rawResponse.isSuccessful()) {
+    public static <T> ResponseModel error(RawResponse rawResponse) {
+        if (rawResponse != null && rawResponse.isSuccessful()) {
             throw new IllegalArgumentException("rawResponse should not be successful data when calling error.");
         } else {
-            return new ResponseModel((Object)null, rawResponse);
+            return new ResponseModel(null, rawResponse);
         }
     }
 

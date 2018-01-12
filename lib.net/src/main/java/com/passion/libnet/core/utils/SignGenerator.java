@@ -2,6 +2,8 @@ package com.passion.libnet.core.utils;
 
 import android.text.TextUtils;
 
+import com.passion.libnet.core.exception.SignException;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

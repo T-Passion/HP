@@ -2,37 +2,36 @@ package com.passion.libnet.core.exception;
 
 /**
  * Created by chaos
- * on 2017/11/16. 14:00
+ * on 2018/1/12. 12:27
  * 文件描述：
  */
 
-public class NetException extends Exception{
+public class BizApiException extends Exception{
 
-    public final ErrorResponse mErrorResponse;
 
-    public NetException() {
+    final ErrorResponse mErrorResponse;
+
+    public BizApiException() {
         this.mErrorResponse = null;
     }
 
-    public NetException(String message, Throwable cause) {
+    public BizApiException(String message, Throwable cause) {
         super(message, cause);
         this.mErrorResponse = null;
     }
 
-    public NetException(String message) {
+    public BizApiException(String message) {
         super(message);
         this.mErrorResponse = null;
     }
 
-    public NetException(Throwable cause) {
+    public BizApiException(Throwable cause) {
         super(cause);
         this.mErrorResponse = null;
     }
 
-    public NetException(String message, Throwable cause, ErrorResponse errorResponse) {
+    public BizApiException(String message, Throwable cause, ErrorResponse errorResponse) {
         super(message, cause);
         this.mErrorResponse = errorResponse;
     }
-
-
 }

@@ -31,11 +31,11 @@ public class HttpMock {
             return null;
         } else {
             String url = httpUrl.toString();
-            MockResponse mockResponse = (MockResponse)MOCK_MAP.get(url);
+            MockResponse mockResponse = MOCK_MAP.get(url);
             if(mockResponse == null) {
                 int pathStart = url.indexOf(47, httpUrl.scheme().length() + 3);
                 String path = url.substring(pathStart);
-                mockResponse = (MockResponse)MOCK_MAP.get(path);
+                mockResponse = MOCK_MAP.get(path);
             }
 
             return mockResponse;

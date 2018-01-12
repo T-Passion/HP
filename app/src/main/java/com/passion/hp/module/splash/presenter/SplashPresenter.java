@@ -2,7 +2,10 @@ package com.passion.hp.module.splash.presenter;
 
 
 import com.passion.hp.module.splash.contract.SplashContract;
+import com.passion.hp.module.splash.model.entity.SplashVo;
 import com.passion.libbase.mvp.BasePresenter;
+import com.passion.libnet.api.HPRestCallback;
+import com.passion.libnet.core.exception.ErrorBody;
 
 /**
  * Created by huangdou
@@ -23,7 +26,20 @@ public class SplashPresenter extends BasePresenter<SplashContract.Model, SplashC
 
     @Override
     public void fetchSplashRes() {
-        String imageUrl = mModel.getSplashRandomRes();
-        mView.updateContent(imageUrl);
+        mView.showNetLoading();
+        mModel.getSplashRandomRes(new HPRestCallback<SplashVo>() {
+            @Override
+            public void onSuccess(SplashVo result) {
+                mView.closeLoading();
+                mView.updateContent(result.getUrl());
+            }
+
+            @Override
+            public void onFailure(ErrorBody errorBody) {
+                mView.closeLoading();
+
+            }
+        });
+
     }
 }

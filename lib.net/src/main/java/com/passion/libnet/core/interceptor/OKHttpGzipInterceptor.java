@@ -12,7 +12,17 @@ import okhttp3.Response;
  */
 
 public class OKHttpGzipInterceptor implements Interceptor {
-    public OKHttpGzipInterceptor() {
+
+
+    private OKHttpGzipInterceptor() {
+    }
+
+    public static final class Holder{
+        static final OKHttpGzipInterceptor GZIP_INTERCEPTOR = new OKHttpGzipInterceptor();
+    }
+
+    public static OKHttpGzipInterceptor get(){
+        return Holder.GZIP_INTERCEPTOR;
     }
 
     @Override

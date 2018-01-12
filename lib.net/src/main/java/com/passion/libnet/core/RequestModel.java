@@ -1,99 +1,99 @@
 package com.passion.libnet.core;
 
+import com.orhanobut.logger.Logger;
 import com.passion.libnet.core.convert.Converter;
-import com.passion.libnet.core.utils.Part;
+import com.passion.libnet.core.exception.BizApiException;
+import com.passion.libnet.core.request.RequestVar;
+import com.passion.libnet.core.utils.StringUtil;
 
-import java.io.File;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by chaos
  * on 2017/11/15. 15:40
- * 文件描述：
+ * 文件描述：包含了请求接口的所有必要业务信息
  */
 
-public final class RequestModel<T> {
-    public static final String MEDIA_TYPE_PLAIN = "text/plain";
-    public static final String MEDIA_TYPE_JSON = "application/json";
-    public static final String REQUEST_POST = "post";
-    public static final String REQUEST_GET = "get";
-    private static final Pattern PATTERN = Pattern.compile("//");
-    public final String httpMethod;
-    public final String url;
-    public final Boolean postBody;
-    public final String postContent;
-    public final String mediaType;
-    public final long connectTimeoutMillis;
-    public final long readTimeoutMillis;
-    public final long writeTimeoutMillis;
-    public final Type responseType;
-    public final Object tag;
-    public final Converter converter;
-    public final Map<String, String> urlParams;
-    public final Map<String, Object> params;
-    public final Map<String, String> headers;
-    public final List<Part> parts;
-    public final boolean gzipEncoding;
+public final class RequestModel {
+
+    private final long connectTimeoutMillis;
+    private final long readTimeoutMillis;
+    private final long writeTimeoutMillis;
+    private final boolean gzipEncoding;
+
+    private final String mediaType;
+    private final String postContent;
+    private final Type responseType;
+
+    private final String fullUrl;
+    private final String pathUrl;
+    private final String requestMethod;
+    private final Map<String, String> headers;
+    private final Map<String, String> urlParams;
+    private final Map<String, Object> bodyParams;
+    private String urlVersion = RequestVar.VERSION_V1;
+
+    private final Converter converter;
     private boolean isMultiPart;
-    private boolean signable;
+
 
     public RequestModel(RequestModel.Builder builder) {
-        this.httpMethod = builder.httpMethod;
-        this.url = builder.url;
-        this.postBody = builder.postBody;
+        this.requestMethod = builder.requestMethod;
+        this.fullUrl = builder.fullUrl;
+        this.pathUrl = builder.pathUrl;
         this.postContent = builder.postContent;
         this.mediaType = builder.mediaType;
         this.connectTimeoutMillis = builder.connectTimeoutMillis;
         this.readTimeoutMillis = builder.readTimeoutMillis;
         this.writeTimeoutMillis = builder.writeTimeoutMillis;
         this.responseType = builder.responseType;
-        this.tag = builder.tag;
         this.converter = builder.converter;
         this.urlParams = builder.urlParams;
-        this.params = builder.params;
-        this.parts = builder.parts;
+        this.urlVersion = builder.pathVersion;
+        this.bodyParams = builder.bodyParams;
         this.headers = builder.headers;
-        this.signable = builder.signable;
         this.gzipEncoding = builder.gzipEncoding;
     }
 
     public String url() {
-        return this.url;
+        return this.fullUrl;
     }
 
     public String method() {
-        return this.httpMethod;
+        return this.requestMethod;
     }
 
-    public boolean isSignable() {
-        return this.signable;
+    public String getPathUrl() {
+        return pathUrl;
+    }
+
+    public String getRequestMethod() {
+        return requestMethod;
     }
 
     public Map<String, String> headers() {
-        return this.headers == null ? null : Collections.unmodifiableMap(this.headers);
+        return this.headers == null ? new HashMap<String, String>() : Collections.unmodifiableMap(this.headers);
     }
 
     public Map<String, String> getUrlParameters() {
-        return this.urlParams == null ? null : Collections.unmodifiableMap(this.urlParams);
+        return this.urlParams == null ? new HashMap<String, String>()  : Collections.unmodifiableMap(this.urlParams);
+    }
+
+    public Type getResponseType() {
+        return responseType;
     }
 
     public Map<String, String> getParameters() {
-        if (this.params == null) {
+        if (this.bodyParams == null) {
             return null;
         } else {
             Map<String, String> formMap = new HashMap();
-            Iterator var2 = this.params.entrySet().iterator();
 
-            while (var2.hasNext()) {
-                Map.Entry<String, Object> entry = (Map.Entry) var2.next();
+            for (Object o : this.bodyParams.entrySet()) {
+                Map.Entry<String, Object> entry = (Map.Entry) o;
                 String value = entry.getValue() instanceof String ? (String) entry.getValue() : String.valueOf(entry.getValue());
                 formMap.put(entry.getKey(), value);
             }
@@ -102,47 +102,11 @@ public final class RequestModel<T> {
         }
     }
 
-    public Map<String, File> getFormDataParts() {
-        Map<String, File> partsMap = new HashMap();
-        if (this.parts != null) {
-            Iterator var2 = this.parts.iterator();
-
-            while (var2.hasNext()) {
-                Part part = (Part) var2.next();
-                if (part.value != null && part.value instanceof File) {
-                    partsMap.put(part.name, (File) part.value);
-                }
-            }
-        }
-
-        return Collections.unmodifiableMap(partsMap);
-    }
-
-    public boolean isMultiPart() {
-        if (this.parts != null) {
-            Iterator var1 = this.parts.iterator();
-
-            Part part;
-            do {
-                do {
-                    if (!var1.hasNext()) {
-                        return this.isMultiPart;
-                    }
-
-                    part = (Part) var1.next();
-                } while (part.value == null);
-            } while (!(part.value instanceof File) && !(part.value instanceof byte[]));
-
-            this.isMultiPart = true;
-        }
-
-        return this.isMultiPart;
-    }
 
     public RequestModel.Builder newBuilder() {
-        return REQUEST_GET.equals(this.httpMethod)
+        return RequestVar.REQUEST_GET.equals(this.requestMethod)
                 ? new GetBuilder(this)
-                : (REQUEST_POST.equals(this.httpMethod)
+                : (RequestVar.REQUEST_POST.equals(this.requestMethod)
                 ? new PostBuilder(this)
                 : new Builder(this));
     }
@@ -156,35 +120,18 @@ public final class RequestModel<T> {
     }
 
     public static final class PostBuilder extends RequestModel.Builder<RequestModel.PostBuilder> {
-        public PostBuilder(String url) {
-            super(REQUEST_POST, url);
-        }
-
-        public PostBuilder(String baseUrl, String relativeUrl) {
-            super(REQUEST_POST, baseUrl, relativeUrl);
+        public PostBuilder(String pathUrl) {
+            super(RequestVar.REQUEST_POST, pathUrl);
         }
 
         public PostBuilder(RequestModel requestModel) {
             super(requestModel);
         }
 
-        public RequestModel.PostBuilder addFormDataPart(String name, File value, String fileName) {
-            if (this.parts == null) {
-                this.parts = new ArrayList();
-            }
-
-            this.parts.add(Part.create(name, value, fileName));
-            return this;
-        }
-
         public RequestModel.PostBuilder postContent(String content, String mediaType) {
             this.postContent = content;
             this.mediaType = mediaType;
             return this;
-        }
-
-        public RequestModel.PostBuilder postContentByBody(Boolean postBody) {
-            return (RequestModel.PostBuilder) super.postContentByBody(postBody);
         }
 
         public RequestModel.PostBuilder gzipEncoding(boolean gzipEncoding) {
@@ -194,13 +141,10 @@ public final class RequestModel<T> {
     }
 
     public static final class GetBuilder extends RequestModel.Builder<RequestModel.GetBuilder> {
-        public GetBuilder(String url) {
-            super(REQUEST_GET, url);
+        public GetBuilder(String pathUrl) {
+            super(RequestVar.REQUEST_GET, pathUrl);
         }
 
-        public GetBuilder(String baseUrl, String relativeUrl) {
-            super(REQUEST_GET, baseUrl, relativeUrl);
-        }
 
         public GetBuilder(RequestModel requestModel) {
             super(requestModel);
@@ -210,7 +154,6 @@ public final class RequestModel<T> {
             if (urlParamsMap != null) {
                 this.urlParams.putAll(urlParamsMap);
             }
-
             return this;
         }
 
@@ -221,61 +164,58 @@ public final class RequestModel<T> {
     }
 
     public static class Builder<T extends RequestModel.Builder> {
-        private final String httpMethod;
-        private String baseUrl;
-        private String relativeUrl;
-        private String url;
-        private Type responseType;
-        private Object tag;
-        Map<String, String> urlParams = new HashMap();
-        Map<String, Object> params = new HashMap();
-        Map<String, String> headers;
-        List<Part> parts;
         private long connectTimeoutMillis;
         private long readTimeoutMillis;
         private long writeTimeoutMillis;
-        String postContent;
+        boolean gzipEncoding;
+
         String mediaType;
-        private Boolean postBody;
+        String postContent;
+        private Type responseType;
+
+        private String fullUrl;
+        private String pathUrl;
+        private String requestMethod;
+        private String pathVersion = RequestVar.VERSION_V1;
+        Map<String, String> headers = new HashMap<>();
+        Map<String, String> urlParams = new HashMap<>();
+        Map<String, Object> bodyParams = new HashMap<>();
+
         private Converter converter;
-        private boolean signable = true;
-        protected boolean gzipEncoding;
 
-        public Builder(String httpMethod, String url) {
-            this.httpMethod = httpMethod;
-            this.url = url;
-        }
-
-        public Builder(String httpMethod, String baseUrl, String relativeUrl) {
-            this.httpMethod = httpMethod;
-            this.baseUrl = baseUrl;
-            this.relativeUrl = relativeUrl;
+        /**
+         * 只提供请求方法，以及相对路径
+         *
+         * @param requestMethod 请求方法
+         * @param pathUrl       相对路径
+         */
+        public Builder(String requestMethod, String pathUrl) {
+            this.requestMethod = requestMethod;
+            this.pathUrl = pathUrl;
         }
 
         Builder(RequestModel requestModel) {
-            this.httpMethod = requestModel.httpMethod;
-            this.url = requestModel.url;
-            this.postBody = requestModel.postBody;
+            this.requestMethod = requestModel.requestMethod;
+            this.fullUrl = requestModel.fullUrl;
+
             this.postContent = requestModel.postContent;
             this.mediaType = requestModel.mediaType;
             this.connectTimeoutMillis = requestModel.connectTimeoutMillis;
             this.readTimeoutMillis = requestModel.readTimeoutMillis;
             this.writeTimeoutMillis = requestModel.writeTimeoutMillis;
             this.responseType = requestModel.responseType;
-            this.tag = requestModel.tag;
             this.converter = requestModel.converter;
             this.urlParams = requestModel.urlParams;
-            this.params = requestModel.params;
-            this.parts = requestModel.parts;
+            this.pathVersion = requestModel.urlVersion;
+            this.bodyParams = requestModel.bodyParams;
             this.headers = requestModel.headers;
-            this.signable = requestModel.signable;
             this.gzipEncoding = requestModel.gzipEncoding;
         }
 
         public RequestModel build() {
-            this.url = this.getUrl();
-            if (this.url == null) {
-                throw new IllegalArgumentException("Request url == null");
+            this.fullUrl = this.getFullUrl();
+            if (this.fullUrl == null) {
+                throw new IllegalArgumentException("请检查 ！ Request fullUrl == null");
             } else {
                 return new RequestModel(this);
             }
@@ -296,21 +236,18 @@ public final class RequestModel<T> {
             return this;
         }
 
+        public Builder<T> gzipEncoding(boolean gzipEncoding) {
+            this.gzipEncoding = gzipEncoding;
+            return this;
+        }
+
         public Builder<T> responseType(Type responseType) {
             this.responseType = responseType;
             return this;
         }
 
-        public Builder<T> tag(Object tag) {
-            this.tag = tag;
-            return this;
-        }
 
         public Builder<T> addHeader(String name, String value) {
-            if (this.headers == null) {
-                this.headers = new HashMap();
-            }
-
             this.headers.put(name, value);
             return this;
         }
@@ -318,34 +255,9 @@ public final class RequestModel<T> {
         public Builder<T> addHeaders(Map<String, String> headers) {
             if (headers == null) {
                 return this;
-            } else {
-                if (this.headers == null) {
-                    this.headers = new HashMap();
-                }
-
-                this.headers.putAll(headers);
-                return this;
             }
-        }
-
-        public Builder<T> addHeaders(List<String> headers) {
-            if (headers == null) {
-                return this;
-            } else {
-                if (this.headers == null) {
-                    this.headers = new HashMap();
-                }
-
-                if (headers.size() % 2 != 0) {
-                    throw new IllegalArgumentException("Headers List content must be name-value paired,current headers list size is " + headers.size());
-                } else {
-                    for (int i = 0; i < headers.size() - 1; i += 2) {
-                        this.headers.put(headers.get(i), headers.get(i + 1));
-                    }
-
-                    return this;
-                }
-            }
+            this.headers.putAll(headers);
+            return this;
         }
 
         public Builder<T> addUrlParameters(Map<String, String> urlParamsMap) {
@@ -371,51 +283,40 @@ public final class RequestModel<T> {
 
         public Builder<T> addParameters(Map<String, Object> parameters) {
             if (parameters != null) {
-                this.params.putAll(parameters);
+                this.bodyParams.putAll(parameters);
             }
-
             return this;
         }
 
         public Builder<T> addParameter(String name, Object value) {
-            this.params.put(name, value);
+            this.bodyParams.put(name, value);
             return this;
         }
 
-        public Builder<T> signable(boolean signable) {
-            this.signable = signable;
+        public Builder<T> version(String urlVersion) {
+            this.pathVersion = urlVersion;
             return this;
         }
 
-        Builder<T> postContentByBody(Boolean postBody) {
-            this.postBody = postBody;
-            return this;
-        }
 
         Builder<T> converter(Converter converter) {
             this.converter = converter;
             return this;
         }
 
-        private String getUrl() {
-            if (this.url != null) {
-                return this.url;
-            } else {
-                if (this.baseUrl != null && this.relativeUrl != null) {
-                    if (this.relativeUrl.startsWith("%s")) {
-                        this.url = String.format(this.relativeUrl, new Object[]{this.baseUrl});
-                    } else {
-                        this.url = this.baseUrl + this.relativeUrl;
-                        Matcher matcher = RequestModel.PATTERN.matcher(this.url);
-                        if (matcher.find(8)) {
-                            StringBuilder stringBuilder = new StringBuilder(this.url);
-                            stringBuilder.replace(matcher.start(), matcher.end(), "/");
-                            this.url = stringBuilder.toString();
-                        }
-                    }
-                }
 
-                return this.url;
+        private String getFullUrl() {
+            if (this.fullUrl != null) {
+                return this.fullUrl;
+            } else {
+                if (this.pathUrl != null) {
+                    String hostUrl = NetWrapper.getConfig().getHostUrl();
+                    String realPathUrl = StringUtil.replace(pathUrl, RequestVar.VERSION_CONST, pathVersion);
+                    this.fullUrl = hostUrl + realPathUrl;
+                } else {
+                    Logger.e(new BizApiException("请检查是否已经设置请求URL"));
+                }
+                return this.fullUrl;
             }
         }
     }
