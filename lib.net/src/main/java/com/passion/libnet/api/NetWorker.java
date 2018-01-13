@@ -1,8 +1,6 @@
 package com.passion.libnet.api;
 
 
-import com.passion.libnet.core.NetConfig;
-import com.passion.libnet.core.NetWrapper;
 import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.imp.INetWorker;
 import com.passion.libnet.core.imp.NetCallback;
@@ -16,11 +14,8 @@ import com.passion.libnet.core.okhttp.OkHttpInternal;
 
 public class NetWorker implements INetWorker {
 
-    private NetConfig mNetConfig;
 
-    private NetWorker() {
-        mNetConfig = NetWrapper.getConfig();
-    }
+    private NetWorker() {}
 
 
     private static final class Holder {

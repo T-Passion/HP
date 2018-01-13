@@ -30,10 +30,10 @@
 
 
         <!--友盟统计-->
-        <meta-data
+        <meta-result
             android:value="59cf4366b27b0a21bc0000dd"
             android:name="UMENG_APPKEY" />
-        <meta-data
+        <meta-result
             android:value="Wandoujia"
             android:name="UMENG_CHANNEL" />
     </application>

@@ -14,7 +14,7 @@ public class HttpResult<T> {
     /**
      * 数据对象，标准json格式
      */
-    private T data;
+    private T result;
 
     /**
      * 接口调用是否成功，0：失败，1：成功
@@ -36,13 +36,16 @@ public class HttpResult<T> {
      */
     private String message;
 
+    private int is_loging;
+    private long crt;
 
-    public T getData() {
-        return data;
+
+    public T getResult() {
+        return result;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setResult(T result) {
+        this.result = result;
     }
 
     public int getCode() {
@@ -59,6 +62,22 @@ public class HttpResult<T> {
 
     public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public int getIs_loging() {
+        return is_loging;
+    }
+
+    public void setIs_loging(int is_loging) {
+        this.is_loging = is_loging;
+    }
+
+    public long getCrt() {
+        return crt;
+    }
+
+    public void setCrt(long crt) {
+        this.crt = crt;
     }
 
     public String getMessage() {

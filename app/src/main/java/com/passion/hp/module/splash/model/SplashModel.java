@@ -7,12 +7,11 @@ import com.passion.libbase.mvp.BaseModel;
 import com.passion.libnet.api.NetWorker;
 import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.imp.NetCallback;
-import com.passion.libnet.core.request.RequestVar;
 
 import javax.inject.Inject;
 
 /**
- * Created by huangdou
+ * Created by chaos
  * on 2017/10/10.
  */
 
@@ -27,10 +26,7 @@ public class SplashModel extends BaseModel implements SplashContract.Model {
     @Override
     public void getSplashRandomRes(NetCallback callback) {
         RequestModel requestModel = new RequestModel
-                .GetBuilder(BizApiConstant.GET_COVER_AD_VALUE)
-                .version(RequestVar.VERSION_V2)
-                .addUrlParameter("page",String.valueOf(1))
-                .addUrlParameter("page_size",String.valueOf(10))
+                .GetBuilder(BizApiConstant.GET_STATUS_INIT_KEY)
                 .build();
         NetWorker.getINS().get(requestModel, callback);
     }

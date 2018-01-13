@@ -73,4 +73,28 @@ public class AppUtils {
             e.printStackTrace();
         }
     }
+
+
+    public static String getAppVersionName(Context context){
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo pInfo = packageManager.getPackageInfo(context.getPackageName(),0);
+            return pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getAppVersionCode(Context context){
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            PackageInfo pInfo = packageManager.getPackageInfo(context.getPackageName(),0);
+            return String.valueOf(pInfo.versionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

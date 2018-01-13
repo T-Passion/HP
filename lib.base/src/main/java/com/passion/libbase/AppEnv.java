@@ -1,5 +1,7 @@
 package com.passion.libbase;
 
+import com.passion.libutils.AppUtils;
+
 /**
  * Created by chaos
  * on 2017/12/6. 13:44
@@ -11,10 +13,11 @@ public final class AppEnv {
     private static final String sApiSecret = "dhMda9daJiw5qe1oa3sah9de2";
     private static String sBuildType;
     private static HPApplication sAppContext;
+    private static String sAppVersion;
 
-    private static String NET_HOST = "https://games.mobileapi.hupu.com/1/7.1.13";
-    private static String NET_HOST_DEBUG = "https://games.mobileapi.hupu.com/1/7.1.13";
-    private static String NET_HOST_RELEASE = "https://games.mobileapi.hupu.com/1/7.1.13";
+    private static String NET_HOST = "https://games.mobileapi.hupu.com/1";
+    private static String NET_HOST_DEBUG = "https://games.mobileapi.hupu.com/1";
+    private static String NET_HOST_RELEASE = "https://games.mobileapi.hupu.com/1";
 
 
     private AppEnv() {
@@ -23,6 +26,7 @@ public final class AppEnv {
     public static void init(HPApplication app, String buildType) {
         sAppContext = app;
         sBuildType = buildType;
+        sAppVersion = AppUtils.getAppVersionName(app);
     }
 
     public static HPApplication app() {
@@ -37,7 +41,7 @@ public final class AppEnv {
         } else {
             NET_HOST = NET_HOST_DEBUG;
         }
-        return NET_HOST;
+        return NET_HOST+"/"+sAppVersion;
     }
 
     private static boolean inDebug() {

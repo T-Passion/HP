@@ -13,6 +13,7 @@ import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.convert.GsonConverter;
 import com.passion.libnet.core.imp.RequestInterceptor;
 import com.passion.libnet.core.utils.MD5Util;
+import com.passion.libutils.AppUtils;
 import com.passion.libutils.DeviceUtil;
 import com.passion.libutils.NetworkUtil;
 import com.passion.libutils.SignUtil;
@@ -42,9 +43,9 @@ public class HPNetConfig {
                 .setAppSecret(AppEnv.getApiSecret()) // app_secret
                 .setAppSecret(AppEnv.getApiSecret())
                 .setCookieEnable(true)
+                .setDebugMode(true)
                 .setHostUrl(AppEnv.netHost())
                 .trustAllCerts(true)
-                .setJsonConverter(new GsonConverter()) // 设置Gson的converter
                 .setApiService(new HPBizApiService())
                 .build();
         NetWrapper.init(netConfig);
@@ -86,34 +87,24 @@ public class HPNetConfig {
         return new RequestInterceptor() {
             @Override
             public RequestModel intercept(RequestModel requestModel) {
-                String callDeviceId = DeviceUtil.getDeviceId(context);
-                if (callDeviceId.length() > 16) {
-                    callDeviceId = callDeviceId.substring(16, callDeviceId.length());
+                String androidId = DeviceUtil.getDeviceId(context);
+                if (androidId.length() > 16) {
+                    androidId = androidId.substring(16, androidId.length());
                 }
                 Map<String, String> apiParamMap = new HashMap<>();
                 apiParamMap.put("s_os", BaseConstant.Net.ANDROID);                                // 系统.    android / ios /
                 apiParamMap.put("s_osv", String.valueOf(Build.VERSION.SDK_INT));             // Android系统版本4.3.1
-//                apiParamMap.put("s_apv", String.valueOf(versionCode));                          // 应用版本
+                apiParamMap.put("s_dv", AppUtils.getAppVersionName(context));                          // 应用版本
                 apiParamMap.put("s_net", getNetType(context));                                      // 网络(有线:1 wifi:2 3G:3 4G:4 5G:5)
                 apiParamMap.put("s_sc", DeviceUtil.getScreenWidAndHeight(context));          //屏幕尺寸(800x600);
                 apiParamMap.put("s_br", String.format("%s-%s-%s", Build.MANUFACTURER, Build.BRAND, Build.MODEL));                                        // 手机品牌:  huawei
-                apiParamMap.put("s_did", MD5Util.encode(TextUtils.isEmpty(callDeviceId)
-                        ? BaseConstant.Net.UNKNOWN : callDeviceId));                      // 设备ID（获取设备uuid再进行md5）
+                apiParamMap.put("android_id", MD5Util.encode(TextUtils.isEmpty(androidId)
+                        ? BaseConstant.Net.UNKNOWN : androidId));                      // 设备ID（获取设备uuid再进行md5）
                 apiParamMap.put("format", BaseConstant.Net.JSON);                                 // 返回格式,目前只支持json
 //                apiParamMap.put("app_key", AppEnv.getApiKey());                             // api分配给每个应用的key
-                apiParamMap.put("v", "1.0");                                                 // API协议版本，可选值：1.0
-                apiParamMap.put("timestamp", String.valueOf(System.currentTimeMillis()));    // 时间戳
-                apiParamMap.put("sign_method", BaseConstant.Net.MD5);                             // 签名算法
+                apiParamMap.put("s_v", "1.0");                                                 // API协议版本，可选值：1.0
+                apiParamMap.put("s_crt", String.valueOf(System.currentTimeMillis()));    // 时间戳
 
-                // 定位
-//                String latitude = LocationUtil.getLgetatitude();
-//                if (!StringUtils.isEmpty(latitude)) {
-//                    apiParamMap.put("s_lat", latitude); // 定位纬度
-//                }
-//                String longitude = LocationHelper.getLongitude();
-//                if (!StringUtils.isEmpty(longitude)) {
-//                    apiParamMap.put("s_lng", longitude); // 定位经度
-//                }
 
                 RequestModel.Builder builder = requestModel.newBuilder().addHeaders(apiParamMap) // 公共参数
                         .addHeader("content-type", "application/x-www-form-urlencoded") // content_type

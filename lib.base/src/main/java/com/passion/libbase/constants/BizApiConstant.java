@@ -9,7 +9,7 @@ package com.passion.libbase.constants;
 public final class BizApiConstant {
 
 
-    public static final String GET_COVER_AD_KEY = "GET_COVER_AD_KEY";
-    public static final String GET_COVER_AD_VALUE = "/api/{version}/get_cover_ad";
+    public static final String GET_STATUS_INIT_KEY = "GET_STATUS_INIT_KEY";
+    public static final String GET_STATUS_INIT_VALUE = "/status/init";
 
 }

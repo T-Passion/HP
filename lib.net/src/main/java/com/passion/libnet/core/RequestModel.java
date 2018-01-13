@@ -4,6 +4,7 @@ import com.orhanobut.logger.Logger;
 import com.passion.libnet.core.convert.Converter;
 import com.passion.libnet.core.exception.BizApiException;
 import com.passion.libnet.core.request.RequestVar;
+import com.passion.libnet.core.utils.SafeCheckUtil;
 import com.passion.libnet.core.utils.StringUtil;
 
 import java.lang.reflect.Type;
@@ -176,7 +177,7 @@ public final class RequestModel {
         private String fullUrl;
         private String pathUrl;
         private String requestMethod;
-        private String pathVersion = RequestVar.VERSION_V1;
+        private String pathVersion ;
         Map<String, String> headers = new HashMap<>();
         Map<String, String> urlParams = new HashMap<>();
         Map<String, Object> bodyParams = new HashMap<>();
@@ -309,12 +310,15 @@ public final class RequestModel {
             if (this.fullUrl != null) {
                 return this.fullUrl;
             } else {
-                if (this.pathUrl != null) {
-                    String hostUrl = NetWrapper.getConfig().getHostUrl();
+                String hostUrl = NetWrapper.getConfig().getHostUrl();
+                if (!SafeCheckUtil.isNull(pathUrl) && !SafeCheckUtil.isNull(pathVersion)) {
                     String realPathUrl = StringUtil.replace(pathUrl, RequestVar.VERSION_CONST, pathVersion);
                     this.fullUrl = hostUrl + realPathUrl;
-                } else {
+                } else if(!SafeCheckUtil.isNull(pathUrl)){
+                    this.fullUrl = hostUrl + pathUrl;
+                }else {
                     Logger.e(new BizApiException("请检查是否已经设置请求URL"));
+
                 }
                 return this.fullUrl;
             }

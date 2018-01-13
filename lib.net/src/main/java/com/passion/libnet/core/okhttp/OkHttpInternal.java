@@ -92,7 +92,7 @@ public final class OkHttpInternal<T> {
                         Type typeOuter = JavaTypeToken.getParameterizedType(HttpResult.class, netCallback.getResponseType());
                         HttpResult<T> httpResult = JsonMapper.fromJson(rStr, typeOuter);
                         if (!SafeCheckUtil.isNull(httpResult)) {
-                            netCallback.onSuccess(httpResult.getData());
+                            netCallback.onSuccess(httpResult.getResult());
                             return;
                         }
                     }
@@ -159,7 +159,6 @@ public final class OkHttpInternal<T> {
         Request request = RequestFactory.create(requestModel);
         return request;
     }
-
 
 
 }
