@@ -3,7 +3,6 @@ package com.passion.libnet.core;
 import android.content.Context;
 
 import com.passion.libnet.core.convert.Converter;
-import com.passion.libnet.core.cookie.NetCookieJar;
 import com.passion.libnet.core.imp.ApiService;
 import com.passion.libnet.core.imp.INetWorker;
 import com.passion.libnet.core.imp.RequestInterceptor;
@@ -31,7 +30,6 @@ public final class NetConfig {
     private final String appSecret;
     private final RequestInterceptor[] requestInterceptors;
     private final Converter jsonConverter;
-    private final NetCookieJar cookieJar;
     public Map<String, INetWorker> networkMap = new LinkedHashMap<>();
     private final ApiService apiService;
 
@@ -47,7 +45,6 @@ public final class NetConfig {
         this.appSecret = builder.mAppSecret;
         this.requestInterceptors = builder.mRequestInterceptors;
         this.jsonConverter = builder.mJsonConverter;
-        this.cookieJar = builder.cookieJar;
         this.apiService = builder.apiService;
     }
 
@@ -99,9 +96,6 @@ public final class NetConfig {
         return jsonConverter;
     }
 
-    public NetCookieJar getCookieJar() {
-        return cookieJar;
-    }
 
     public Map<String, INetWorker> getNetworkMap() {
         return networkMap;
@@ -118,7 +112,6 @@ public final class NetConfig {
         private String mAppSecret;
         private RequestInterceptor[] mRequestInterceptors;
         private Converter mJsonConverter;
-        private NetCookieJar cookieJar;
         private boolean trustAllCerts;
         private Map<String, INetWorker> networkMap = new LinkedHashMap<>();
         private ApiService apiService;
@@ -183,10 +176,6 @@ public final class NetConfig {
             return this;
         }
 
-        public NetConfig.Builder setCookieJar(NetCookieJar cookieJar) {
-            this.cookieJar = cookieJar;
-            return this;
-        }
 
         public NetConfig.Builder setApiService(ApiService apiService) {
             this.apiService = apiService;

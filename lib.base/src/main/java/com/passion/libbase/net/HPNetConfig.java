@@ -10,7 +10,6 @@ import com.passion.libbase.constants.BaseConstant;
 import com.passion.libnet.core.NetConfig;
 import com.passion.libnet.core.NetWrapper;
 import com.passion.libnet.core.RequestModel;
-import com.passion.libnet.core.convert.GsonConverter;
 import com.passion.libnet.core.imp.RequestInterceptor;
 import com.passion.libnet.core.utils.MD5Util;
 import com.passion.libutils.AppUtils;
@@ -37,7 +36,7 @@ public class HPNetConfig {
     public static void initNetWork(Context appContext) {
         NetConfig netConfig = new NetConfig.Builder() //
                 .setAppContext(appContext)
-                .setRequestInterceptors((RequestInterceptor[]) getRequestInterceptors(appContext).toArray()) // 拦截器
+                .setRequestInterceptors(getRequestInterceptors(appContext).toArray(new RequestInterceptor[getRequestInterceptors(appContext).size()])) // 拦截器
                 .setSignAutomatic(false) // 不使用自动签名
                 .setDebugMode(true) // debug 模式
                 .setAppSecret(AppEnv.getApiSecret()) // app_secret

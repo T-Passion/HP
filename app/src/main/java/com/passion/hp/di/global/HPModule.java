@@ -2,7 +2,7 @@ package com.passion.hp.di.global;
 
 import com.passion.libbase.Configuration;
 import com.passion.libbase.HPApplication;
-import com.passion.libbase.net.NetWorker;
+import com.passion.libnet.api.NetWorker;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -35,7 +35,7 @@ public class HPModule {
     @Singleton
     @Provides
     public NetWorker provideNetWorker(){
-        return new NetWorker();
+        return NetWorker.getINS();
     }
 
 }

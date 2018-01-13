@@ -38,12 +38,6 @@ import okhttp3.ResponseBody;
  * on 2018/1/10. 14:50
  * 文件描述：
  */
-        /*
-         * 1。请求之前的状态检查（网络状态，当前页面是否处于前台）
-         * 2。封装底层的请求参数（）
-         * 3。触发请求
-         * 4。请求之后的失败或成功的分流
-         */
 public final class OkHttpInternal<T> {
     private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     private static final NetConfig NET_CONFIG = NetWrapper.getConfig();
