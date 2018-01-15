@@ -9,7 +9,6 @@ package com.passion.libbase.constants;
 public final class BizApiConstant {
 
 
-    public static final String GET_STATUS_INIT_KEY = "GET_STATUS_INIT_KEY";
-    public static final String GET_STATUS_INIT_VALUE = "/status/init";
+    public static final String GET_STATUS_INIT = "/status/init";
 
 }

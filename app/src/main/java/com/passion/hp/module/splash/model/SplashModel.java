@@ -8,8 +8,6 @@ import com.passion.libnet.api.NetWorker;
 import com.passion.libnet.core.RequestModel;
 import com.passion.libnet.core.imp.NetCallback;
 
-import javax.inject.Inject;
-
 /**
  * Created by chaos
  * on 2017/10/10.
@@ -19,15 +17,15 @@ public class SplashModel extends BaseModel implements SplashContract.Model {
 
 
 
-    @Inject
     public SplashModel() {
     }
 
     @Override
     public void getSplashRandomRes(NetCallback callback) {
         RequestModel requestModel = new RequestModel
-                .GetBuilder(BizApiConstant.GET_STATUS_INIT_KEY)
+                .GetBuilder(BizApiConstant.GET_STATUS_INIT)
                 .build();
         NetWorker.getINS().get(requestModel, callback);
+
     }
 }

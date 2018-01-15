@@ -198,6 +198,7 @@ public final class RequestModel {
         Builder(RequestModel requestModel) {
             this.requestMethod = requestModel.requestMethod;
             this.fullUrl = requestModel.fullUrl;
+            this.pathUrl = requestModel.pathUrl;
 
             this.postContent = requestModel.postContent;
             this.mediaType = requestModel.mediaType;

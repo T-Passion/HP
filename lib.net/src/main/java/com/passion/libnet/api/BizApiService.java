@@ -2,8 +2,8 @@ package com.passion.libnet.api;
 
 import com.passion.libnet.core.imp.ApiService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by chaos
@@ -15,10 +15,10 @@ public abstract class BizApiService implements ApiService {
     /**
      * 需要在这里注册使用到的server请求方法
      */
-    protected static Map<String,String> apiMap = new HashMap<>();
+    protected static List<String> apiList = new LinkedList<>();
 
     @Override
-    public String get(String key) {
-        return apiMap.get(key);
+    public boolean contains(String value) {
+        return apiList.contains(value);
     }
 }

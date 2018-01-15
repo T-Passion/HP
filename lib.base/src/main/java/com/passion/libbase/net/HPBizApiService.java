@@ -12,7 +12,7 @@ import com.passion.libnet.api.BizApiService;
 public class HPBizApiService extends BizApiService {
 
     static {
-        apiMap.put(BizApiConstant.GET_STATUS_INIT_KEY,BizApiConstant.GET_STATUS_INIT_VALUE);
+        apiList.add(BizApiConstant.GET_STATUS_INIT);
     }
 
 

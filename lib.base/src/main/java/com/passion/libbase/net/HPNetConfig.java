@@ -54,7 +54,7 @@ public class HPNetConfig {
         List<RequestInterceptor> interceptors = new LinkedList<>();
         interceptors.add(signInterceptor);
         interceptors.add(getApiParamsInterceptor(context));
-        interceptors.add(checkInterceptor);
+//        interceptors.add(checkInterceptor);
         return interceptors;
     }
 
@@ -124,12 +124,12 @@ public class HPNetConfig {
 
 
     private static Map<String,String> innerCheck(Map<String,String> params){
-        Iterator hIterator = params.keySet().iterator();
-        while (hIterator.hasNext()){
-            Map.Entry entry = (Map.Entry) hIterator.next();
-            String value = (String) entry.getValue();
+        Iterator<Map.Entry<String,String>> entries = params.entrySet().iterator();
+        while (entries.hasNext()){
+            Map.Entry<String,String> entry = entries.next();
+            String value = entry.getValue();
             if(TextUtils.isEmpty(value)){
-                hIterator.remove();//
+                entries.remove();//
             }
         }
         return params;

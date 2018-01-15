@@ -1,5 +1,8 @@
 package com.passion.libnet.core.okhttp;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.orhanobut.logger.Logger;
 import com.passion.libnet.core.NetConfig;
 import com.passion.libnet.core.NetWrapper;
@@ -41,8 +44,10 @@ import okhttp3.ResponseBody;
 public final class OkHttpInternal<T> {
     private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
     private static final NetConfig NET_CONFIG = NetWrapper.getConfig();
-    final RequestModel requestModel;
-    final NetCallback<T> netCallback;
+    private final RequestModel requestModel;
+    private final NetCallback<T> netCallback;
+    private final Handler mainHandler;
+
 
     public OkHttpInternal(RequestModel requestModel, NetCallback<T> netCallback) {
         requestModel = requestModel.newBuilder()
@@ -50,6 +55,7 @@ public final class OkHttpInternal<T> {
                 .build();
         this.requestModel = requestModel;
         this.netCallback = netCallback;
+        this.mainHandler = new Handler(Looper.getMainLooper());
     }
 
     /**
@@ -67,7 +73,7 @@ public final class OkHttpInternal<T> {
                 }
 
                 @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(Call call, Response response) {
                     if (call.isCanceled()) {
                         netCallback.onFailure(new ErrorBody());
                     } else if (response.isSuccessful()) {
@@ -78,19 +84,36 @@ public final class OkHttpInternal<T> {
 
                 }
 
-                private void dealResponse(Response response) throws IOException {
-                    ResponseBody responseBody = response.body();
-                    int responseCode = response.code();
-                    if (responseCode == 200) {
-                        String rStr = responseBody.string();
-                        Type typeOuter = JavaTypeToken.getParameterizedType(HttpResult.class, netCallback.getResponseType());
-                        HttpResult<T> httpResult = JsonMapper.fromJson(rStr, typeOuter);
-                        if (!SafeCheckUtil.isNull(httpResult)) {
-                            netCallback.onSuccess(httpResult.getResult());
-                            return;
-                        }
+                private void dealResponse(final Response response) {
+
+                    final ResponseBody responseBody = response.body();
+                    if (responseBody != null) {
+                        mainHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    int responseCode = response.code();
+                                    if (responseCode == 200) {
+                                        String rStr = responseBody.string();
+                                        Type typeOuter = JavaTypeToken.getParameterizedType(HttpResult.class, netCallback.getResponseType());
+                                        HttpResult<T> httpResult = JsonMapper.fromJson(rStr, typeOuter);
+                                        if (!SafeCheckUtil.isNull(httpResult)) {
+                                            if(SafeCheckUtil.isNull(httpResult.getError())){
+                                                netCallback.onSuccess(httpResult.getResult());
+                                            }else {
+                                                netCallback.onFailure(new ErrorBody(httpResult.getError().getId(),httpResult.getError().getText()));
+                                            }
+                                            return;
+                                        }
+                                    }
+                                    netCallback.onFailure(new ErrorBody());
+                                } catch (IOException ioe) {
+                                    netCallback.onFailure(new ErrorBody());
+                                }
+
+                            }
+                        });
                     }
-                    netCallback.onFailure(new ErrorBody());
 
                 }
 
@@ -139,7 +162,7 @@ public final class OkHttpInternal<T> {
             NetException bizException = new NetException("requestModel 不能为null 并且其请求方法不能为 null");
             netCallback.onFailure(new ErrorBody(bizException));
             return false;
-        } else if (NET_CONFIG.getApiService().get(requestModel.getPathUrl()) == null) {
+        } else if (!NET_CONFIG.getApiService().contains(requestModel.getPathUrl())) {
             Logger.e("方法 :" + requestModel.url() + "未注册,请联系软件供应商");
             NetException bizException = new NetException("方法 :" + requestModel.url() + "未注册,请联系软件供应商");
             netCallback.onFailure(new ErrorBody(bizException));

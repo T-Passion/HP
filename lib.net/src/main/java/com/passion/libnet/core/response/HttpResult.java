@@ -39,6 +39,8 @@ public class HttpResult<T> {
     private int is_loging;
     private long crt;
 
+    private ErrorInfo error;
+
 
     public T getResult() {
         return result;
@@ -86,5 +88,13 @@ public class HttpResult<T> {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public ErrorInfo getError() {
+        return error;
+    }
+
+    public void setError(ErrorInfo error) {
+        this.error = error;
     }
 }

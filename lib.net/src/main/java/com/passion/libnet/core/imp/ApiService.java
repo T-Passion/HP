@@ -8,5 +8,5 @@ package com.passion.libnet.core.imp;
 
 public interface ApiService  {
 
-    String get(String key);
+    boolean contains(String value);
 }
