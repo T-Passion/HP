@@ -23,11 +23,11 @@ import butterknife.BindView;
 
 @LayoutId(R.layout.activity_main_layout)
 @Route(path = RouterPath.MAIN_ACTIVITY)
-public class MainActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener ,MainContract.View{
+public class MainActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener, MainContract.View {
 
 
     @BindView(R.id.main_content_container)
-    FrameLayout mContentContainer;
+    FrameLayout mMainContainer;
     @BindView(R.id.main_tab_container)
     NavigationTabBar mTabContainer;
 
@@ -40,7 +40,7 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
         initTitleBar();
 
         mModel = new MainModel();
-        mPresenter = new MainPresenter(this,mModel);
+        mPresenter = new MainPresenter(this, mModel);
 
     }
 
@@ -51,12 +51,12 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
 
     }
 
-    private void initTitleBar(){
+    private void initTitleBar() {
         setTitleBar(null, R.drawable.icon_title_bar);
         setTitleBarRight(null, R.drawable.search_btn_board_day, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toaster.showToast(MainActivity.this,"搜索");
+                Toaster.showToast(MainActivity.this, "搜索");
             }
         });
     }
@@ -100,11 +100,11 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
 
     @Override
     public void onStartTabSelected(NavigationTabBar.Model model, int index) {
-        LogUtil.i("tab onStartTab :"+ index);
+        LogUtil.i("tab onStartTab :" + index);
     }
 
     @Override
     public void onEndTabSelected(NavigationTabBar.Model model, int index) {
-        LogUtil.i("tab onEndTab :"+ index);
+        LogUtil.i("tab onEndTab :" + index);
     }
 }

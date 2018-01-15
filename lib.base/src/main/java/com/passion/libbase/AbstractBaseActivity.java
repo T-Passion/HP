@@ -64,13 +64,14 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
         findView();
         injector();
         inflateUiBind();
-
+        //子类实现
         initVars(mContentView);
         loadInitDta();
     }
-    public void fullScreen(){
+
+    public void fullScreen() {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
@@ -169,7 +170,7 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     }
 
     /**
-     * @param rightTxt         标题
+     * @param rightTxt      标题
      * @param rightIcon     标题图片
      * @param rightListener 监听器
      */
@@ -179,13 +180,11 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
 
     private void setActionTitleBar(String leftTxt, Integer leftDrawableId, View.OnClickListener leftListener,
                                    String title, Integer titleDrawableId,
-                                   String rightTxt, Integer rightDrawableId, View.OnClickListener rightListener){
-        this.setTitleBarLeft(leftTxt,leftDrawableId,leftListener);
-        this.setTitleBar(title,titleDrawableId);
-        this.setTitleBarRight(rightTxt,rightDrawableId,rightListener);
+                                   String rightTxt, Integer rightDrawableId, View.OnClickListener rightListener) {
+        this.setTitleBarLeft(leftTxt, leftDrawableId, leftListener);
+        this.setTitleBar(title, titleDrawableId);
+        this.setTitleBarRight(rightTxt, rightDrawableId, rightListener);
     }
-
-
 
 
     /**
@@ -264,14 +263,15 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
 
     /**
      * 事件订阅的默认实现
+     *
      * @param e 事件
      */
     @Subscribe
-    public void onEvent(Object e){
+    public void onEvent(Object e) {
 
     }
 
-    private void immerseTheme(){
+    private void immerseTheme() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
