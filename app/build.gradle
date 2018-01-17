@@ -87,6 +87,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["butterknifeCompileVersion"]
     compile rootProject.ext.dependencies["aliRouter"]
     annotationProcessor rootProject.ext.dependencies["aliRouterCompiler"]
+    compile rootProject.ext.dependencies["pagerIndicator"]
 
 
     compile project(":lib.base")

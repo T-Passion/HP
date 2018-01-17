@@ -50,6 +50,8 @@ def glide = "3.8.0"
 
 def eventbus3 = "3.0.0"
 def multidex = "1.0.1"
+//view pager indicator
+def pagerIndicator = "1.1.6"
 
 //Testing tools
 def jUnitVersion = "4.12"
@@ -104,6 +106,7 @@ project.ext {
             "rxerrorhandler2"          : "me.jessyan:rxerrorhandler:2.1.0",
             "gson"                     : "com.google.code.gson:gson:${gson}",
             "multidex"                 : "com.android.support:multidex:${multidex}",
+            "pagerIndicator"           : "com.shizhefei:ViewPagerIndicator:${pagerIndicator}",
 
             //Testing
             "junit"                    : "junit:junit:${jUnitVersion}",

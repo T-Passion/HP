@@ -34,7 +34,6 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initVars();
     }
 
     @Nullable
@@ -42,7 +41,8 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View content = inflater.inflate(getLayoutId(), container, false);
         mUnBinder = ButterKnife.bind(this, content);
-        loadInitDta(content);
+        initVars(content);
+        loadInitDta();
         return content;
     }
 
@@ -60,13 +60,14 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
     }
 
     /**
-     * <p>在onCreate()之后</p>
+     * <p>onCreateView()之后</p>
      */
-    public abstract void initVars();
+    public abstract void initVars(View view);
+
     /**
      * <p>onCreateView(),完成butterKnife bind之后</p>
      */
-    public abstract void loadInitDta(View view);
+    public abstract void loadInitDta();
 
     /**
      * 注册事件

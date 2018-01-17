@@ -1,11 +1,14 @@
 package com.passion.hp.module.main.ui;
 
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.passion.hp.R;
+import com.passion.hp.module.home.ui.HomeFragment;
 import com.passion.hp.module.main.contract.MainContract;
 import com.passion.hp.module.main.model.MainModel;
 import com.passion.hp.module.main.presenter.MainPresenter;
@@ -31,8 +34,13 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     @BindView(R.id.main_tab_container)
     NavigationTabBar mTabContainer;
 
-    MainContract.Model mModel;
-    MainContract.Presenter mPresenter;
+    private MainContract.Model mModel;
+    private MainContract.Presenter mPresenter;
+
+    private List<Fragment> mFragmentList;
+    private int mCurTabIndex = 0;
+
+
 
     @Override
     protected void initVars(View view) {
@@ -42,6 +50,7 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
         mModel = new MainModel();
         mPresenter = new MainPresenter(this, mModel);
 
+        switchFragmentWithTab(mCurTabIndex);
     }
 
     @Override
@@ -64,29 +73,34 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     private void initTabBars() {
         final List<NavigationTabBar.Model> models = new ArrayList<>();
         final int whiteColor = getResources().getColor(R.color.white);
+        //首页
         models.add(new NavigationTabBar.Model.Builder(
                 getResources().getDrawable(R.drawable.btn_news_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_news_down))
                 .build()
         );
+        //比赛
         models.add(new NavigationTabBar.Model.Builder(
                 getResources().getDrawable(R.drawable.btn_nba_game_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_nba_game_down))
                 .build()
 
         );
+        //论坛
         models.add(new NavigationTabBar.Model.Builder(
                 getResources().getDrawable(R.drawable.btn_bbs_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_bbs_down))
                 .build()
 
         );
+        //发现
         models.add(new NavigationTabBar.Model.Builder(
                 getResources().getDrawable(R.drawable.btn_discovery_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_discovery_down))
                 .build()
 
         );
+        //更多
         models.add(new NavigationTabBar.Model.Builder(
                 getResources().getDrawable(R.drawable.btn_more_up), whiteColor)
                 .selectedIcon(getResources().getDrawable(R.drawable.btn_more_down))
@@ -107,4 +121,12 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     public void onEndTabSelected(NavigationTabBar.Model model, int index) {
         LogUtil.i("tab onEndTab :" + index);
     }
+
+    private void switchFragmentWithTab(int tabIndex) {
+        FragmentManager fm = getSupportFragmentManager();
+        fm.beginTransaction()
+                .replace(R.id.main_content_container, new HomeFragment())
+                .commit();
+    }
+
 }
