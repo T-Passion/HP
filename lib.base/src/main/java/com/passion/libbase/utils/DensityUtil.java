@@ -1,6 +1,9 @@
 package com.passion.libbase.utils;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.widget.TextView;
 
 import com.passion.libbase.AppEnv;
 
@@ -39,4 +42,19 @@ public class DensityUtil {
         }
         return context;
     }
+
+    public static int getTextWidth(TextView textView) {
+        if (textView == null) {
+            return 0;
+        }
+        Rect bounds = new Rect();
+        String text = textView.getText().toString();
+        Paint paint = textView.getPaint();
+        paint.getTextBounds(text, 0, text.length(), bounds);
+        int width = bounds.left + bounds.width();
+        return width;
+    }
+
+
+
 }

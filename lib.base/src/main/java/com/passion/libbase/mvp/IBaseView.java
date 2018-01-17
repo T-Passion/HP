@@ -11,4 +11,6 @@ public interface IBaseView {
     void showNetLoading(String message);
     void closeLoading();
 
+    void emptyUi(Object... args);
+    void errorUi(Object... args);
 }

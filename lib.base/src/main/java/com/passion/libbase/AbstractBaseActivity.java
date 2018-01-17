@@ -186,6 +186,15 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
         this.setTitleBarRight(rightTxt, rightDrawableId, rightListener);
     }
 
+    @Override
+    public void emptyUi(Object... args) {
+
+    }
+
+    @Override
+    public void errorUi(Object... args) {
+
+    }
 
     /**
      * 是否展示空页面

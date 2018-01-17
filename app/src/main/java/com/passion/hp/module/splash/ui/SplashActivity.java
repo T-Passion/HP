@@ -45,7 +45,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        fullScreen();
+        super.fullScreen();
         super.onCreate(savedInstanceState);
     }
 

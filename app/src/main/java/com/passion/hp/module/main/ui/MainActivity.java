@@ -37,7 +37,7 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     private MainContract.Model mModel;
     private MainContract.Presenter mPresenter;
 
-    private List<Fragment> mFragmentList;
+    private final List<Fragment> mFragmentList = new ArrayList<>();
     private int mCurTabIndex = 0;
 
 
@@ -46,6 +46,7 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     protected void initVars(View view) {
         initTabBars();
         initTitleBar();
+        initAllFragments();
 
         mModel = new MainModel();
         mPresenter = new MainPresenter(this, mModel);
@@ -112,6 +113,14 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
         mTabContainer.setOnTabBarSelectedIndexListener(this);
     }
 
+    private void initAllFragments(){
+        mFragmentList.add(HomeFragment.newInstance(null));
+        mFragmentList.add(HomeFragment.newInstance(null));
+        mFragmentList.add(HomeFragment.newInstance(null));
+        mFragmentList.add(HomeFragment.newInstance(null));
+        mFragmentList.add(HomeFragment.newInstance(null));
+    }
+
     @Override
     public void onStartTabSelected(NavigationTabBar.Model model, int index) {
         LogUtil.i("tab onStartTab :" + index);
@@ -120,13 +129,14 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     @Override
     public void onEndTabSelected(NavigationTabBar.Model model, int index) {
         LogUtil.i("tab onEndTab :" + index);
+        switchFragmentWithTab(index);
     }
 
     private void switchFragmentWithTab(int tabIndex) {
         FragmentManager fm = getSupportFragmentManager();
         fm.beginTransaction()
-                .replace(R.id.main_content_container, new HomeFragment())
-                .commit();
+                .replace(R.id.main_content_container, mFragmentList.get(tabIndex))
+                .commitAllowingStateLoss();
     }
 
 }

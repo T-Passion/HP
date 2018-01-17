@@ -1,7 +1,12 @@
 package com.passion.hp.module.home.presenter;
 
 import com.passion.hp.module.home.contract.HomeContract;
+import com.passion.hp.module.home.model.bean.TabVo;
 import com.passion.libbase.mvp.BasePresenter;
+import com.passion.libnet.api.HPRestCallback;
+import com.passion.libnet.core.exception.ErrorBody;
+
+import java.util.List;
 
 /**
  * Created by chaos
@@ -16,5 +21,39 @@ public class HomePresenter extends BasePresenter<HomeContract.Model,HomeContract
 
     public HomePresenter(HomeContract.View view, HomeContract.Model model) {
         super(view, model);
+    }
+
+    @Override
+    public void getHomeTabs() {
+        mView.showNetLoading();
+        mModel.getHomeTabs(new HPRestCallback<List<TabVo>>() {
+            @Override
+            public void onSuccess(List<TabVo> result) {
+                mView.closeLoading();
+                mView.renderTabs();
+                getNBANewsList();
+            }
+
+            @Override
+            public void onFailure(ErrorBody error) {
+                mView.closeLoading();
+            }
+        });
+    }
+
+    @Override
+    public void getNBANewsList() {
+        mView.showNetLoading();
+        mModel.getNBANewsList(new HPRestCallback<List<TabVo>>() {
+            @Override
+            public void onSuccess(List<TabVo> result) {
+
+            }
+
+            @Override
+            public void onFailure(ErrorBody error) {
+
+            }
+        });
     }
 }

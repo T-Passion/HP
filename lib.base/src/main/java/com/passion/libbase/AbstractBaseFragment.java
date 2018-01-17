@@ -102,4 +102,14 @@ public abstract class AbstractBaseFragment extends Fragment implements IBaseView
     public void closeLoading() {
 
     }
+
+    @Override
+    public void emptyUi(Object... args) {
+
+    }
+
+    @Override
+    public void errorUi(Object... args) {
+
+    }
 }
