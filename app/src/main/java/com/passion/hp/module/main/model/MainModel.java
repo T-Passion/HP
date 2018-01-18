@@ -2,6 +2,7 @@ package com.passion.hp.module.main.model;
 
 import com.passion.hp.module.main.contract.MainContract;
 import com.passion.libbase.mvp.BaseModel;
+import com.passion.libnet.api.HPRestCallback;
 
 /**
  * Created by chaos
@@ -15,7 +16,7 @@ public class MainModel extends BaseModel implements MainContract.Model {
 
 
     @Override
-    public void loadStatusInit() {
+    public void loadStatusInit(HPRestCallback callback) {
 
 
 

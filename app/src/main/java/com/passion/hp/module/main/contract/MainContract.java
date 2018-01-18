@@ -3,6 +3,7 @@ package com.passion.hp.module.main.contract;
 import com.passion.libbase.mvp.IBaseModel;
 import com.passion.libbase.mvp.IBasePresenter;
 import com.passion.libbase.mvp.IBaseView;
+import com.passion.libnet.api.HPRestCallback;
 
 /**
  * Created by chaos
@@ -20,7 +21,7 @@ public interface MainContract {
         /**
          * 获取应用初始数据
          */
-        void loadStatusInit();
+        void loadStatusInit(HPRestCallback callback);
     }
 
     /**
@@ -33,6 +34,8 @@ public interface MainContract {
     *
     */
     interface Presenter extends IBasePresenter {
+
+        void getStatusInit();
 
     }
 

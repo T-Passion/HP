@@ -11,4 +11,6 @@ public final class BizApiConstant {
 
     public static final String GET_STATUS_INIT = "/status/init";
 
+    public static final String GET_HOME_TABS = "/status/tabs";
+
 }

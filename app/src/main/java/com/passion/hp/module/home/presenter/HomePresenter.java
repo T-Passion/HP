@@ -30,13 +30,15 @@ public class HomePresenter extends BasePresenter<HomeContract.Model,HomeContract
             @Override
             public void onSuccess(List<TabVo> result) {
                 mView.closeLoading();
-                mView.renderTabs();
+//                mView.renderTabPagers(result);
                 getNBANewsList();
             }
 
             @Override
             public void onFailure(ErrorBody error) {
                 mView.closeLoading();
+                mView.renderTabPagers(mModel.getMockHomeTabs(),mModel.getMockHomePagers());
+
             }
         });
     }

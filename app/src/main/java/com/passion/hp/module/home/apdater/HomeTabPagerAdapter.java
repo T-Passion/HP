@@ -13,6 +13,7 @@ import com.passion.hp.module.home.model.bean.TabVo;
 import com.passion.libbase.utils.DensityUtil;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,9 +28,10 @@ public class HomeTabPagerAdapter extends IndicatorViewPager.IndicatorFragmentPag
     private List<TabVo> mTabList;
     private List<Fragment> mPagerList;
 
-    public HomeTabPagerAdapter(FragmentManager fragmentManager) {
-        this(fragmentManager,null,null,null);
+    public HomeTabPagerAdapter(FragmentManager fragmentManager, Context context) {
+        this(fragmentManager, context, null, null);
     }
+
     public HomeTabPagerAdapter(FragmentManager fragmentManager,
                                Context context,
                                List<TabVo> tabList,
@@ -40,15 +42,26 @@ public class HomeTabPagerAdapter extends IndicatorViewPager.IndicatorFragmentPag
         mPagerList = pagerList;
     }
 
-    public HomeTabPagerAdapter setTabList(){
-
+    public HomeTabPagerAdapter setTabList(List<TabVo> tabs) {
+        if (mTabList == null) {
+            mTabList = new ArrayList<>();
+        }
+        if (tabs != null) {
+            mTabList.addAll(tabs);
+        }
         return this;
     }
 
-    public HomeTabPagerAdapter setNewsList(){
-
+    public HomeTabPagerAdapter setPagerList(List<Fragment> pagers) {
+        if (mPagerList == null) {
+            mPagerList = new ArrayList<>();
+        }
+        if (pagers != null) {
+            mPagerList.addAll(pagers);
+        }
         return this;
     }
+
 
 
     @Override
@@ -82,7 +95,10 @@ public class HomeTabPagerAdapter extends IndicatorViewPager.IndicatorFragmentPag
      */
     @Override
     public Fragment getFragmentForPage(int position) {
-        Fragment pager = mPagerList.get(position);
-        return pager;
+        if (mPagerList != null && mPagerList.size() > position) {
+            Fragment pager = mPagerList.get(position);
+            return pager;
+        }
+        return null;
     }
 }

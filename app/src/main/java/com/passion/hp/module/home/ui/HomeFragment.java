@@ -2,6 +2,8 @@ package com.passion.hp.module.home.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -10,6 +12,7 @@ import com.passion.hp.R;
 import com.passion.hp.module.home.apdater.HomeTabPagerAdapter;
 import com.passion.hp.module.home.contract.HomeContract;
 import com.passion.hp.module.home.model.HomeModel;
+import com.passion.hp.module.home.model.bean.TabVo;
 import com.passion.hp.module.home.presenter.HomePresenter;
 import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.constants.RouterPath;
@@ -19,6 +22,8 @@ import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -43,7 +48,11 @@ public class HomeFragment extends AbstractBaseFragment implements HomeContract.V
     private HomeContract.Presenter mPresenter;
 
 
-    private HomeTabPagerAdapter mIndiAdapter;
+    private HomeTabPagerAdapter mIndAdapter;
+
+    public static HomeFragment newInstance() {
+        return newInstance(null);
+    }
 
     public static HomeFragment newInstance(Bundle args) {
         HomeFragment home = new HomeFragment();
@@ -62,8 +71,8 @@ public class HomeFragment extends AbstractBaseFragment implements HomeContract.V
 
 
         IndicatorViewPager indicatorPagerContainer = new IndicatorViewPager(mHomePagerTabs, mHomePagers);
-        mIndiAdapter = new HomeTabPagerAdapter(getFragmentManager());
-        indicatorPagerContainer.setAdapter(mIndiAdapter);
+        mIndAdapter = new HomeTabPagerAdapter(getFragmentManager(),getContext());
+        indicatorPagerContainer.setAdapter(mIndAdapter);
     }
 
     @Override
@@ -72,12 +81,12 @@ public class HomeFragment extends AbstractBaseFragment implements HomeContract.V
     }
 
     @Override
-    public void renderTabs() {
-        mIndiAdapter.setTabList().notifyDataSetChanged();
+    public void renderTabPagers(@NonNull List<TabVo> tabs, List<Fragment> pagers) {
+        mIndAdapter.setTabList(tabs).setPagerList(pagers).notifyDataSetChanged();
     }
 
     @Override
     public void renderContent() {
-        mIndiAdapter.setNewsList().notifyDataSetChanged();
+
     }
 }

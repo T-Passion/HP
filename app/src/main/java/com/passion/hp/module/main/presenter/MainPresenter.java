@@ -19,4 +19,9 @@ public class MainPresenter extends BasePresenter<MainContract.Model,MainContract
     public MainPresenter(MainContract.View view, MainContract.Model model) {
         super(view, model);
     }
+
+    @Override
+    public void getStatusInit() {
+
+    }
 }

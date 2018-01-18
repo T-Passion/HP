@@ -4,7 +4,6 @@ package com.passion.hp.module.main.ui;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.passion.hp.R;
@@ -28,9 +27,6 @@ import butterknife.BindView;
 @Route(path = RouterPath.MAIN_ACTIVITY)
 public class MainActivity extends AbstractBaseActivity implements NavigationTabBar.OnTabBarSelectedIndexListener, MainContract.View {
 
-
-    @BindView(R.id.main_content_container)
-    FrameLayout mMainContainer;
     @BindView(R.id.main_tab_container)
     NavigationTabBar mTabContainer;
 
@@ -57,7 +53,7 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     @Override
     protected void loadInitDta() {
         //请求接口获得
-        mModel.loadStatusInit();
+        mPresenter.getStatusInit();
 
     }
 
@@ -114,11 +110,11 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
     }
 
     private void initAllFragments(){
-        mFragmentList.add(HomeFragment.newInstance(null));
-        mFragmentList.add(HomeFragment.newInstance(null));
-        mFragmentList.add(HomeFragment.newInstance(null));
-        mFragmentList.add(HomeFragment.newInstance(null));
-        mFragmentList.add(HomeFragment.newInstance(null));
+        mFragmentList.add(HomeFragment.newInstance());
+        mFragmentList.add(HomeFragment.newInstance());
+        mFragmentList.add(HomeFragment.newInstance());
+        mFragmentList.add(HomeFragment.newInstance());
+        mFragmentList.add(HomeFragment.newInstance());
     }
 
     @Override
