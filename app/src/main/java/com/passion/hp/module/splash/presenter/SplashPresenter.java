@@ -26,17 +26,17 @@ public class SplashPresenter extends BasePresenter<SplashContract.Model, SplashC
 
     @Override
     public void fetchSplashRes() {
-        mView.showNetLoading();
+//        mView.showNetLoading();
         mModel.getSplashRandomRes(new HPRestCallback<SplashVo>() {
             @Override
             public void onSuccess(SplashVo result) {
-                mView.closeLoading();
+//                mView.closeLoading(true);
                 mView.updateContent(result.getUrl());
             }
 
             @Override
             public void onFailure(ErrorBody errorBody) {
-                mView.closeLoading();
+//                mView.closeLoading(false);
 
             }
         });

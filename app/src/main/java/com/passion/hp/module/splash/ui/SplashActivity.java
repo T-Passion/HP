@@ -45,7 +45,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.fullScreen();
+//        super.fullScreen();
         super.onCreate(savedInstanceState);
     }
 
@@ -57,7 +57,8 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
             @Override
             public void onEnd() {
                 HPRouter.navigate(RouterPath.MAIN_ACTIVITY);
-//                finish();//由于这里finish会导致转场动画发生变化
+                //由于这里finish会导致转场动画发生变化,采用main界面拦截onBackPressed方法
+                //finish();
             }
         }).start();
     }

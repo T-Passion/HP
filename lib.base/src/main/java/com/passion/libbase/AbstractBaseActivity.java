@@ -300,8 +300,6 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     @Override
     public void showNetLoading(String message) {
         mProgressLayout.setVisibility(View.VISIBLE);
-        mEmptyLayout.setVisibility(View.GONE);
-        mContentLayout.setVisibility(View.GONE);
     }
 
     @Override
