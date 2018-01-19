@@ -52,12 +52,12 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
     @Override
     protected void initVars(View view) {
         setTitleBarVisibility(false);
-        mPresenter = new SplashPresenter(this,mModel);
+        mPresenter = new SplashPresenter(this, mModel);
         mSplashJump.setJumpAction(new WidJumpView.OnJumpAction() {
             @Override
             public void onEnd() {
                 HPRouter.navigate(RouterPath.MAIN_ACTIVITY);
-                finish();
+//                finish();//由于这里finish会导致转场动画发生变化
             }
         }).start();
     }
@@ -75,7 +75,7 @@ public class SplashActivity extends AbstractBaseActivity implements SplashContra
     }
 
     @OnClick(R.id.splashAdImg)
-    public void onADClick(){
-        Toaster.showToast(this,"广告内容");
+    public void onADClick() {
+        Toaster.showToast(this, "广告内容");
     }
 }

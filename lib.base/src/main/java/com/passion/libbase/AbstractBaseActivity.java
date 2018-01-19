@@ -1,6 +1,5 @@
 package com.passion.libbase;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
@@ -60,7 +59,6 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_layout);
-        immerseTheme();
         findView();
         injector();
         inflateUiBind();
@@ -278,15 +276,6 @@ public abstract class AbstractBaseActivity extends AppCompatActivity implements 
     @Subscribe
     public void onEvent(Object e) {
 
-    }
-
-    private void immerseTheme() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            View decorView = getWindow().getDecorView();
-            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            decorView.setSystemUiVisibility(option);
-        }
     }
 
 

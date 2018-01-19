@@ -4,6 +4,7 @@ package com.passion.hp.module.main.ui;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.passion.hp.R;
@@ -15,6 +16,7 @@ import com.passion.libbase.AbstractBaseActivity;
 import com.passion.libbase.constants.RouterPath;
 import com.passion.libbase.imp.LayoutId;
 import com.passion.libbase.utils.LogUtil;
+import com.passion.libutils.ActvStackUtil;
 import com.passion.libutils.Toaster;
 import com.passion.widget.main.NavigationTabBar;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private int mCurTabIndex = 0;
-
+    private long firstTime = 0;
 
 
     @Override
@@ -134,5 +136,21 @@ public class MainActivity extends AbstractBaseActivity implements NavigationTabB
                 .replace(R.id.main_content_container, mFragmentList.get(tabIndex))
                 .commitAllowingStateLoss();
     }
+
+
+    /**
+     * 双击退出
+     */
+    @Override
+    public void onBackPressed() {
+        long secondTime = System.currentTimeMillis();
+        if (secondTime - firstTime > 2000) {
+            Toast.makeText(MainActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+            firstTime = secondTime;
+        } else{
+            ActvStackUtil.AppExit();
+        }
+    }
+
 
 }
