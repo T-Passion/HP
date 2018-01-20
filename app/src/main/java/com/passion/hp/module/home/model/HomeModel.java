@@ -3,7 +3,7 @@ package com.passion.hp.module.home.model;
 import android.support.v4.app.Fragment;
 
 import com.passion.hp.module.home.contract.HomeContract;
-import com.passion.hp.module.home.model.bean.TabVo;
+import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.hp.module.home.ui.SubTabListFragment;
 import com.passion.libbase.constants.BizApiConstant;
 import com.passion.libnet.api.HPRestCallback;

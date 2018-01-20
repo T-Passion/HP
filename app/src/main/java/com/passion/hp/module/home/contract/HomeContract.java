@@ -3,7 +3,7 @@ package com.passion.hp.module.home.contract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import com.passion.hp.module.home.model.bean.TabVo;
+import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.libbase.mvp.IBaseModel;
 import com.passion.libbase.mvp.IBasePresenter;
 import com.passion.libbase.mvp.IBaseView;

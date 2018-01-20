@@ -1,4 +1,4 @@
-package com.passion.hp.module.home.model.bean;
+package com.passion.hp.module.home.model.entity;
 
 /**
  * Created by chaos
@@ -8,6 +8,7 @@ package com.passion.hp.module.home.model.bean;
 
 public class TabVo {
 
+    private String cate_type;
     private String name;
     private String id;
 
@@ -18,6 +19,15 @@ public class TabVo {
     public TabVo(String name, String id) {
         this.name = name;
         this.id = id;
+    }
+
+
+    public String getCate_type() {
+        return cate_type;
+    }
+
+    public void setCate_type(String cate_type) {
+        this.cate_type = cate_type;
     }
 
     public String getName() {

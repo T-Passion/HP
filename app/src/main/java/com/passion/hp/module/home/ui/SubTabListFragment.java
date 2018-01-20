@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.passion.hp.R;
 import com.passion.hp.module.home.apdater.SubTabListAdapter;
-import com.passion.hp.module.home.model.bean.TabVo;
+import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.imp.LayoutId;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
@@ -54,6 +54,7 @@ public class SubTabListFragment extends AbstractBaseFragment {
 
         mTabAdapter = new SubTabListAdapter(getContext(),getSubTabs());
         mTabsView.setAdapter(mTabAdapter);
+        mTabsView.setCurrentItem(0);
     }
 
     @Override

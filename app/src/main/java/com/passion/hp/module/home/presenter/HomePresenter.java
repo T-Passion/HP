@@ -1,7 +1,7 @@
 package com.passion.hp.module.home.presenter;
 
 import com.passion.hp.module.home.contract.HomeContract;
-import com.passion.hp.module.home.model.bean.TabVo;
+import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.libbase.mvp.BasePresenter;
 import com.passion.libnet.api.HPRestCallback;
 import com.passion.libnet.core.exception.ErrorBody;

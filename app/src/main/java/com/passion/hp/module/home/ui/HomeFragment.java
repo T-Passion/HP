@@ -12,7 +12,7 @@ import com.passion.hp.R;
 import com.passion.hp.module.home.apdater.HomeTabPagerAdapter;
 import com.passion.hp.module.home.contract.HomeContract;
 import com.passion.hp.module.home.model.HomeModel;
-import com.passion.hp.module.home.model.bean.TabVo;
+import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.hp.module.home.presenter.HomePresenter;
 import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.constants.RouterPath;

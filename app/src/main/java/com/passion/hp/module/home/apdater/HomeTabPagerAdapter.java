@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.passion.hp.R;
-import com.passion.hp.module.home.model.bean.TabVo;
+import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.libbase.utils.DensityUtil;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 
