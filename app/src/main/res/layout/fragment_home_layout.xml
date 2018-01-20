@@ -3,10 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <com.shizhefei.view.indicator.ScrollIndicatorView
         android:id="@+id/homePagerTabs"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_title_bar_height"/>
+        android:layout_height="@dimen/app_title_bar_height" />
+
+    <View style="@style/DividerLine" />
 
 
     <android.support.v4.view.ViewPager

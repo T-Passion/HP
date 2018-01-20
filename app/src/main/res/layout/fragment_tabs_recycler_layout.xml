@@ -7,12 +7,14 @@
     <com.shizhefei.view.indicator.ScrollIndicatorView
         android:id="@+id/tabsView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_tab_height"/>
+        android:layout_height="@dimen/app_tab_height"
+        android:layout_marginBottom="2dp"/>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/contentRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/white70transparent"/>
 
 </LinearLayout>

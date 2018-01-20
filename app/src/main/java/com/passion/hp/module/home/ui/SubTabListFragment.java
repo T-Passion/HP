@@ -11,7 +11,9 @@ import com.passion.hp.module.home.model.bean.TabVo;
 import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.imp.LayoutId;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
-import com.shizhefei.view.indicator.slidebar.SpringBar;
+import com.shizhefei.view.indicator.slidebar.DrawableBar;
+import com.shizhefei.view.indicator.slidebar.ScrollBar;
+import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,8 @@ public class SubTabListFragment extends AbstractBaseFragment {
     }
     @Override
     public void initVars(View view) {
-        mTabsView.setScrollBar(new SpringBar(getContext(), Color.RED));
+        mTabsView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.WHITE,Color.GRAY));
+        mTabsView.setScrollBar(new DrawableBar(getContext(), R.drawable.shape_sub_tab_background, ScrollBar.Gravity.CENTENT_BACKGROUND));
 
 
         mTabAdapter = new SubTabListAdapter(getContext(),getSubTabs());
