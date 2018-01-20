@@ -15,7 +15,7 @@ import com.passion.widget.main.render.LoadingRendererFactory;
 
 
 /**
- * Created by huangdou
+ * Created by chaos
  * on 2017/10/10.
  */
 

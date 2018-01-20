@@ -155,7 +155,6 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
 
     }
 
-
     public void setDuration(int time) {
         setDuration(time, DEFAULT_INTERVAL);
     }
@@ -188,13 +187,13 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
     }
 
     public void start() {
-        final int changePer = 100 / mDrawTimes;
-        mTimeCounter.schedule(new TimerTask() {
+        mDrawedTimes = 0;//重置
+        TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 postInvalidate();
                 mDrawedTimes++;
-                mProgress += changePer;
+                mProgress += (100 / mDrawTimes);
                 mDuration -= mInterval;
                 if (mProgress == 100) {
                     stop();
@@ -207,7 +206,8 @@ public class WidJumpView extends android.support.v7.widget.AppCompatTextView {
                     });
                 }
             }
-        }, 500, mInterval);
+        };
+        mTimeCounter.schedule(task, 500, mInterval);
     }
 
     public void stop() {

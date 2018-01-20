@@ -37,7 +37,7 @@ public class SplashPresenter extends BasePresenter<SplashContract.Model, SplashC
             @Override
             public void onFailure(ErrorBody errorBody) {
 //                mView.closeLoading(false);
-
+                mView.updateContent(SplashVo.SPLASH_IMG.SPLASH_LIST.get((int) (Math.random()*1)));
             }
         });
 
