@@ -1,8 +1,10 @@
 package com.passion.hp.module.home.contract;
 
+import com.passion.hp.module.home.model.entity.NewsAllVo;
 import com.passion.libbase.mvp.IBaseModel;
 import com.passion.libbase.mvp.IBasePresenter;
 import com.passion.libbase.mvp.IBaseView;
+import com.passion.libnet.api.HPRestCallback;
 
 /**
  * Created by chaos
@@ -18,6 +20,10 @@ public interface SubTabFragmentContract {
     */
     interface Model extends IBaseModel {
 
+        void getData(HPRestCallback callback);
+
+        NewsAllVo mockData();
+
     }
 
     /**
@@ -25,11 +31,15 @@ public interface SubTabFragmentContract {
     */
     interface View extends IBaseView {
 
+        void render(NewsAllVo newsAllVo);
+
     }
     /**
     *
     */
     interface Presenter extends IBasePresenter {
+
+        void getDta();
 
     }
 }

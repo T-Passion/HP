@@ -13,4 +13,7 @@ public final class BizApiConstant {
 
     public static final String GET_HOME_TABS = "/status/tabs";
 
+
+    public static final String GET_NBA_NEWS = "/nba/getNews";
+
 }

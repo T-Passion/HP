@@ -1,5 +1,7 @@
 package com.passion.libbase.utils;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.text.TextUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -14,7 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,7 +27,7 @@ import java.util.Map;
 
 
 /**
- * Created by huangdou
+ * Created by chaos
  * on 2017/10/10.
  */
 
@@ -469,5 +473,28 @@ public class JsonUtil {
         return message;
     }
 
+
+    public <T> T fromFile(Context context, String assetsFileName, Class<T> clazz) {
+        //先获取assets管理器，assets中的文件无法直接访问
+        AssetManager am = context.getAssets();
+        String line;
+        StringBuilder resultBuilder = new StringBuilder();
+        try {
+            InputStreamReader isr = new InputStreamReader(am.open(assetsFileName), "UTF-8");
+            BufferedReader bufReader = new BufferedReader(isr);
+
+            while ((line = bufReader.readLine()) != null) {
+                resultBuilder.append(line);
+            }
+            isr.close();
+            bufReader.close();
+        } catch (IOException e) {
+            LogUtil.e(e);
+        }
+
+        //下面有T来解析得到具体对象
+        T result = fromJSON(resultBuilder.toString(), clazz);
+        return result;
+    }
 
 }

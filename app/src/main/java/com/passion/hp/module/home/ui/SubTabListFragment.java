@@ -7,9 +7,14 @@ import android.view.View;
 
 import com.passion.hp.R;
 import com.passion.hp.module.home.apdater.SubTabListAdapter;
+import com.passion.hp.module.home.contract.SubTabFragmentContract;
+import com.passion.hp.module.home.model.SubTabFragmentModel;
+import com.passion.hp.module.home.model.entity.NewsAllVo;
 import com.passion.hp.module.home.model.entity.TabVo;
+import com.passion.hp.module.home.presenter.SubTabFragmentPresenter;
 import com.passion.libbase.AbstractBaseFragment;
 import com.passion.libbase.imp.LayoutId;
+import com.shizhefei.view.indicator.Indicator;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.DrawableBar;
 import com.shizhefei.view.indicator.slidebar.ScrollBar;
@@ -27,7 +32,7 @@ import butterknife.BindView;
  */
 
 @LayoutId(R.layout.fragment_tabs_recycler_layout)
-public class SubTabListFragment extends AbstractBaseFragment {
+public class SubTabListFragment extends AbstractBaseFragment implements SubTabFragmentContract.View,Indicator.OnItemSelectedListener{
 
 
     @BindView(R.id.tabsView)
@@ -36,6 +41,9 @@ public class SubTabListFragment extends AbstractBaseFragment {
     RecyclerView mContentRecycleView;
 
     SubTabListAdapter mTabAdapter;
+    SubTabFragmentContract.Model mModel;
+    SubTabFragmentContract.Presenter mPresenter;
+
 
     public static SubTabListFragment newInstance() {
         return newInstance(null);
@@ -46,19 +54,30 @@ public class SubTabListFragment extends AbstractBaseFragment {
         subTab.setArguments(args);
         return subTab;
     }
+
     @Override
     public void initVars(View view) {
-        mTabsView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.WHITE,Color.GRAY));
+        mTabsView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.WHITE, Color.GRAY));
         mTabsView.setScrollBar(new DrawableBar(getContext(), R.drawable.shape_sub_tab_background, ScrollBar.Gravity.CENTENT_BACKGROUND));
+        mTabsView.setOnItemSelectListener(this);
 
 
-        mTabAdapter = new SubTabListAdapter(getContext(),getSubTabs());
+        mTabAdapter = new SubTabListAdapter(getContext());
         mTabsView.setAdapter(mTabAdapter);
         mTabsView.setCurrentItem(0);
+
+        mModel = new SubTabFragmentModel(getContext());
+        mPresenter = new SubTabFragmentPresenter(this,mModel);
     }
 
     @Override
     public void loadInitDta() {
+        mPresenter.getDta();
+    }
+
+
+    @Override
+    public void render(NewsAllVo newsAllVo) {
 
     }
 
@@ -74,5 +93,8 @@ public class SubTabListFragment extends AbstractBaseFragment {
         return tabs;
     }
 
+    @Override
+    public void onItemSelected(View view, int i, int i1) {
 
+    }
 }

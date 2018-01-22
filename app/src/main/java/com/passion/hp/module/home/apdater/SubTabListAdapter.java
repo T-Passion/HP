@@ -24,10 +24,21 @@ public class SubTabListAdapter extends Indicator.IndicatorAdapter {
     private List<TabVo> mSubTabs;
     private Context mContext;
 
+    public SubTabListAdapter(Context context) {
+        mContext = context;
+    }
+
     public SubTabListAdapter(Context context, List<TabVo> subTabs) {
         mSubTabs = subTabs;
         mContext = context;
     }
+
+    public SubTabListAdapter setSubTabs(List<TabVo> subTabs){
+        mSubTabs = subTabs;
+        return this;
+    }
+
+
 
     @Override
     public int getCount() {
