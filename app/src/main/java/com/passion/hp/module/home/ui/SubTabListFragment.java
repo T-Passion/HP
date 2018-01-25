@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.passion.hp.R;
+import com.passion.hp.module.home.apdater.SubTabNewsAdapter;
 import com.passion.hp.module.home.apdater.SubTabsAdapter;
 import com.passion.hp.module.home.contract.SubTabFragmentContract;
 import com.passion.hp.module.home.model.SubTabFragmentModel;
@@ -38,9 +39,10 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
     @BindView(R.id.tabsView)
     ScrollIndicatorView mTabsView;
     @BindView(R.id.contentRecycleView)
-    RecyclerView mContentRecycleView;
+    RecyclerView mRecyclerView;
 
     SubTabsAdapter mTabAdapter;
+    SubTabNewsAdapter mNewsAdapter;
     SubTabFragmentContract.Model mModel;
     SubTabFragmentContract.Presenter mPresenter;
 
@@ -66,6 +68,9 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mTabsView.setAdapter(mTabAdapter);
         mTabsView.setCurrentItem(0);
 
+        mNewsAdapter = new SubTabNewsAdapter();
+        mRecyclerView.setAdapter(mNewsAdapter);
+
         mModel = new SubTabFragmentModel(getContext());
         mPresenter = new SubTabFragmentPresenter(this,mModel);
     }
@@ -79,6 +84,7 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
     @Override
     public void render(NewsAllVo newsAllVo) {
         renderTabs(newsAllVo.getTabList());
+        renderNews(newsAllVo);
     }
 
 
@@ -86,8 +92,10 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mTabAdapter.setSubTabs(cateList).notifyDataSetChanged();
     }
 
-    private void renderNews(){
-
+    private void renderNews(NewsAllVo newsAllVo){
+        mNewsAdapter.setNewsList(newsAllVo.getData())
+                .setGame(newsAllVo.getGame())
+                .notifyDataSetChanged();
     }
 
     private List<TabVo> getSubTabs() {

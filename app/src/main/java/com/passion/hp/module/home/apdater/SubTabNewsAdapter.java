@@ -26,6 +26,8 @@ public class SubTabNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int SECTION_GAME = 0;
     private static final int SECTION_NEWS = 1;
 
+    public SubTabNewsAdapter() {
+    }
 
     private Game mGame;
     private List<NewsVo> mNewsList;
@@ -58,10 +60,10 @@ public class SubTabNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         int viewType = holder.getItemViewType();
         switch (viewType) {
             case SECTION_GAME:
-
+                ((GameHolder)holder).update(mGame.getGame_lists());
                 break;
-
             case SECTION_NEWS:
+                ((NewsHolder)holder).update(mNewsList);
                 break;
 
             default:
@@ -114,9 +116,10 @@ public class SubTabNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public NewsHolder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this,itemView);
         }
 
-        private void update() {
+        private void update(List<NewsVo> list) {
 
         }
     }

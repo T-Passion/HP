@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.passion.hp.R;
+import com.passion.hp.module.home.model.entity.Game;
+import com.passion.hp.module.home.model.entity.NewsVo;
 import com.passion.hp.module.home.model.entity.TabVo;
 import com.passion.libnet.core.utils.SafeCheckUtil;
 import com.shizhefei.view.indicator.Indicator;
@@ -21,8 +23,10 @@ import java.util.List;
 
 public class SubTabsAdapter extends Indicator.IndicatorAdapter {
 
-    private List<TabVo> mSubTabs;
     private Context mContext;
+    private List<TabVo> mSubTabs;
+    private List<NewsVo> mNewsList;
+    private Game mGame;
 
     public SubTabsAdapter(Context context) {
         mContext = context;
@@ -33,12 +37,20 @@ public class SubTabsAdapter extends Indicator.IndicatorAdapter {
         mContext = context;
     }
 
-    public SubTabsAdapter setSubTabs(List<TabVo> subTabs){
+    public SubTabsAdapter setSubTabs(List<TabVo> subTabs) {
         mSubTabs = subTabs;
         return this;
     }
 
+    public SubTabsAdapter setNewsList(List<NewsVo> newsList) {
+        mNewsList = newsList;
+        return this;
+    }
 
+    public SubTabsAdapter setGame(Game game) {
+        mGame = game;
+        return this;
+    }
 
     @Override
     public int getCount() {
