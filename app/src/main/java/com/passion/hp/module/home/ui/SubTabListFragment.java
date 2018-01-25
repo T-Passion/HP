@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.passion.hp.R;
-import com.passion.hp.module.home.apdater.SubTabListAdapter;
+import com.passion.hp.module.home.apdater.SubTabsAdapter;
 import com.passion.hp.module.home.contract.SubTabFragmentContract;
 import com.passion.hp.module.home.model.SubTabFragmentModel;
 import com.passion.hp.module.home.model.entity.NewsAllVo;
@@ -40,7 +40,7 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
     @BindView(R.id.contentRecycleView)
     RecyclerView mContentRecycleView;
 
-    SubTabListAdapter mTabAdapter;
+    SubTabsAdapter mTabAdapter;
     SubTabFragmentContract.Model mModel;
     SubTabFragmentContract.Presenter mPresenter;
 
@@ -57,12 +57,12 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
 
     @Override
     public void initVars(View view) {
-        mTabsView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.WHITE, Color.GRAY));
+        mTabsView.setOnTransitionListener(new OnTransitionTextListener().setColor(Color.RED, Color.GRAY));
         mTabsView.setScrollBar(new DrawableBar(getContext(), R.drawable.shape_sub_tab_background, ScrollBar.Gravity.CENTENT_BACKGROUND));
         mTabsView.setOnItemSelectListener(this);
 
 
-        mTabAdapter = new SubTabListAdapter(getContext());
+        mTabAdapter = new SubTabsAdapter(getContext());
         mTabsView.setAdapter(mTabAdapter);
         mTabsView.setCurrentItem(0);
 
@@ -78,7 +78,12 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
 
     @Override
     public void render(NewsAllVo newsAllVo) {
+        renderTabs(newsAllVo.getTabList());
+    }
 
+
+    private void renderTabs(List<TabVo> cateList){
+        mTabAdapter.setSubTabs(cateList).notifyDataSetChanged();
     }
 
 

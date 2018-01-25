@@ -11,6 +11,9 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.passion.libnet.core.mapper.JavaTypeToken;
+import com.passion.libnet.core.mapper.JsonMapper;
+import com.passion.libnet.core.response.HttpResult;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -19,6 +22,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -115,7 +119,7 @@ public class JsonUtil {
             JsonNode jsonNode = objectMapper.readTree(json);
             return fromJSON(jsonNode, clazz);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
         return null;
     }
@@ -493,8 +497,9 @@ public class JsonUtil {
         }
 
         //下面有T来解析得到具体对象
-        T result = fromJSON(resultBuilder.toString(), clazz);
-        return result;
+        Type typeOuter = JavaTypeToken.getParameterizedType(HttpResult.class, clazz);
+        HttpResult<T> httpResult = JsonMapper.fromJson(resultBuilder.toString(), typeOuter);
+        return httpResult.getResult();
     }
 
 }

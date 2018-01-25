@@ -5,7 +5,7 @@ def compileSdkVersion = 25
 def minSdkVersion = 16
 def targetSdkVersion = 23
 def versionName = "7.1.13"
-def versionCode = 701013
+def versionCode = 701014
 
 //依赖库配置版本
 def supportDesign = "25.1.0"

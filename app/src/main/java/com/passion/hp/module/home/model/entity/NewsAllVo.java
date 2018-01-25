@@ -35,9 +35,15 @@ public class NewsAllVo  {
         return cate_list;
     }
 
+    public List<TabVo> getTabList(){
+        return getCate_list();
+    }
+
     public void setCate_list(List<TabVo> cate_list) {
         this.cate_list = cate_list;
     }
+
+
 
     public Game getGame() {
         return game;

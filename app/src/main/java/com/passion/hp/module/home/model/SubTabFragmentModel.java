@@ -34,7 +34,7 @@ public class SubTabFragmentModel extends BaseModel implements SubTabFragmentCont
     @Override
     public NewsAllVo mockData() {
         JsonUtil jsonUtil = new JsonUtil(new ObjectMapper());
-        NewsAllVo newsAllVo = jsonUtil.fromFile(mContext,"news.json",NewsAllVo.class);
-        return newsAllVo;
+        NewsAllVo result = jsonUtil.fromFile(mContext,"news.json",NewsAllVo.class);
+        return result;
     }
 }

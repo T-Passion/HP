@@ -19,21 +19,21 @@ import java.util.List;
  * 文件描述：
  */
 
-public class SubTabListAdapter extends Indicator.IndicatorAdapter {
+public class SubTabsAdapter extends Indicator.IndicatorAdapter {
 
     private List<TabVo> mSubTabs;
     private Context mContext;
 
-    public SubTabListAdapter(Context context) {
+    public SubTabsAdapter(Context context) {
         mContext = context;
     }
 
-    public SubTabListAdapter(Context context, List<TabVo> subTabs) {
+    public SubTabsAdapter(Context context, List<TabVo> subTabs) {
         mSubTabs = subTabs;
         mContext = context;
     }
 
-    public SubTabListAdapter setSubTabs(List<TabVo> subTabs){
+    public SubTabsAdapter setSubTabs(List<TabVo> subTabs){
         mSubTabs = subTabs;
         return this;
     }
