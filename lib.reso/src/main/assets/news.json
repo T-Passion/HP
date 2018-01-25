@@ -1,7 +1,8 @@
 {
   "result": {
     "nextDataExists": 1,
-    "data": [{
+    "data": [
+      {
       "nid": "2252575",
       "title": "NBA\u5b98\u65b9\u53d1\u5e03\u4eca\u65e57\u652f\u83b7\u80dc\u7403\u961f\u7684\u8d62\u7403\u56fe\u96c6",
       "summary": "\u864e\u6251\u7684\u8fd9\u7bc7\u6587\u7ae0\u5df2\u7ecf\u5f15\u53d1\u70ed\u70c8\u8ba8\u8bba\uff0c\u8d76\u5feb\u6765\u770b\u770b\u5427\u3002",
@@ -222,7 +223,8 @@
       "replies": "9",
       "read": "2252555"
     }],
-    "cate_list": [{
+    "cate_list": [
+      {
       "name": "\u5168\u90e8",
       "cate_type": "news"
     }, {
@@ -250,7 +252,8 @@
     "show_news_lights": 1,
     "display_type": 1,
     "game": {
-      "game_lists": [{
+      "game_lists": [
+        {
         "video_collection": "1",
         "gid": "153707",
         "away_timeout": "1",
@@ -286,7 +289,8 @@
         "league_name": "\u5e38\u89c4\u8d5b",
         "lid": "1",
         "league_en": "nba"
-      }, {
+      },
+        {
         "video_collection": "1",
         "gid": "153702",
         "away_timeout": "0",
@@ -322,7 +326,8 @@
         "league_name": "\u5e38\u89c4\u8d5b",
         "lid": "1",
         "league_en": "nba"
-      }, {
+      },
+        {
         "video_collection": "1",
         "gid": "153704",
         "away_timeout": "2",
@@ -358,7 +363,8 @@
         "league_name": "\u5e38\u89c4\u8d5b",
         "lid": "1",
         "league_en": "nba"
-      }, {
+      },
+        {
         "video_collection": "1",
         "away_timeout": "0",
         "gid": "153703",

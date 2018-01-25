@@ -86,6 +86,9 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mTabAdapter.setSubTabs(cateList).notifyDataSetChanged();
     }
 
+    private void renderNews(){
+
+    }
 
     private List<TabVo> getSubTabs() {
         List<TabVo> tabs = new ArrayList<>();
