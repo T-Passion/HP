@@ -31,6 +31,7 @@ public class HPApplication extends Application {
                 .build();
 
         mConfiguration.withLog()
+                .withLeaker()
                 .withNet()
                 .withDagger2()
                 .withRouter();

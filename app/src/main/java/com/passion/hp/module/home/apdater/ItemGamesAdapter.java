@@ -97,7 +97,7 @@ public class ItemGamesAdapter extends RecyclerView.Adapter<ItemGamesAdapter.H> {
         }
 
         void update(GameVo gameVo) {
-            mGameType.setText(gameVo.getGame_type());
+            mGameType.setText(gameVo.getLeague_name());
             mGameInfo.setOnClickListener(view -> Toaster.showToast(mContext, "敬请期待！"));
             Glide.with(mContext).load(gameVo.getHome_logo()).into(mHomeLogo);
             mHomeName.setText(gameVo.getHome_name());
