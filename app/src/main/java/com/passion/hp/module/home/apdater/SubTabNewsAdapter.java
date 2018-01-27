@@ -2,6 +2,7 @@ package com.passion.hp.module.home.apdater;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.passion.hp.R;
 import com.passion.hp.module.home.model.entity.Game;
 import com.passion.hp.module.home.model.entity.GameVo;
 import com.passion.hp.module.home.model.entity.NewsVo;
+import com.passion.libbase.utils.LogUtil;
 import com.passion.libnet.core.utils.SafeCheckUtil;
 
 import java.util.List;
@@ -73,7 +75,8 @@ public class SubTabNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 ((GameHolder) holder).update(mGame.getGame_lists());
                 break;
             case SECTION_NEWS:
-                NewsVo vo = mNewsList.get(position);
+                LogUtil.e("IndexOut: ", "size: " + mNewsList.size() + "  position: " + position);
+                NewsVo vo = mNewsList.get(position - 1);
                 ((NewsHolder) holder).update(vo);
                 break;
             default:
@@ -118,6 +121,7 @@ public class SubTabNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         private void update(List<GameVo> voList) {
             if (mGamesAdapter == null) {
                 mGamesAdapter = new ItemGamesAdapter(mContext);
+                mGameView.setLayoutManager(new LinearLayoutManager(mContext));
                 mGameView.setAdapter(mGamesAdapter);
             }
             mGamesAdapter.setVoList(voList).notifyDataSetChanged();

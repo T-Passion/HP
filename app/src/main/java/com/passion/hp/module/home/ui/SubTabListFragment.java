@@ -69,7 +69,9 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mTabsView.setCurrentItem(0);
 
         mNewsAdapter = new SubTabNewsAdapter(getContext());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        LinearLayoutManager lm = new LinearLayoutManager(getContext());
+        lm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(lm);
         mRecyclerView.setAdapter(mNewsAdapter);
 
         mModel = new SubTabFragmentModel(getContext());
