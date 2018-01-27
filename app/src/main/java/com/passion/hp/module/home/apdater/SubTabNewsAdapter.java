@@ -123,7 +123,12 @@ public class SubTabNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (mGamesAdapter == null) {
                 final int row = 2;
                 mGamesAdapter = new ItemGamesAdapter(mContext);
-                GridLayoutManager glm = new GridLayoutManager(mContext,row);
+                GridLayoutManager glm = new GridLayoutManager(mContext,row){
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;//禁止滑动
+                    }
+                };
                 mGameView.setLayoutManager(glm);
                 mGameView.addItemDecoration(new GridGameDecoration(row,20,20));
                 mGameView.setAdapter(mGamesAdapter);

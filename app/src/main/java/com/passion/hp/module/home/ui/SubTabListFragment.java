@@ -33,7 +33,7 @@ import butterknife.BindView;
  */
 
 @LayoutId(R.layout.fragment_tabs_recycler_layout)
-public class SubTabListFragment extends AbstractBaseFragment implements SubTabFragmentContract.View,Indicator.OnItemSelectedListener{
+public class SubTabListFragment extends AbstractBaseFragment implements SubTabFragmentContract.View, Indicator.OnItemSelectedListener {
 
 
     @BindView(R.id.tabsView)
@@ -75,7 +75,7 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mRecyclerView.setAdapter(mNewsAdapter);
 
         mModel = new SubTabFragmentModel(getContext());
-        mPresenter = new SubTabFragmentPresenter(this,mModel);
+        mPresenter = new SubTabFragmentPresenter(this, mModel);
     }
 
     @Override
@@ -91,11 +91,11 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
     }
 
 
-    private void renderTabs(List<TabVo> cateList){
+    private void renderTabs(List<TabVo> cateList) {
         mTabAdapter.setSubTabs(cateList).notifyDataSetChanged();
     }
 
-    private void renderNews(NewsAllVo newsAllVo){
+    private void renderNews(NewsAllVo newsAllVo) {
         mNewsAdapter.setNewsList(newsAllVo.getData())
                 .setGame(newsAllVo.getGame())
                 .notifyDataSetChanged();

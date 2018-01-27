@@ -56,4 +56,6 @@
             tools:drawableLeft="@drawable/search_day_search_ic"
             tools:text="789" />
     </LinearLayout>
+
+    <View style="@style/DividerLine"/>
 </RelativeLayout>

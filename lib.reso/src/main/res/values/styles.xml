@@ -3,7 +3,7 @@
 
     <style name="DividerLine">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1px</item>
+        <item name="android:layout_height">0.8px</item>
         <item name="android:background">@color/holo_gray_light</item>
     </style>
 
