@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.dependencies["compileSdkVersion"]
@@ -59,14 +60,17 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -77,11 +81,12 @@ dependencies {
     androidTestCompile('com.android.support.test:rules:0.4.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile rootProject.ext.dependencies["supportAppcompatV7"]
     compile rootProject.ext.dependencies["constraintLayout"]
-    compile rootProject.ext.dependencies["umeng"]//友盟
-    compile rootProject.ext.dependencies["glide"]//
+    compile rootProject.ext.dependencies["umeng"]
+    //友盟
+    compile rootProject.ext.dependencies["glide"]
+    //
     compile rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["daggerCompiler"]
     compile rootProject.ext.dependencies["butterknifeVersion"]
@@ -89,12 +94,8 @@ dependencies {
     compile rootProject.ext.dependencies["aliRouter"]
     annotationProcessor rootProject.ext.dependencies["aliRouterCompiler"]
     compile rootProject.ext.dependencies["pagerIndicator"]
-
-
-    compile project(":lib.base")
-    compile project(":lib.reso")
-    compile project(":lib.widget")
-
-
+    compile project(':lib.base')
+    compile project(':lib.reso')
+    compile project(':lib.widget')
 }
 

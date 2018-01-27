@@ -2,6 +2,7 @@ package com.passion.hp.module.home.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -21,7 +22,6 @@ import com.shizhefei.view.indicator.slidebar.DrawableBar;
 import com.shizhefei.view.indicator.slidebar.ScrollBar;
 import com.shizhefei.view.indicator.transition.OnTransitionTextListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -68,7 +68,8 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mTabsView.setAdapter(mTabAdapter);
         mTabsView.setCurrentItem(0);
 
-        mNewsAdapter = new SubTabNewsAdapter();
+        mNewsAdapter = new SubTabNewsAdapter(getContext());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mNewsAdapter);
 
         mModel = new SubTabFragmentModel(getContext());
@@ -96,17 +97,6 @@ public class SubTabListFragment extends AbstractBaseFragment implements SubTabFr
         mNewsAdapter.setNewsList(newsAllVo.getData())
                 .setGame(newsAllVo.getGame())
                 .notifyDataSetChanged();
-    }
-
-    private List<TabVo> getSubTabs() {
-        List<TabVo> tabs = new ArrayList<>();
-        tabs.add(new TabVo("全部", "205601"));
-        tabs.add(new TabVo("视频", "205602"));
-        tabs.add(new TabVo("流言", "205603"));
-        tabs.add(new TabVo("深度", "205604"));
-        tabs.add(new TabVo("图集", "205605"));
-        tabs.add(new TabVo("场外", "205606"));
-        return tabs;
     }
 
     @Override

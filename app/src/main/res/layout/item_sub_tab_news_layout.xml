@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="60dp"
+    android:padding="@dimen/padding_4">
 
+
+    <ImageView
+        android:id="@+id/itemNewsImg"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_launcher_background" />
+
+
+    <TextView
+        android:id="@+id/itemNewsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/itemNewsImg"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/title_common"
+        android:textSize="13sp"
+        tools:text="东西部全明星阵容已经选出，三旬老汉与小学生之间的恩怨情仇" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/newsTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_2"
+            android:orientation="horizontal"
+            />
+
+        <TextView
+            android:id="@+id/newsLight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_2"
+            tools:drawableLeft="@drawable/search_day_search_ic"
+            tools:text="456" />
+
+        <TextView
+            android:id="@+id/newsMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_2"
+            tools:drawableLeft="@drawable/search_day_search_ic"
+            tools:text="789" />
+    </LinearLayout>
 </RelativeLayout>
